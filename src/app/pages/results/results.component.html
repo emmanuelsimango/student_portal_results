@@ -1,0 +1,56 @@
+<div class=" content">
+	<div class=" row">
+		<div class=" col-md-12">
+			<div class=" card">
+				<div class=" card-header d-flex flex-row justify-content-between align-items-center">
+					<span>
+						<label for="period">
+							Change Period:
+						</label>
+						<select class="form-control" name="period" [(ngModel)]="selectedResult" id="period">
+							<option [ngValue]="res" *ngFor="let res of studentResults">
+								{{res.periodname}}
+							</option>
+						</select>
+					</span>
+					<h4 class=" card-title">{{selectedResult.periodname}} Semester {{ selectedResult.level }} Period
+						{{selectedResult.semester}} </h4>
+
+				</div>
+				<div class=" card-body" *ngIf="selectedResult">
+					<div class=" table-responsive">
+						<table class=" table tablesorter" id="">
+							<thead class=" text-primary">
+								<tr>
+									<th>Code</th>
+									<th>Module Name</th>
+									<th>Mark</th>
+									<th>GPE</th>
+									<th class=" text-center">Grade</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr *ngFor="let module of selectedResult.modules">
+									<td>{{module.code}}</td>
+									<td>{{module.name}}</td>
+									<td>{{module.mark}}</td>
+									<td>{{module.gpe}}</td>
+									<td class=" text-center">{{module.gd}}</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<div class="card-footer align-items-center">
+					<span>
+
+						Decision : {{ selectedResult.decision }}
+					</span>
+					<span class="badge badge-danger mx-4"  *ngIf="selectedResult.supression">
+						Carry : {{ selectedResult.supression}}
+					</span>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

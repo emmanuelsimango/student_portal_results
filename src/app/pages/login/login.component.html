@@ -1,0 +1,64 @@
+<div class=" col-sm-10 col-md-6 col-lg-6 mx-auto ">
+
+	<div class="user_card">
+		<div class="d-flex justify-content-center">
+			<div class="brand_logo_container">
+				<div class="brand_logo">
+
+					<img src="assets/img/logo.png" class="logo" alt="Logo">
+				</div>
+			</div>
+		</div>
+		<div class="d-flex justify-content-center form_container text-white">
+			<form [formGroup]="loginForm" (ngSubmit)="login()"
+				[ngClass]="{ 'was-validated': submitted && f.reg_number.errors }">
+				<h4 class="mb-0 text-center"> Online Results </h4>
+				<h6 class="">Please confirm your identity to continue</h6>
+				<p *ngIf="loginError" class="text-danger" class="text-center text-danger">Invalid registration number or
+					password!!</p>
+
+					<div class="input-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text"><i class="fas fa-user"></i></span>
+						</div>
+						<input class="form-control" formControlName="reg_number"
+							[ngClass]="{ 'is-invalid': submitted && f.reg_number.errors }" type="text" name="reg_number"
+							id="reg_number" [(ngModel)]="reg_number" placeholder="Reg Number" required>
+							<div class="invalid-feedback float-right">
+								registration number is required
+							</div>
+					</div>
+
+
+				<div class="form-group">
+
+					<div class="input-group" [ngClass]="{ '': submitted && f.password.errors }">
+						<div class="input-group-prepend">
+							<span class="input-group-text"><i class="fas fa-key"></i></span>
+						</div>
+						<input class="form-control " formControlName="password"
+							[ngClass]="{'is-invalid': submitted && f.password.invalid }" type="password" name="password"
+							id="password" [(ngModel)]="password" placeholder="Password" required>
+						<div class="invalid-feedback float-right">
+							password is required
+						</div>
+					</div>
+				</div>
+
+				<div class="d-flex justify-content-center mt-3 login_container">
+					<button type="button" name="button" (click)="login()" class="btn login_btn">Login</button>
+				</div>
+			</form>
+		</div>
+
+		<div class="mt-4">
+			<div class="d-flex justify-content-center links">
+				Don't have an account? <a href="#" class="ml-2">Sign Up</a>
+			</div>
+			<div class="d-flex justify-content-center links">
+				<a href="#">Forgot your password?</a>
+			</div>
+		</div>
+	</div>
+
+</div>
