@@ -4,7 +4,7 @@
 			<div class=" card">
 				<div class=" card-header d-flex flex-row justify-content-between align-items-center">
 					<h4 class=" card-title"> Bursary </h4>
-
+					<button class="btn btn-success btn-sm" (click)="refresh()"> <i class="fas fa-sync-alt    "></i> </button>
 				</div>
 				<div class=" card-body" >
 					<div class=" table-responsive">
@@ -12,18 +12,25 @@
 							<thead class=" text-primary">
 								<tr>
 									<th>Date</th>
-									<th>Account</th>
+									<th>Description</th>
 									<th>Reference</th>
-									<th>Amount</th>
-
+									<th class="text-right">Amount</th>
 								</tr>
 							</thead>
 							<tbody>
 								<tr *ngFor="let transaction of studentBursary">
 									<td>{{transaction.trans_date}}</td>
-									<td>{{transaction.acc_number}}</td>
+									<td>{{transaction.trans_value < 0 ?'Fees Payment':'Invoice' }}</td>
 									<td>{{transaction.trans_reference}}</td>
-									<td>{{transaction.trans_value}}</td>
+									<td class="text-right">{{transaction.trans_value | currency}}</td>
+								</tr>
+								<tr>
+									<td colspan="3">
+
+									</td>
+									<td  class="justify-content-end font-weight-bold text-right">
+										Balance	{{total | currency}}
+									</td>
 								</tr>
 							</tbody>
 						</table>

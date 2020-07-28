@@ -6,6 +6,7 @@
     <app-footer></app-footer>
   </div>
 </div>
+<app-notice-modal  ></app-notice-modal>
 <div class=" fixed-plugin">
   <div class=" show-dropdown" ngbDropdown>
     <a data-toggle="dropdown" ngbDropdownToggle>
@@ -16,7 +17,7 @@
       <li class=" adjustments-line">
         <a class=" switch-trigger background-color" href="javascript:void(0)">
           <div class=" badge-colors text-center">
-      
+
             <span class=" badge filter badge-info" [ngClass]="{'active':sidebarColor==='blue'}" (click)="changeSidebarColor('blue')"> </span>
             <!-- <span class=" badge filter badge-success" [ngClass]="{'active':sidebarColor==='green'}" (click)="changeSidebarColor('green')">
             </span> -->

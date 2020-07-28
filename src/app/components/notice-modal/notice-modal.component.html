@@ -1,0 +1,16 @@
+<ng-template #content let-c="close" let-d="dismiss">
+	<div class="modal-header " [ngClass]="notice.class" >
+		<h6 id="modal-basic-title"> <span> <i class="fas fa-bell fa-2x fa-fw mx-2"></i> </span> {{notice.title}}</h6>
+		<button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+			<span aria-hidden="true">&times;</span>
+		</button>
+	</div>
+	<div class="modal-body">
+		<p>{{notice.body}}</p>
+	</div>
+	<div class="modal-footer justify-content-end">
+		<button type="button" class="btn btn-outline-primary" (click)="c('Save click')">Dismiss</button>
+	</div>
+</ng-template>
+
+<button class="btn btn-lg btn-outline-primary d-none" id="noticeLauncher" (click)="open(content)">Launch demo modal</button>

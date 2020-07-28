@@ -2,6 +2,8 @@ import { Component, OnInit } from "@angular/core";
 import { AuthService } from 'src/app/services/auth/auth-service.service';
 import { Student } from 'src/app/models/student';
 import { Transaction } from 'src/app/models/Transaction';
+import { BursaryService } from 'src/app/services/auth/bursary.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -9,21 +11,38 @@ import { Transaction } from 'src/app/models/Transaction';
 	templateUrl: "bursary.component.html"
 })
 export class BursaryComponent implements OnInit {
+	total:number;
 	student:Student;
 	studentBursary: Transaction[];
 	constructor(
-		private auth: AuthService
+		private auth: AuthService,
+		private bursary:BursaryService,
+		private router:Router
 	) {
-		this.student = this.auth.currentStudent();
-		this.studentBursary = JSON.parse(this.student.studentBursaryData).transaction;
-		console.log(this.studentBursary);
+		this.initStudent();
+		// console.log(this.total);
+
 
 	}
 
+	initStudent(){
+		this.student = this.auth.currentStudent();
+		// console.log(this.student.studentBursaryData);
+
+		this.studentBursary = JSON.parse(this.student.studentBursaryData).transaction;
+
+		this.total = 0
+		this.studentBursary.forEach(tr => {
+
+			this.total = this.total +  parseFloat(tr.trans_value+'')
+			// console.log(this.total);
+		});
+	}
 	ngOnInit() {
 
 	}
-	public updateOptions() {
-
+	public refresh() {
+		this.bursary.updateBursary(this.student.studentId)
+		this.initStudent();
 	}
 }
