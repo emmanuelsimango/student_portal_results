@@ -16,7 +16,10 @@ export class NoticeModalComponent implements OnInit,OnChanges {
 		auth.has_Message.subscribe(notice=>{
 			if (notice) {
 				this.notice = notice
-				document.getElementById('noticeLauncher').click();
+				const ntic = document.getElementById('noticeLauncher');
+				if (ntic) {
+					ntic.click();
+				}
 				console.log('clicked');
 			}
 

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth/auth-service.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { LoaderService } from 'src/app/services/loader.service';
 
 @Component({
 	selector: 'app-login',
@@ -20,7 +21,8 @@ export class LoginComponent implements OnInit {
 		private formBuilder: FormBuilder,
 		private auth: AuthService,
 		private route: ActivatedRoute,
-		private router: Router
+		private router: Router,
+		private loader:LoaderService
 	) { }
 
 	ngOnInit(): void {
@@ -44,21 +46,22 @@ export class LoginComponent implements OnInit {
 
 	login() {
 		this.submitted = true;
-
-
+		this.loader.is_loading.next(true)
 		// stop here if form is invalid
 		if (this.loginForm.invalid) {
 			// alert('invalid')
 			console.log(this.f.password.invalid);
-
 			return;
 		}
+
 
 
 		this.auth.login(this.reg_number, this.password)
 			.subscribe(data => {
 				this.router.navigate([this.returnUrl]);
+				this.loader.is_loading.next(false);
 			}, error => {
+				this.loader.is_loading.next(false);
 				console.log(error);
 
 				this.loginError = true

@@ -48,15 +48,22 @@
               </div>
             </div> -->
 						<div class=" row">
-							<div class=" col-md-12 ">
+							<div class=" col-md-6 ">
 								<div class=" form-group">
-									<label> Address </label>
+									<label> Gender </label>
 									<input disabled class=" form-control" placeholder="Home Address" type="text"
-										value="" />
+										[value]="studentPersonal.sex" />
+								</div>
+							</div>
+							<div class=" col-md-6 ">
+								<div class=" form-group">
+									<label> Date of Birth </label>
+									<input disabled class=" form-control" placeholder="Home Address" type="text"
+										[value]="studentPersonal.dob" />
 								</div>
 							</div>
 						</div>
-						<div class=" row">
+						<!-- <div class=" row">
 							<div class=" col-md-6 ">
 								<div class=" form-group">
 									<label> City </label>
@@ -72,8 +79,8 @@
 								</div>
 							</div>
 
-						</div>
-						<div class=" row">
+						</div> -->
+						<!-- <div class=" row">
 							<div class=" col-md-12">
 								<div class=" form-group">
 									<label> Enrolment Info</label>
@@ -83,7 +90,7 @@ Lamborghini Mercy, Your chick she so thirsty, I'm in that two seat Lambo.
 </textarea>
 								</div>
 							</div>
-						</div>
+						</div> -->
 					</form>
 				</div>
 				<div class=" card-footer">
@@ -101,14 +108,14 @@ Lamborghini Mercy, Your chick she so thirsty, I'm in that two seat Lambo.
 						<div class=" block block-three"></div>
 						<div class=" block block-four"></div>
 						<a href="javascript:void(0)">
-							<img alt="..." class=" avatar" src="assets/img/emilyz.jpg" />
+							<img alt="..." class=" avatar" [src]="'https://www.cut.ac.zw/portal/ids/'+studentPersonal.reg_num+'.JPG'" />
 
 							<h5 class=" title">{{ studentPersonal.fname}} {{studentPersonal.lname}} </h5>
 						</a>
-						<p class=" description">Program and Level</p>
+						<p class=" description">{{studentPersonal.reg_num}}</p>
 					</div>
 					<div class=" card-description">
-						Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cumque, error.
+						<!-- Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cumque, error. -->
 					</div>
 				</div>
 				<div class=" card-footer">

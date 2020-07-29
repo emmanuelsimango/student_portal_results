@@ -1,4 +1,5 @@
 import { Component } from "@angular/core";
+import { LoaderService } from './services/loader.service';
 
 @Component({
   selector: "app-root",
@@ -6,5 +7,11 @@ import { Component } from "@angular/core";
   styleUrls: ["./app.component.scss"]
 })
 export class AppComponent {
-  title = "black-dashboard-angular";
+  title = "online-results";
+  is_loading:boolean
+  constructor(private loader:LoaderService){
+	this.loader.is_loading.subscribe(status=>{
+		this.is_loading = status
+	})
+  }
 }

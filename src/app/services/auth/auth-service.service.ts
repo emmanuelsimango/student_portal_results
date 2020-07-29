@@ -38,7 +38,7 @@ export class AuthService {
 	}
 	public login(reg,pass){
 		const data = {
-			myid:reg,
+			myid:reg.toUpperCase(),
 			mycode:pass
 		};
 

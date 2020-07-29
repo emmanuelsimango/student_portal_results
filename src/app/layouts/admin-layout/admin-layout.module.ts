@@ -14,6 +14,7 @@ import { UserComponent } from "../../pages/user/user.component";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { ResultsComponent } from 'src/app/pages/results/results.component';
 import { BursaryComponent } from 'src/app/pages/bursary/bursary.component';
+import { ComponentsModule } from 'src/app/components/components.module';
 
 @NgModule({
   imports: [
@@ -21,7 +22,8 @@ import { BursaryComponent } from 'src/app/pages/bursary/bursary.component';
     RouterModule.forChild(AdminLayoutRoutes),
     FormsModule,
     HttpClientModule,
-    NgbModule,
+	NgbModule,
+	ComponentsModule
   ],
   declarations: [
     DashboardComponent,
