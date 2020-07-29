@@ -25,17 +25,17 @@
 									<th>Code</th>
 									<th>Module Name</th>
 									<th>Mark</th>
-									<th>GPE</th>
 									<th class=" text-center">Grade</th>
+									<th>GPE</th>
 								</tr>
 							</thead>
 							<tbody>
 								<tr *ngFor="let module of selectedResult.modules">
-									<td>{{module.code}}</td>
-									<td>{{module.name}}</td>
+									<td>{{module.modulecode}}</td>
+									<td>{{module.modulename}}</td>
 									<td>{{module.mark}}</td>
-									<td>{{module.gpe}}</td>
 									<td class=" text-center">{{module.gd}}</td>
+									<td>{{module.gpe}}</td>
 								</tr>
 							</tbody>
 						</table>
