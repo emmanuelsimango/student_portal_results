@@ -12,14 +12,15 @@ export class ResultsComponent implements OnInit {
 	student:Student;
 	studentResults: Result[];
 	selectedResult:Result;
-
+	resultOveral:Result
 	constructor(
 		private auth:AuthService
 	) {
 		this.student = this.auth.currentStudent();
+
 		this.studentResults = JSON.parse(this.student.studentResultsData).results;
 		this.selectedResult = this.studentResults[0];
-		console.log(this.studentResults);
+		console.log(this.selectedResult);
 	 }
 
 	ngOnInit() { }

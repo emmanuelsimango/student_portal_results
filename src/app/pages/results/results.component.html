@@ -43,8 +43,21 @@
 				</div>
 				<div class="card-footer align-items-center">
 					<span>
-
+						Level: {{selectedResult.level}}
+					</span>
+					<span class=" ml-4">
+						Semester: {{selectedResult.semester}}
+					</span>
+					<br>
+					<span class="">
+						Period: {{selectedResult.periodname}}
+					</span>
+					<hr>
+					<span>
 						Decision : {{ selectedResult.decision }}
+					</span>
+					<span class=" ml-4"  *ngIf="selectedResult.gpa">
+						GPA : {{ selectedResult.gpa}}
 					</span>
 					<span class="badge badge-danger mx-4"  *ngIf="selectedResult.supression">
 						Carry : {{ selectedResult.supression}}
