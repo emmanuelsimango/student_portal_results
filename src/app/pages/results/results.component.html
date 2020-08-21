@@ -18,7 +18,7 @@
 
 				</div>
 				<div class=" card-body" *ngIf="selectedResult">
-					<div class=" table-responsive">
+					<div class=" ">
 						<table class=" table tablesorter" id="">
 							<thead class=" text-primary">
 								<tr>
@@ -42,15 +42,8 @@
 					</div>
 				</div>
 				<div class="card-footer align-items-center">
-					<span>
-						Level: {{selectedResult.level}}
-					</span>
-					<span class=" ml-4">
-						Semester: {{selectedResult.semester}}
-					</span>
-					<br>
 					<span class="">
-						Period: {{selectedResult.periodname}}
+						{{selectedResult.periodname}} <br> Level: {{selectedResult.level}} Semester: {{selectedResult.semester}}
 					</span>
 					<hr>
 					<span>

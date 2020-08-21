@@ -36,6 +36,7 @@ export class AuthService {
 		}
 		return this.router.navigate(['login']);
 	}
+
 	public login(reg,pass){
 		const data = {
 			myid:reg.toUpperCase(),
