@@ -34,7 +34,7 @@ export class AuthService {
 			// return <Student>JSON.parse(localStorage.getItem('currentStudent')).records[0]
 			return JSON.parse(localStorage.getItem('currentStudent'))
 		}
-		return this.router.navigate(['login']);
+		return this.router.navigate(['auth']);
 	}
 
 	public login(reg,pass){
@@ -58,10 +58,35 @@ export class AuthService {
 			return student;
 		}));
 	}
+
+	public auth(reg,token){
+		const data = {
+			myid:reg.toUpperCase(),
+			mycode:token
+		};
+
+		localStorage.setItem('auth',JSON.stringify(data))
+		const headers = new HttpHeaders({'Content-Type':'application/json; charset=utf-8'});
+		console.log(`${this._serverDetails.studentServerDetails}/api/getHomeData/C16127442T/QzE2MTI3NDQyVDoyMDIwLTA4LTIxIDE0OjI3OjE1`)
+		return this._http.post<any>(`${this._serverDetails.studentServerDetails}/api/getHomeData/C16127442T/QzE2MTI3NDQyVDoyMDIwLTA4LTIxIDE0OjI3OjE1`,data,{headers:headers})
+		.pipe(map(response => {
+			console.log(response)
+			// login successful if there's a jwt token in the response when using laravel passport
+			if (response) {
+				// store user details and jwt token in local storage to keep user logged in between page refreshes
+				localStorage.setItem('currentStudent', JSON.stringify(response));
+				this._currentStudentSubject.next(response.body);
+
+			}
+
+			return response.body;
+		}));
+	}
+
 	logout() {
         // remove student from local storage to log student out
         localStorage.removeItem('currentStudent');
 		this._currentStudentSubject.next(null);
-		this.router.navigate(['login']);
+		this.router.navigateByUrl('https://cut.ac.zw/portal/login');
     }
 }

@@ -3,6 +3,7 @@ export class ServerDetails {
 	// public serverDetailsForApi = `${this.serverDetails}/api`;
 	// public serverDetailsForStorage = `${this.serverDetails}`;
 	public serverDetails = "http://elearning/Procedures";
+	public studentServerDetails = "http://localhost/portal/index.php/cut_elearning";
 	public serverDetailsForApi = `${this.serverDetails}`;
 	public serverDetailsForStorage = `${this.serverDetails}`;
 }

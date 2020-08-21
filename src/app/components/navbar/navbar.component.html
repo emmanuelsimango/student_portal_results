@@ -1,4 +1,4 @@
-<nav class=" navbar navbar-expand-lg navbar-absolute navbar-transparent">
+<nav class=" navbar navbar-expand-lg navbar-absolute navbar-transparent ">
   <div class=" container-fluid">
     <div class=" navbar-wrapper">
       <div class=" navbar-toggle d-inline">
@@ -9,7 +9,7 @@
         </button>
       </div>
     </div>
-    <a class="navbar-brand" href="javascript:void(0)"> {{ getTitle() }} </a>
+
     <button aria-label="Toggle navigation" class=" navbar-toggler" (click)="collapse()"
       [attr.aria-expanded]="!isCollapsed" aria-controls="collapseExample" id="navigation" type="button">
 
@@ -21,13 +21,19 @@
     <div class=" navbar-collapse" [ngbCollapse]="isCollapsed" id="navigation">
 
 
-
+		<a class="text-uppercase mr-auto text-primary " style="font-size: 1.4rem!important;font-weight:400" href="javascript:void(0)">
+			<img src="assets/img/logo.png" style="max-height: 3rem; " />
+		   C.U.T Student Self Service Portal <!--  {{ getTitle() }} --> </a>
+		<!-- <a class="navbar-brand ml-auto" href="javascript:void(0)">
+			<img src="assets/img/logo.png" style="max-height: 3rem;" />
+		   C.U.T Student Self Service Portal <!--  {{ getTitle() }}  </a> -->
       <ul class=" navbar-nav ml-auto align-items-center">
         <li class="nav-item">
           <button
           class=" btn btn-link"
           id="search-button"
 		>
+		Notices
 		<i class=" tim-icons icon-bell-55"> </i>
 
         </button>

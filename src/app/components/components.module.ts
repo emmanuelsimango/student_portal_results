@@ -9,10 +9,11 @@ import { SidebarComponent } from "./sidebar/sidebar.component";
 import { NoticeModalComponent } from './notice-modal/notice-modal.component';
 import { StudentProfileComponent } from './student-profile/student-profile.component';
 import { LoaderComponent } from './loader/loader.component';
+import { BreadComponent } from './bread/bread.component';
 
 @NgModule({
   imports: [CommonModule, RouterModule, NgbModule],
-  declarations: [FooterComponent, NavbarComponent, SidebarComponent, NoticeModalComponent, StudentProfileComponent, LoaderComponent],
-  exports: [FooterComponent, NavbarComponent, SidebarComponent,NoticeModalComponent,StudentProfileComponent,LoaderComponent]
+  declarations: [FooterComponent, NavbarComponent, SidebarComponent, NoticeModalComponent, StudentProfileComponent, LoaderComponent,BreadComponent],
+  exports: [FooterComponent, NavbarComponent, SidebarComponent,NoticeModalComponent,StudentProfileComponent,LoaderComponent,BreadComponent]
 })
 export class ComponentsModule {}
