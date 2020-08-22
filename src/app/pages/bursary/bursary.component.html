@@ -3,33 +3,32 @@
 		<div class=" col-md-12">
 			<div class=" card">
 				<div class=" card-header d-flex flex-row justify-content-between align-items-center">
-					<h4 class=" card-title"> Bursary </h4>
+					<!-- <h4 class=" card-title"> Bursary </h4> -->
 					<button class="btn btn-success btn-sm" (click)="refresh()"> <i class="fas fa-sync-alt    "></i> </button>
 				</div>
 				<div class=" card-body" >
 					<div class=" ">
-						<table class=" table tablesorter" id="">
+						<table datatable class=" table tablesorter" id="">
 							<thead class=" text-primary">
 								<tr>
 									<th>Date</th>
 									<th>Description</th>
-									<th>Reference</th>
+									<!-- <th>Reference</th> -->
 									<th class="text-right">Amount</th>
 								</tr>
 							</thead>
 							<tbody>
-								<tr *ngFor="let transaction of studentBursary">
-									<td>{{transaction.trans_date}}</td>
-									<td>{{transaction.trans_value < 0 ?'Fees Payment':'Invoice' }}</td>
-									<td>{{transaction.trans_reference}}</td>
-									<td class="text-right">{{transaction.trans_value | currency}}</td>
+								<tr class="small" *ngFor="let transaction of statements">
+									<td>{{transaction.transaction_date | date}}</td>
+									<td>{{transaction.transaction_description}}</td>
+									<td class="text-right">{{transaction.credit>0?-transaction.credit:transaction.debit| currency}}</td>
 								</tr>
 								<tr>
-									<td colspan="3">
+									<td colspan="2">
 
 									</td>
 									<td  class="justify-content-end font-weight-bold text-right">
-										Balance	{{total | currency}}
+										Balance	{{bursary.getBalance() | currency}}
 									</td>
 								</tr>
 							</tbody>

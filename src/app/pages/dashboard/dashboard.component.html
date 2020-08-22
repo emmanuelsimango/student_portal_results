@@ -84,7 +84,7 @@
 	<div class=" col-lg-4">
 		<div class=" card card-chart">
 			<div class=" card-header bg-primary">
-				<h4 class=" ">Student Accounts</h4>
+				<h4 class=" ">Student Access Services</h4>
 			</div>
 			<div class=" card-body">
 				<h6 class=" card-title  d-flex justify-content-between">
@@ -127,13 +127,13 @@
 	<div class=" col-lg-6 col-md-12">
 		<div class=" card card-tasks">
 			<div class=" card-header">
-				<h4 class=" title d-inline">Bursary </h4>
+				<h3 class=" title d-inline">Bursary </h3>
 				<i class=" tim-icons icon-money-coins float-right text-lg-right"></i>
 
 			</div>
 			<div class=" card-body py-2">
-				<h3 class="mb-2  justify-content-between pr-4"> <span>Available Balance</span> <span
-						class="text-right ml-4"> {{ bursary.getBalance() | currency }} </span></h3>
+				<h4 class="mb-2  justify-content-between pr-4"> <span>Available Balance</span> <span
+						class="text-right ml-4"> {{ bursary.getBalance() | currency }} </span></h4>
 				<!-- <h5 class="d-flex justify-content-between pr-4">
 					<span class="text-success">
 						Credits <span class="text-dark">{{ 6400 | currency }}</span>
@@ -157,7 +157,7 @@
 
 					<table class="table ">
 						<tbody>
-							<tr *ngFor="let statement of statements.slice(-3)" >
+							<tr class="small" *ngFor="let statement of statements.slice(-3)" >
 								<td class="text-left">
 									{{ statement.transaction_date | date }}
 								</td>
@@ -186,28 +186,22 @@
 					<table class=" table tablesorter" id="">
 						<thead class=" text-primary">
 							<tr>
+
 								<th colspan=3></th>
 								<th class=" text-center">date</th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
-								<td colspan="3">Lorem ipsum dolor, sit amet consectetur adipisicing.</td>
-								<td class=" text-center">20 Aug 2020</td>
-							</tr>
-							<tr>
-								<td colspan="3">Lorem ipsum dolor, sit amet consectetur adipisicing.</td>
-								<td class=" text-center">20 Aug 2020</td>
-							</tr>
-							<tr>
-								<td colspan="3">Lorem ipsum dolor, sit amet consectetur adipisicing.</td>
-								<td class=" text-center">20 Aug 2020</td>
-							</tr>
-							<tr>
-								<td colspan="3">Lorem ipsum dolor, sit amet consectetur adipisicing.</td>
-								<td class=" text-center">20 Aug 2020</td>
-							</tr>
+							<tr class="small" *ngFor="let notice of student.notice;let i= index">
+								<td colspan="3">
+									<span  >
 
+										{{ notice.body }}
+									</span>
+								</td>
+								<td class=" text-center">{{ notice.date  }}</td>
+								<app-dashNoticeModal [id]="'notice'+i" ></app-dashNoticeModal>
+							</tr>
 						</tbody>
 					</table>
 				</div>
@@ -215,3 +209,4 @@
 		</div>
 	</div>
 </div>
+

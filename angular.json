@@ -27,12 +27,16 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss",
-              "node_modules/ngx-toastr/toastr.css",
-              "src/assets/scss/black-dashboard.scss",
-              "src/assets/css/nucleo-icons.css"
+				"src/styles.scss",
+				"node_modules/ngx-toastr/toastr.css",
+				"src/assets/scss/black-dashboard.scss",
+				"src/assets/css/nucleo-icons.css",
+				"node_modules/datatables.net-dt/css/jquery.dataTables.css"
             ],
-            "scripts": [],
+            "scripts": [
+				"node_modules/jquery/dist/jquery.js",
+				"node_modules/datatables.net/js/jquery.dataTables.js"
+			],
             "es5BrowserSupport": true
           },
           "configurations": {

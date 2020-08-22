@@ -4,6 +4,7 @@ import { Student } from 'src/app/models/student';
 import { AuthService } from 'src/app/services/auth/auth-service.service';
 import { BursaryService } from 'src/app/services/auth/bursary.service';
 import { Statement } from 'src/app/models/statement';
+import { ModalModule } from 'ngb-modal';
 
 @Component({
 	selector: "app-dashboard",

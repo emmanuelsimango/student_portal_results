@@ -1,43 +1,49 @@
-
-
-  <div class=" row">
-	<div class="col-12">
-		<app-bread>
-
-		</app-bread>
-	</div>
-    <div class=" col-lg-4">
-        <div class=" card card-chart">
+<div class=" row" *ngIf="modules.length>0;else no_modules">
+	<div class=" col-lg-4">
+		<div class=" card card-chart mb-4">
 			<div class=" card-header">
-			  <h5 class=" card-category">Modules Summary</h5>
-			  <h6 class=" card-title">
-				<i class=" tim-icons icon-book-bookmark text-danger-states"> </i>Total Modules: <span class="font-weight-bold">(5)</span>
-			  </h6>
-			  <h6 class=" card-title">
-				<i class=" tim-icons icon-notes text-success"> </i> VLE Active Modules: <span class="font-weight-bold" > (3)</span>
-			  </h6>
+				<h5 class=" ">Modules Summary</h5>
+				<h6 class=" card-title d-flex justify-content-between">
+					<span>
+						<i class=" tim-icons icon-book-bookmark text-danger-states"> </i>
+						Total Modules:
+					</span>
+					<span class="font-weight-bold">({{ modules.length }})</span>
+				</h6>
+				<h6 class=" card-title d-flex flex-column">
+					<span>
+						<i class=" tim-icons icon-notes text-success"> </i>
+						VLE Active Modules:
+					</span>
+					<span *ngIf="student.vle" class="font-weight-bold"> ({{ student.vle.class_ready }})
+					</span>
+				</h6>
 			</div>
 			<div class="card-body px-3 border-top">
 
-				<a class="text-uppercase" href="http://" target="_blank" rel="noopener noreferrer">Your VLE Account is ready, click here to continue</a>
+				<a class="text-uppercase" href="http://" target="_blank" rel="noopener noreferrer">Your VLE Account is
+					ready, click here to continue</a>
 
 
 			</div>
-		  </div>
-    </div>
-    <div class=" col-lg-4">
-        <div class=" card card-chart">
+		</div>
+	</div>
+	<div class=" col-lg-4">
+		<div class=" card card-chart">
 			<div class=" card-header">
-			  <h5 class=" card-category">Learning Summary</h5>
-			  <h6 class=" card-title">
-				<i class=" tim-icons icon-paper text-danger-states"> </i>Total Reading Material: <span class="font-weight-bold">(5)</span>
-			  </h6>
-			  <h6 class=" card-title">
-				<i class=" tim-icons icon-pencil text-success"> </i> Assignments: <span class="font-weight-bold" > (2)</span>
-			  </h6>
-			  <h6 class=" card-title">
-				<i class=" tim-icons icon-bag-16 text-success"> </i> Past Exam Papers: <span class="font-weight-bold" > (12)</span>
-			  </h6>
+				<h5 class=" ">Learning Summary</h5>
+				<h6 class=" card-title">
+					<i class=" tim-icons icon-paper text-danger-states"> </i>Total Reading Material: <span
+						class="font-weight-bold">(5)</span>
+				</h6>
+				<h6 class=" card-title">
+					<i class=" tim-icons icon-pencil text-success"> </i> Assignments: <span class="font-weight-bold">
+						(2)</span>
+				</h6>
+				<h6 class=" card-title">
+					<i class=" tim-icons icon-bag-16 text-success"> </i> Past Exam Papers: <span
+						class="font-weight-bold"> (12)</span>
+				</h6>
 			</div>
 			<div class="card-body px-3 ">
 
@@ -45,45 +51,46 @@
 
 
 			</div>
-		  </div>
+		</div>
 	</div>
 	<div class=" col-lg-4">
-        <div class=" card card-chart">
+		<div class=" card card-chart">
 			<div class=" card-header">
-			  <h5 class=" card-category">Miscellenous Summary</h5>
-			  <h6 class=" card-title">
-				<i class=" tim-icons icon-chat-33 text-danger-states"> </i>Posts: <span class="font-weight-bold">(5)</span>
-			  </h6>
-			  <h6 class=" card-title">
-				<i class=" tim-icons icon-notes text-success"> </i> VLE Active Modules: <span class="font-weight-bold" > (3)</span>
-			  </h6>
+				<h5 class=" card-category">Miscellenous Summary</h5>
+				<h6 class=" card-title">
+					<i class=" tim-icons icon-chat-33 text-danger-states"> </i>Posts: <span
+						class="font-weight-bold">(5)</span>
+				</h6>
+				<h6 class=" card-title">
+					<i class=" tim-icons icon-notes text-success"> </i> VLE Active Modules: <span
+						class="font-weight-bold"> (3)</span>
+				</h6>
 			</div>
 			<div class="card-body px-3 border-top">
 
-				<a class="text-uppercase" href="http://" target="_blank" rel="noopener noreferrer">Your VLE Account is ready, click here to continue</a>
+				<a class="text-uppercase" href="http://" target="_blank" rel="noopener noreferrer">Your VLE Account is
+					ready, click here to continue</a>
 
 
 			</div>
-		  </div>
-    </div>
-
-  </div>
-  <div class=" row">
-    <div class=" col-lg-12">
-        <div class=" card card-chart">
+		</div>
+	</div>
+	<div class=" col-lg-12">
+		<div class=" card card-chart mt-4">
 			<div class=" card-header">
-			  <h4 class=" card-title">Modules</h4>
+				<h4 class=" card-title">Modules</h4>
 			</div>
 			<div class="card-body px-3 ">
 				<hr>
 				<table class="table">
-					<tbody >
-						<tr>
+					<tbody>
+
+						<tr class="small" *ngFor="let module of modules" >
 							<td class="text-uppercase">
-								Computer Mathematics
+								{{ module.module_code }} - {{ module.module_name }}
 							</td>
 							<td>
-								 Posts[2]
+								Posts[2]
 							</td>
 							<td>
 								Reading Material [5]
@@ -100,7 +107,7 @@
 							<td>
 								<span>
 
-									VLE <supp class="badge badge-pill badge-success small"> active</supp>
+									VLE <span class="badge badge-pill small" [ngClass]="module.vle_status?'badge-success':'badge-danger'" > {{ module.vle_status?'active':'not active' }}</span>
 								</span>
 							</td>
 						</tr>
@@ -110,6 +117,23 @@
 				</table>
 
 			</div>
-		  </div>
-    </div>
+		</div>
+	</div>
+</div>
 
+<ng-template #no_modules >
+	<div class="row">
+
+		<div class=" col-lg-12">
+			<div class=" card card-chart">
+
+			<div class="card-body px-3 ">
+				<h3 class="font-weight-light">
+
+					No Modules Found
+				</h3>
+			</div>
+		</div>
+	</div>
+</div>
+</ng-template>

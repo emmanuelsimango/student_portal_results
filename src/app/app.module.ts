@@ -8,6 +8,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { AppComponent } from "./app.component";
 import { AdminLayoutComponent } from "./layouts/admin-layout/admin-layout.component";
 import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component';
+import { DataTablesModule } from 'angular-datatables';
 
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 
@@ -15,13 +16,15 @@ import { AppRoutingModule } from "./app-routing.module";
 import { ComponentsModule } from "./components/components.module";
 import { LoginComponent } from './pages/login/login.component';
 
+
 @NgModule({
   imports: [
     BrowserAnimationsModule,
     FormsModule,
     HttpClientModule,
     ComponentsModule,
-    NgbModule,
+	NgbModule,
+	DataTablesModule,
 	RouterModule,
 	ReactiveFormsModule,
     AppRoutingModule,

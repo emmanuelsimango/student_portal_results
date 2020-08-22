@@ -15,6 +15,7 @@ import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { ResultsComponent } from 'src/app/pages/results/results.component';
 import { BursaryComponent } from 'src/app/pages/bursary/bursary.component';
 import { ComponentsModule } from 'src/app/components/components.module';
+import { ModulesComponent } from 'src/app/pages/modules/modules.component';
 
 @NgModule({
   imports: [
@@ -29,7 +30,8 @@ import { ComponentsModule } from 'src/app/components/components.module';
     DashboardComponent,
     UserComponent,
     ResultsComponent,
-	BursaryComponent
+	BursaryComponent,
+	ModulesComponent
   ]
 })
 export class AdminLayoutModule {}
