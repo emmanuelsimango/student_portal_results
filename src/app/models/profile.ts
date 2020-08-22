@@ -1,0 +1,22 @@
+export interface Profile {
+	citizenship: String,
+	contact_address: String,
+	date_of_birth: String,
+	email_address: String,
+	first_name: String,
+	marital_status: String,
+	national_id: String,
+	nationality: String,
+	passport_number: String,
+	permanant_address: String,
+	permanant_zimbabwe_resident: boolean,
+	permanent_home_address: String,
+	phone_numbers: String,
+	place_of_birth: String,
+	radio_frequency_id: String,
+	religion: String,
+	sex: String,
+	student_id: number,
+	surname: String,
+	title: String
+}

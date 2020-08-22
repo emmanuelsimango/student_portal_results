@@ -6,6 +6,7 @@ import { Observable, BehaviorSubject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { Notice } from 'src/app/models/notice';
+import { MyAuth } from 'src/app/models/auth';
 
 @Injectable({
 	providedIn: 'root'
@@ -15,6 +16,7 @@ export class AuthService {
 	private _currentStudentSubject:BehaviorSubject<Student> = new BehaviorSubject<Student>(JSON.parse(localStorage.getItem('currentStudent')))
 	public has_Message:BehaviorSubject<Notice> = new BehaviorSubject<Notice>(null);
 	public has_Notice: BehaviorSubject<Notice[]> = new BehaviorSubject<Notice[]>(null);;
+
 	// public currentStudent: Observable<Student>;
 
 
@@ -43,6 +45,7 @@ export class AuthService {
 			mycode:pass
 		};
 
+
 		const headers = new HttpHeaders({'Content-Type':'application/json; charset=utf-8'});
 		return this._http.post<any>(`${this._serverDetails.serverDetailsForApi}/student.signin.php`,data,{headers:headers})
 		.pipe(map(student => {
@@ -60,23 +63,22 @@ export class AuthService {
 	}
 
 	public auth(reg,token){
-		const data = {
-			myid:reg.toUpperCase(),
-			mycode:token
-		};
+		const myAuth:MyAuth = {reg_number:reg,token:token};
 
-		localStorage.setItem('auth',JSON.stringify(data))
+		localStorage.setItem('auth',JSON.stringify(myAuth))
 		const headers = new HttpHeaders({'Content-Type':'application/json; charset=utf-8'});
-		console.log(`${this._serverDetails.studentServerDetails}/api/getHomeData/C16127442T/QzE2MTI3NDQyVDoyMDIwLTA4LTIxIDE0OjI3OjE1`)
-		return this._http.post<any>(`${this._serverDetails.studentServerDetails}/api/getHomeData/C16127442T/QzE2MTI3NDQyVDoyMDIwLTA4LTIxIDE0OjI3OjE1`,data,{headers:headers})
+		console.log(`${this._serverDetails.studentServerDetails}/api/getHomeData/${reg}/${token}`)
+		return this._http.post<any>(`${this._serverDetails.studentServerDetails}/api/getHomeData/${reg}/${token}`,myAuth,{headers:headers})
 		.pipe(map(response => {
 			console.log(response)
 			// login successful if there's a jwt token in the response when using laravel passport
-			if (response) {
+			if (response.body) {
 				// store user details and jwt token in local storage to keep user logged in between page refreshes
-				localStorage.setItem('currentStudent', JSON.stringify(response));
+				localStorage.setItem('currentStudent', JSON.stringify(response.body));
 				this._currentStudentSubject.next(response.body);
 
+			}else{
+				this.router.navigateByUrl(this._serverDetails.loginURL+"?e=1");
 			}
 
 			return response.body;

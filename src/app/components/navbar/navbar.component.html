@@ -53,7 +53,7 @@
 		</li> -->
         <li class="">
           <h6>
-            {{ studentPersonal.fname }} {{ studentPersonal.lname }} ({{ studentPersonal.reg_num}})
+            {{ profile.first_name }} {{ profile.surname }} ( {{ myAuth.reg_number }})
           </h6>
         </li>
         <!-- <li class=" nav-item" ngbDropdown>
@@ -98,7 +98,7 @@
         <li class=" nav-item" ngbDropdown>
           <a class=" nav-link" data-toggle="dropdown" href="javascript:void(0)" ngbDropdownToggle>
             <div class=" photo bg-light">
-              <img alt="Profile Photo" [src]="'https://www.cut.ac.zw/portal/ids/'+studentPersonal.reg_num+'.JPG'" />
+              <img *ngIf="myAuth" alt="Profile Photo" [src]="'https://www.cut.ac.zw/portal/ids/'+myAuth.reg_number.toUpperCase()+'.JPG'" />
             </div>
             <b class=" caret d-none d-lg-block d-xl-block"> </b>
             <p class=" d-lg-none">Log out</p>

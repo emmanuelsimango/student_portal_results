@@ -6,6 +6,8 @@ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService } from 'src/app/services/auth/auth-service.service';
 import { Student } from 'src/app/models/student';
 import { StudentPersonal } from 'src/app/models/student-personal';
+import { Profile } from 'src/app/models/profile';
+import { MyAuth } from 'src/app/models/auth';
 
 @Component({
 	selector: "app-navbar",
@@ -20,8 +22,9 @@ export class NavbarComponent implements OnInit, OnDestroy {
 	private sidebarVisible: boolean;
 	public isCollapsed = true;
 	closeResult: string;
+	myAuth:MyAuth;
 	student:Student;
-	studentPersonal:StudentPersonal;
+	profile:Profile;
 
 	constructor(
 		location: Location,
@@ -33,7 +36,9 @@ export class NavbarComponent implements OnInit, OnDestroy {
 		this.location = location;
 		this.sidebarVisible = false;
 		this.student =	this.auth.currentStudent()
-		this.studentPersonal = JSON.parse(this.student.studentPersonalData);
+		this.profile =this.student.profile;
+		this.myAuth = JSON.parse(localStorage.getItem('auth'))
+		// this.studentPersonal = JSON.parse(this.student.stu);
 
 
 	}
