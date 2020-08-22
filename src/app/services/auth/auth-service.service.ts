@@ -36,7 +36,7 @@ export class AuthService {
 			// return <Student>JSON.parse(localStorage.getItem('currentStudent')).records[0]
 			return JSON.parse(localStorage.getItem('currentStudent'))
 		}
-		return this.router.navigate(['auth']);
+		return this.router.navigateByUrl(this._serverDetails.loginURL);
 	}
 
 	public login(reg,pass){
@@ -86,9 +86,14 @@ export class AuthService {
 	}
 
 	logout() {
-        // remove student from local storage to log student out
-        localStorage.removeItem('currentStudent');
+
+		localStorage.clear();
+
+        // localStorage.removeItem('currentStudent');
 		this._currentStudentSubject.next(null);
-		this.router.navigateByUrl('https://cut.ac.zw/portal/login');
+		this.router.navigateByUrl(this._serverDetails.loginURL);
+		// console.log('pano',this._serverDetails.loginURL);
+		window.location.href = this._serverDetails.loginURL;
+
     }
 }

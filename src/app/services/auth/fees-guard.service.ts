@@ -19,6 +19,7 @@ export class FeesGuardService implements CanActivate {
 	canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
 
 		this.student = this.auth.currentStudent();
+		return true;
 		const studentPersonalData: StudentPersonal = JSON.parse(this.student.studentPersonalData)
 		try {
 			// console.log(this.student.studentBursaryData);

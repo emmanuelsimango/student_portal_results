@@ -1,4 +1,4 @@
-<div class=" card card-user">
+<div class=" card card-user" *ngIf="profile">
 	<div class=" card-body">
 		<p class=" card-text"></p>
 		<div class=" author">
@@ -7,11 +7,11 @@
 			<div class=" block block-three"></div>
 			<div class=" block block-four"></div>
 			<a href="javascript:void(0)">
-				<img alt="..." class=" avatar" [src]="'https://www.cut.ac.zw/portal/ids/'+studentPersonal.reg_num+'.JPG'" />
+				<img *ngIf="myAuth" alt="..." class=" avatar" [src]="'https://www.cut.ac.zw/portal/ids/'+myAuth.reg_number.toUpperCase()+'.JPG'" />
 
-				<h5 class=" title">{{ studentPersonal.fname}} {{studentPersonal.lname}} </h5>
+				<h5 class=" title">{{ profile.first_name}} {{profile.surname}} </h5>
 			</a>
-			<p class=" description">{{studentPersonal.reg_num}}</p>
+			<p class=" description">{{profile.date_of_birth}}</p>
 		</div>
 		<div class=" card-description">
 			<!-- Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cumque, error. -->

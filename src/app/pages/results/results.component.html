@@ -1,8 +1,6 @@
-<div class=" content">
+
 	<div class=" row">
-		<div class="col-12">
-			<app-bread></app-bread>
-		</div>
+
 		<div class=" col-md-8">
 			<div class=" card">
 				<div class=" card-header d-flex flex-row justify-content-between align-items-center">
@@ -16,7 +14,7 @@
 							</option>
 						</select>
 					</span>
-					<h4 class=" card-title">{{selectedResult.periodname}} Semester {{ selectedResult.level }} Period
+					<h4 *ngIf="selectedResult" class="card-title">{{selectedResult.periodname}} Semester {{ selectedResult.level }} Period
 						{{selectedResult.semester}} </h4>
 
 				</div>
@@ -44,8 +42,8 @@
 						</table>
 					</div>
 				</div>
-				<div class="card-footer align-items-center">
-					<span class="">
+				<div *ngIf="selectedResult" class="card-footer align-items-center">
+					<span  class="">
 						{{selectedResult.periodname}} <br> Level: {{selectedResult.level}} Semester: {{selectedResult.semester}}
 					</span>
 					<hr>
@@ -66,4 +64,4 @@
 		</div>
 
 	</div>
-</div>
+
