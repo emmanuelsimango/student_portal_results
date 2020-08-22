@@ -5,18 +5,47 @@
 			<div class=" card-header bg-primary">
 				<h4 class="">Registration</h4>
 			</div>
-			<div class="card-body px-3">
-				<h6 class=" card-title">
-					<i class=" tim-icons icon-book-bookmark text-danger-states"> </i>Period: March 2020 - June 2020
-					Semester
+			<div class="card-body px-3" >
+				<h6 class=" card-title d-flex justify-content-between ">
+					<span>
+						<i class=" tim-icons icon-book-bookmark text-danger-states"> </i>
+						<span *ngIf="student.registration.modules.length>0;else activeP" >
+
+							Last Active Period:
+						</span>
+						<ng-template  #activeP >
+
+							Active Period:
+						</ng-template>
+					</span>
+					<span>
+						{{ student.registration.period.period_name }}
+					</span>
 				</h6>
-				<h6 class=" card-title">
-					<i class=" tim-icons icon-bell-55 text-danger-states"> </i> Modules Registered: <span
-						class="font-weight-bold"> (5)</span>
+				<h6 class=" card-title d-flex justify-content-between" *ngIf="student.registration.modules.length>0;else not_registered" >
+					<span>
+
+						<i class=" tim-icons icon-bell-55 text-danger-states"> </i> Modules Registered:
+					</span>
+					<span
+						class="font-weight-bold"> ({{student.registration.modules.length}})</span>
 				</h6>
+				<ng-template #not_registered >
+					<h6  class=" card-title d-flex justify-content-between">
+
+						<span>
+							<i class=" tim-icons icon-bell-55 text-danger-states"> </i>
+							You're not registered
+						</span>
+						<a  href=""	class="badge badge-danger small ">
+							register
+						</a>
+					</h6>
+
+				</ng-template>
 				<hr>
 
-				BACHELOR OF SCIENCE HONOURS DEGREE IN INFORMATION TECHNOLOGY
+				{{ student.registration.program.programme_name }}
 
 			</div>
 		</div>
@@ -31,11 +60,11 @@
 					<span>
 						<i class=" tim-icons icon-globe-2 text-info"> </i> Status:
 					</span>
-					<span class="badge badge-pill badge-success">Active</span>
+					<span class="badge badge-pill" [ngClass]="student.vle?'badge-success':'badge-danger'">{{ student.vle?'Active':'Not Active' }}</span>
 				</h6>
-				<h6 class=" card-title">
+				<h6 class=" card-title" *ngIf="student.vle">
 					<i class=" tim-icons icon-delivery-fast text-info"> </i> Classes Ready: <span
-						class="font-weight-bold"> (2)</span>
+						class="font-weight-bold"> ({{ student.vle.readyClasses }})</span>
 				</h6>
 				<h6 class=" card-title">
 					<i class=" tim-icons icon-single-copy-04 text-info"> </i> <a href="http://" target="_blank"
@@ -46,7 +75,7 @@
 						rel="noopener noreferrer"> Visit Library </a>
 				</h6>
 
-				<a class="text-uppercase" href="http://" target="_blank" rel="noopener noreferrer">Your VLE Account
+				<a class="text-uppercase" *ngIf="student.vle" href="http://" target="_blank" rel="noopener noreferrer">Your VLE Account
 					is ready, click here to continue</a>
 
 			</div>
@@ -62,23 +91,27 @@
 					<span>
 						<i class=" tim-icons icon-wifi text-success"> </i> WiFi :
 					</span>
-					<span class="badge badge-pill badge-success">Active</span>
+					<span class="badge badge-pill" [ngClass]="student.accounts.wifi?'badge-success':'badge-danger'">{{ student.accounts.wifi?'Active':'Not Active' }}</span>
+
 				</h6>
 				<h6 class=" card-title  d-flex justify-content-between">
 					<span>
 						<i class=" tim-icons icon-badge text-success"> </i> Student ID :
 					</span>
-					<span class="badge badge-pill badge-primary">pending</span>
+					<span class="badge badge-pill" [ngClass]="student.accounts.student_id_card?'badge-success':'badge-danger'">{{ student.accounts.student_id_card?'Active':'Not Active' }}</span>
+
 				</h6>
 				<h6 class=" card-title  d-flex justify-content-between">
 					<span>
 						<i class=" tim-icons icon-bag-16 text-success"> </i> Canteen :
 					</span>
-						<span
-						class="badge badge-pill badge-danger">disabled</span>
+					<span class="badge badge-pill" [ngClass]="student.accounts.canteen?'badge-success':'badge-danger'">{{ student.accounts.canteen?'Active':'Not Active' }}</span>
+
 				</h6>
 				<h6 class=" card-title">
-					<i class=" tim-icons icon-istanbul text-success"> </i> My Accomodation : <a href="http://"
+					<i class=" tim-icons icon-istanbul text-success"> </i> My Accomodation :
+
+					<a href="http://"
 						target="_blank" rel="noopener noreferrer">Download OffCampus Database</a>
 					<br>
 					<span class="badge badge- badge-danger small font-weight-light">You have no accomodation on
@@ -96,41 +129,22 @@
 			<div class=" card-header">
 				<h4 class=" title d-inline">Bursary </h4>
 				<i class=" tim-icons icon-money-coins float-right text-lg-right"></i>
-				<!--
-          <div ngbDropdown>
-            <button
-              class=" btn btn-link btn-icon"
-              data-toggle="dropdown"
-              ngbDropdownToggle
-              type="button"
-            >
-              <i class=" tim-icons icon-settings-gear-63"> </i>
-            </button>
-            <div
-              aria-labelledby="dropdownMenuLink"
-              class=" dropdown-menu-right"
-              ngbDropdownMenu
-            >
-              <a href="javascript:void(0)" ngbDropdownItem> Action </a>
-              <a href="javascript:void(0)" ngbDropdownItem> Another action </a>
-              <a href="javascript:void(0)" ngbDropdownItem> Something else </a>
-            </div>
-          </div> -->
+
 			</div>
 			<div class=" card-body py-2">
 				<h3 class="mb-2  justify-content-between pr-4"> <span>Available Balance</span> <span
-						class="text-right ml-4"> {{ 2400 | currency }} </span></h3>
-				<h5 class="d-flex justify-content-between pr-4">
+						class="text-right ml-4"> {{ bursary.getBalance() | currency }} </span></h3>
+				<!-- <h5 class="d-flex justify-content-between pr-4">
 					<span class="text-success">
 						Credits <span class="text-dark">{{ 6400 | currency }}</span>
 					</span>
 					<span class="text-primary">
 						Debits <span class="text-dark"> {{ 4000 | currency }} </span>
 					</span>
-				</h5>
+				</h5> -->
 				<div class="d-flex justify-content-between">
 
-					<button class="btn btn-outline-light btn-link">
+					<button routerLink="/bursary" class="btn btn-outline-light btn-link">
 						View Bursary
 					</button>
 					<button class="btn btn-outline-primary ">
@@ -143,39 +157,18 @@
 
 					<table class="table ">
 						<tbody>
-							<tr>
+							<tr *ngFor="let statement of statements.slice(-3)" >
 								<td class="text-left">
-									23 May 2020
+									{{ statement.transaction_date | date }}
 								</td>
 								<td>
-									Credit
+									{{ statement.transaction_description }}
 								</td>
 								<td class="text-right">
-									{{ 400 | currency }}
+									{{ statement.credit>0?-statement.credit:statement.debit | currency }}
 								</td>
 							</tr>
-							<tr>
-								<td class="text-left">
-									23 May 2020
-								</td>
-								<td>
-									Credit
-								</td>
-								<td class="text-right">
-									{{ 400 | currency }}
-								</td>
-							</tr>
-							<tr>
-								<td class="text-left">
-									23 May 2020
-								</td>
-								<td>
-									Credit
-								</td>
-								<td class="text-right">
-									{{ 400 | currency }}
-								</td>
-							</tr>
+
 						</tbody>
 					</table>
 				</div>
