@@ -85,21 +85,21 @@
 				<table class="table">
 					<tbody>
 
-						<tr class="small" *ngFor="let module of modules" >
+						<tr class="small" *ngFor="let module of modules">
 							<td class="text-uppercase">
 								{{ module.module_code }} - {{ module.module_name }}
 							</td>
 							<td>
-								Posts[2]
+								Posts[{{ module.posts.length }}]
 							</td>
-							<td>
-								Reading Material [5]
+							<td class="cursor-pointer" (click)="open(reading_material,module)">
+								Reading Material [{{ module.reading_materials.length }}]
 							</td>
-							<td>
-								Past Exam Papers [5]
+							<td class="cursor-pointer" (click)="open(exam_papers,module)">
+								Past Exam Papers [{{ module.past_exam_papers.length }}]
 							</td>
-							<td>
-								Assignments [5]
+							<td class="cursor-pointer" (click)="open(assignments,module)">
+								Assignments [{{ module.assignments.length }}]
 							</td>
 							<td>
 								CSWK
@@ -107,7 +107,9 @@
 							<td>
 								<span>
 
-									VLE <span class="badge badge-pill small" [ngClass]="module.vle_status?'badge-success':'badge-danger'" > {{ module.vle_status?'active':'not active' }}</span>
+									VLE <span class="badge badge-pill small"
+										[ngClass]="module.vle_status?'badge-success':'badge-danger'">
+										{{ module.vle_status?'active':'not active' }}</span>
 								</span>
 							</td>
 						</tr>
@@ -121,19 +123,129 @@
 	</div>
 </div>
 
-<ng-template #no_modules >
+<ng-template #no_modules>
 	<div class="row">
 
 		<div class=" col-lg-12">
 			<div class=" card card-chart">
 
-			<div class="card-body px-3 ">
-				<h3 class="font-weight-light">
+				<div class="card-body px-3 ">
+					<h3 class="font-weight-light">
 
-					No Modules Found
-				</h3>
+						No Modules Found
+					</h3>
+				</div>
 			</div>
 		</div>
 	</div>
-</div>
+</ng-template>
+
+<ng-template #reading_material let-modal>
+	<div class="modal-header bg-primary">
+		<h4 class="" id="modal-basic-title">Reading Materials for {{ selectedModule.module_code }} -
+			{{ selectedModule.module_name }}</h4>
+		<button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+			<span aria-hidden="true">×</span>
+		</button>
+	</div>
+	<div class="modal-body">
+		<table datatable class="table table-light">
+			<tbody>
+
+				<tr class="small" *ngFor="let material of selectedModule.reading_materials">
+					<td>
+						{{ material.upload_description }}
+					</td>
+					<td>
+						{{ material.document_size }}kb
+					</td>
+					<td>
+						<a class="" [href]="getFileURL(material)" target="_blank" rel="noopener noreferrer">Download</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<p *ngIf="selectedModule.reading_materials.length<1">
+			No Materials
+		</p>
+	</div>
+	<div class="modal-footer justify-content-end">
+		<button type="button" class="btn btn-primary" (click)="modal.close('Save click')">Close</button>
+	</div>
+</ng-template>
+<ng-template #exam_papers let-modal>
+	<div class="modal-header bg-primary">
+		<h4 class="" id="modal-basic-title">Exam Papers for {{ selectedModule.module_code }} -
+			{{ selectedModule.module_name }}</h4>
+		<button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+			<span aria-hidden="true">×</span>
+		</button>
+	</div>
+	<div class="modal-body">
+		<table datatable class="table table-light">
+			<tbody>
+
+				<tr class="small" *ngFor="let paper of selectedModule.past_exam_papers">
+					<td>
+						<!-- {{ paper }} -->
+					</td>
+					<td>
+						<!-- {{ material.document_size }}kb -->
+					</td>
+					<td>
+						<!-- <a class="" [href]="getFileURL(material)" target="_blank" rel="noopener noreferrer">Download</a> -->
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<p *ngIf="selectedModule.past_exam_papers.length<1">
+			No Papers Found
+		</p>
+	</div>
+	<div class="modal-footer justify-content-end">
+		<button type="button" class="btn btn-primary" (click)="modal.close('Save click')">Close</button>
+	</div>
+</ng-template>
+<ng-template #assignments let-modal>
+	<div class="modal-header bg-primary">
+		<h4 class="" id="modal-basic-title">Assignments for {{ selectedModule.module_code }} -
+			{{ selectedModule.module_name }}</h4>
+		<button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+			<span aria-hidden="true">×</span>
+		</button>
+	</div>
+	<div class="modal-body">
+		<table datatable class="table table-light">
+
+			<tbody *ngFor="let material of selectedModule.assignments">
+
+				<tr class="small">
+					<td>
+						{{ material.assignment_information }}
+					</td>
+					<td>
+						Due Date: {{ material.due_date | date}}
+					</td>
+				</tr>
+				<tr class="small">
+					<td>
+						<input type="file" name="assignment" id="">
+					</td>
+					<td>
+						<button class="btn btn-sm btn-success">
+							Submit
+						</button>
+					</td>
+				</tr>
+			</tbody>
+
+		</table>
+		<p *ngIf="selectedModule.assignments.length<1">
+			No Assignments
+		</p>
+
+	</div>
+	<div class="modal-footer justify-content-end">
+		<button type="button" class="btn btn-primary" (click)="modal.close('Save click')">Close</button>
+	</div>
 </ng-template>
