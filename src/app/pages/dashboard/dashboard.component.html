@@ -9,7 +9,7 @@
 				<h6 class=" card-title d-flex justify-content-between ">
 					<span>
 						<i class=" tim-icons icon-book-bookmark text-danger-states"> </i>
-						<span *ngIf="student.registration.modules.length>0;else activeP" >
+						<span *ngIf="student.registration.modules.length<1;else activeP" >
 
 							Last Active Period:
 						</span>
