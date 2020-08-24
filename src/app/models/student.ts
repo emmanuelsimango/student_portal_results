@@ -6,6 +6,7 @@ import { Registration } from './registration';
 import { Student_account_status } from './student_account_status';
 import { BursaryStatement } from './bursaryStatement';
 import { Notice } from './notice';
+import { Vle } from './vle';
 
 export interface Student {
 	"studentId" : number,
@@ -20,5 +21,5 @@ export interface Student {
 	"studentResultsData":any,
 	"studentModulesData":any,
 	"isactive" : 0,
-	"vle":any
+	"vle":Vle
 }

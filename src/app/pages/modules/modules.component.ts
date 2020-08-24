@@ -38,7 +38,7 @@ export class ModulesComponent implements OnInit {
 	open(content,module:Module) {
 		this.selectedModule = module;
 
-		this.modalService.open(content, {keyboard:true, size:'lg',windowClass: 'modal-xl',backdrop:true}).result.then((result) => {
+		this.modalService.open(content, {keyboard:true, size:'lg'}).result.then((result) => {
 		  this.closeResult = `Closed with: ${result}`;
 		}, (reason) => {
 		  this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
@@ -57,5 +57,37 @@ export class ModulesComponent implements OnInit {
 
 	getFileURL(material:ReadingMaterial){
 		return `${this.serverDetails.portalURL}\\${material.path}\\${material.upload_name}`;
+	}
+	getReadingMaterialTotal():number{
+		let total = 0;
+		this.modules.forEach(st=>{
+			total +=st.reading_materials.length;
+		})
+
+		return total
+	}
+	getReadingAssignmentsTotal():number{
+		let total = 0;
+		this.modules.forEach(st=>{
+			total +=st.assignments.length;
+		})
+
+		return total
+	}
+	getReadingPapersTotal():number{
+		let total = 0;
+		this.modules.forEach(st=>{
+			total +=st.past_exam_papers.length;
+		})
+
+		return total
+	}
+	getPostTotal():number{
+		let total = 0;
+		this.modules.forEach(st=>{
+			total +=st.posts.length;
+		})
+
+		return total
 	}
 }

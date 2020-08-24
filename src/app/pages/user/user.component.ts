@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { AuthService } from 'src/app/services/auth/auth-service.service';
 import { Student } from 'src/app/models/student';
 import { StudentPersonal } from 'src/app/models/student-personal';
+import { Profile } from 'src/app/models/profile';
 
 @Component({
 	selector: "app-user",
@@ -9,13 +10,14 @@ import { StudentPersonal } from 'src/app/models/student-personal';
 })
 export class UserComponent implements OnInit {
 	student:Student;
-	studentPersonal:StudentPersonal
+	profile:Profile;
+	reg_number: String
 	constructor(
 		public auth: AuthService
 	) {
-		this.student =	this.auth.currentStudent()
-		this.studentPersonal = JSON.parse(this.student.studentPersonalData);
-		console.log(this.studentPersonal);
+		this.student =	this.auth.currentStudent();
+		this.profile = this.student.profile;
+		this.reg_number = JSON.parse(localStorage.getItem('auth')).reg_number
 
 	}
 

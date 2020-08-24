@@ -8,13 +8,54 @@
 			<div class=" block block-four"></div>
 			<a href="javascript:void(0)">
 				<img *ngIf="myAuth" alt="..." class=" avatar" [src]="'https://www.cut.ac.zw/portal/ids/'+myAuth.reg_number.toUpperCase()+'.JPG'" />
-
-				<h5 class=" title">{{ profile.first_name}} {{profile.surname}} </h5>
 			</a>
-			<p class=" description">{{profile.date_of_birth}}</p>
 		</div>
+		<hr class="mb-0">
 		<div class=" card-description">
-			<!-- Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cumque, error. -->
+			<h6 class=" font-weight-light mb-0 d-flex justify-content-between ">
+				<span>
+					Reg Number:
+				</span>
+				<span class="font-weight-bold" >
+
+					{{ myAuth.reg_number }}
+				</span>
+			 </h6>
+			<h6 class=" font-weight-light mb-0 d-flex justify-content-between ">
+				<span>
+					Account Number:
+				</span>
+				<span class="font-weight-bold" >
+
+					{{ student.bursary.pastel_account }}
+				</span>
+			 </h6>
+			<h6 class=" font-weight-light mb-0 d-flex justify-content-between ">
+				<span>
+					Name:
+				</span>
+				<span>
+
+					{{ profile.first_name}} {{profile.surname}}
+				</span>
+			 </h6>
+			<h6 class=" font-weight-light  mb-0 d-flex justify-content-between ">
+				<span>
+					Program:
+				</span>
+				<span>
+					{{ student.registration.program.programme_name}}
+				</span>
+			 </h6>
+			<h6 class=" font-weight-light  mb-0 d-flex justify-content-between ">
+				<span>
+					Level:
+				</span>
+				<span class="font-weight-bold">
+					{{ student.registration.program.level}}
+				</span>
+			 </h6>
+
 		</div>
 	</div>
 	<div class=" card-footer">

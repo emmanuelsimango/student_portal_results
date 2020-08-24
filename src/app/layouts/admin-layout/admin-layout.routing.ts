@@ -6,6 +6,7 @@ import { ResultsComponent } from 'src/app/pages/results/results.component';
 import { BursaryComponent } from 'src/app/pages/bursary/bursary.component';
 import { FeesGuardService } from 'src/app/services/auth/fees-guard.service';
 import { ModulesComponent } from 'src/app/pages/modules/modules.component';
+import { IconsComponent } from 'src/app/pages/icons/icons.component';
 // import { RtlComponent } from "../../pages/rtl/rtl.component";
 
 export const AdminLayoutRoutes: Routes = [
@@ -14,5 +15,6 @@ export const AdminLayoutRoutes: Routes = [
   { path: "user", component: UserComponent },
   { path: "results", component: ResultsComponent,canActivate:[FeesGuardService] },
   { path: "dashboard", component:DashboardComponent},
-  { path: "modules", component:ModulesComponent}
+  { path: "modules", component:ModulesComponent},
+  { path: "profile", component:UserComponent}
 ];

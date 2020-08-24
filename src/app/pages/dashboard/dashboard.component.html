@@ -5,15 +5,15 @@
 			<div class=" card-header bg-primary">
 				<h4 class="">Registration</h4>
 			</div>
-			<div class="card-body px-3" >
+			<div class="card-body px-3">
 				<h6 class=" card-title d-flex justify-content-between ">
 					<span>
 						<i class=" tim-icons icon-book-bookmark text-danger-states"> </i>
-						<span *ngIf="student.registration.modules.length<1;else activeP" >
+						<span *ngIf="student.registration.modules.length<1;else activeP">
 
 							Last Active Period:
 						</span>
-						<ng-template  #activeP >
+						<ng-template #activeP>
 
 							Active Period:
 						</ng-template>
@@ -22,34 +22,34 @@
 						{{ student.registration.period.period_name }}
 					</span>
 				</h6>
-				<h6 class=" card-title d-flex justify-content-between" *ngIf="student.registration.modules.length>0;else not_registered" >
+				<h6 class=" card-title d-flex justify-content-between"
+					*ngIf="student.registration.modules.length>0;else not_registered">
 					<span>
 
 						<i class=" tim-icons icon-bell-55 text-danger-states"> </i> Modules Registered:
 					</span>
-					<span
-						class="font-weight-bold"> ({{student.registration.modules.length}})</span>
+					<span class="font-weight-bold"> ({{student.registration.modules.length}})</span>
 				</h6>
-				<ng-template #not_registered >
-					<h6  class=" card-title d-flex justify-content-between">
+				<ng-template #not_registered>
+					<h6 class=" card-title d-flex justify-content-between">
 
 						<span>
 							<i class=" tim-icons icon-bell-55 text-danger-states"> </i>
 							You're not registered
 						</span>
-						<a  href=""	class="badge badge-danger small ">
+						<a href="" class="badge badge-danger small ">
 							register
 						</a>
 					</h6>
 
 				</ng-template>
-				<h6  class=" card-title d-flex justify-content-between">
+				<h6 class=" card-title d-flex justify-content-between">
 
 					<span>
 						<i class=" tim-icons icon-bell-55 text-danger-states"> </i>
 						Level
 					</span>
-					<span href=""	class=" font-weight-bold">
+					<span href="" class=" font-weight-bold">
 						{{ student.registration.program.level }}
 					</span>
 				</h6>
@@ -70,11 +70,15 @@
 					<span>
 						<i class=" tim-icons icon-globe-2 text-info"> </i> Status:
 					</span>
-					<span class="badge badge-pill" [ngClass]="student.vle?'badge-success':'badge-danger'">{{ student.vle?'Active':'Not Active' }}</span>
+					<span class="badge badge-pill"
+						[ngClass]="student.vle?'badge-success':'badge-danger'">{{ student.vle?'Active':'Not Active' }}</span>
 				</h6>
-				<h6 class=" card-title" *ngIf="student.vle">
-					<i class=" tim-icons icon-delivery-fast text-info"> </i> Classes Ready: <span
-						class="font-weight-bold"> ({{ student.vle.readyClasses }})</span>
+				<h6 class=" card-title d-flex justify-content-between" *ngIf="student.vle">
+					<span class="">
+
+						<i class=" tim-icons icon-delivery-fast text-info"> </i> Classes Ready:
+					</span>
+					<span class="font-weight-bold"> ({{ student.vle.classes_ready }})</span>
 				</h6>
 				<h6 class=" card-title">
 					<i class=" tim-icons icon-single-copy-04 text-info"> </i> <a href="http://" target="_blank"
@@ -88,8 +92,9 @@
 					<i class=" tim-icons icon-planet text-info"> </i> <a href="http://" target="_blank"
 						rel="noopener noreferrer"> Institutional Repository</a>
 				</h6>
-
-				<a class="text-uppercase" *ngIf="student.vle" href="http://" target="_blank" rel="noopener noreferrer">CUT Virtual Learning Environment
+				<hr>
+				<a class="text-uppercase" *ngIf="student.vle" href="http://" target="_blank"
+					rel="noopener noreferrer">CUT Virtual Learning Environment
 					is ready, click here to continue</a>
 
 			</div>
@@ -98,41 +103,33 @@
 	<div class=" col-lg-4">
 		<div class=" card card-chart">
 			<div class=" card-header bg-primary">
-				<h4 class=" ">Student Access Services</h4>
+				<h4 class=" ">Student Access Control</h4>
 			</div>
 			<div class=" card-body px-3">
 				<h6 class=" card-title  d-flex justify-content-between">
 					<span>
 						<i class=" tim-icons icon-wifi text-success"> </i> WiFi :
 					</span>
-					<span class="badge badge-pill" [ngClass]="student.accounts.wifi?'badge-success':'badge-danger'">{{ student.accounts.wifi?'Active':'Not Active' }}</span>
+					<span class="badge badge-pill"
+						[ngClass]="student.accounts.wifi?'badge-success':'badge-danger'">{{ student.accounts.wifi?'Active':'Not Active' }}</span>
 
 				</h6>
 				<h6 class=" card-title  d-flex justify-content-between">
 					<span>
 						<i class=" tim-icons icon-badge text-success"> </i> Student ID :
 					</span>
-					<span class="badge badge-pill" [ngClass]="student.accounts.student_id_card?'badge-success':'badge-danger'">{{ student.accounts.student_id_card?'Active':'Not Active' }}</span>
+					<span class="badge badge-pill"
+						[ngClass]="student.accounts.student_id_card?'badge-success':'badge-danger'">{{ student.accounts.student_id_card?'Active':'Not Active' }}</span>
 
 				</h6>
 				<h6 class=" card-title  d-flex justify-content-between">
 					<span>
 						<i class=" tim-icons icon-bag-16 text-success"> </i> Canteen :
 					</span>
-					<span class="badge badge-pill" [ngClass]="student.accounts.canteen?'badge-success':'badge-danger'">{{ student.accounts.canteen?'Active':'Not Active' }}</span>
+					<span class="badge badge-pill"
+						[ngClass]="student.accounts.canteen?'badge-success':'badge-danger'">{{ student.accounts.canteen?'Active':'Not Active' }}</span>
 
 				</h6>
-				<h6 class=" card-title">
-					<i class=" tim-icons icon-istanbul text-success"> </i> My Accomodation :
-
-					<a href="http://"
-						target="_blank" rel="noopener noreferrer">Download OffCampus Database</a>
-					<br>
-					<span class="badge badge- badge-danger small font-weight-light">You have no accomodation on
-						campus</span>
-
-				</h6>
-
 			</div>
 		</div>
 	</div>
@@ -141,21 +138,26 @@
 	<div class=" col-lg-6 col-md-12">
 		<div class=" card card-tasks">
 			<div class=" card-header">
-				<h3 class=" title d-inline">Bursary </h3>
+				<h4 class=" title d-inline text-warning">Bursary </h4>
 				<i class=" tim-icons icon-money-coins float-right text-lg-right"></i>
 
 			</div>
 			<div class=" card-body py-2">
-				<h4 class="mb-2  justify-content-between pr-4"> <span>Available Balance</span> <span
-						class="text-right ml-4"> {{ bursary.getBalance() | currency }} </span></h4>
-				<!-- <h5 class="d-flex justify-content-between pr-4">
-					<span class="text-success">
+				<h5 class="mb-2 d-flex justify-content-between pr-4">
+					<span>Available Balance: </span>
+					<span class="text-right ml-4" [ngClass]="bursary.getBalance()<1 ?'text-success': 'text-danger'"> {{ bursary.getBalance() | currency }} </span></h5>
+				<h5 class="d-flex justify-content-between pr-4">
+					<span class="">
+						Account Number:
+					</span>
+					<span class=" ml-4"> {{ student.bursary.pastel_account }} </span>
+					<!-- <span class="text-success">
 						Credits <span class="text-dark">{{ 6400 | currency }}</span>
 					</span>
 					<span class="text-primary">
 						Debits <span class="text-dark"> {{ 4000 | currency }} </span>
-					</span>
-				</h5> -->
+					</span> -->
+				</h5>
 				<div class="d-flex justify-content-between">
 
 					<button routerLink="/bursary" class="btn btn-outline-light btn-link">
@@ -171,7 +173,7 @@
 
 					<table class="table ">
 						<tbody>
-							<tr class="small" *ngFor="let statement of statements.slice(-5)" >
+							<tr class="small" *ngFor="let statement of statements.slice(-5)">
 								<td class="text-left">
 									{{ statement.transaction_date | date }}
 								</td>
@@ -207,7 +209,7 @@
 						<tbody>
 							<tr class="small" *ngFor="let notice of student.notice.slice(-5);let i= index">
 								<td colspan="3">
-									<a [href]="notice.link" target="_blank" >
+									<a [href]="notice.link" target="_blank">
 
 										{{ notice.body }}
 									</a>
@@ -229,53 +231,36 @@
 	<div class=" col-lg-4">
 		<div class=" card card-chart">
 			<div class=" card-header bg-primary">
-				<h4 class="">Student Financial Services</h4>
+				<h4 class="">Student Financial Aid</h4>
 			</div>
-			<div class="card-body px-3" >
+			<div class="card-body px-3">
 				<h6 class=" card-title d-flex justify-content-between ">
 					<span>
-						<i class=" tim-icons icon-book-bookmark text-danger-states"> </i>
-						<span >
-							Personal Account
-						</span>
-
+						<i class=" tim-icons icon-coins text-danger-states"> </i>
+						Government loan
 					</span>
-
-				</h6>
-				<h6 class=" card-title d-flex justify-content-between" *ngIf="student.registration.modules.length>0;else not_registered" >
 					<span>
-
-						<i class=" tim-icons icon-bell-55 text-danger-states"> </i> Modules Registered:
-					</span>
-					<span
-						class="font-weight-bold"> ({{student.registration.modules.length}})</span>
-				</h6>
-				<ng-template #not_registered >
-					<h6  class=" card-title d-flex justify-content-between">
-
-						<span>
-							<i class=" tim-icons icon-bell-55 text-danger-states"> </i>
-							You're not registered
-						</span>
-						<a  href=""	class="badge badge-danger small ">
-							register
+						<a href="http://www.cut.ac.zw/home/2020-downloads/january/loan%20application%20form.pdf"
+							target="_blank" rel="noopener noreferrer">
+							download application form
 						</a>
-					</h6>
-
-				</ng-template>
-				<h6  class=" card-title d-flex justify-content-between">
-
-					<span>
-						<i class=" tim-icons icon-bell-55 text-danger-states"> </i>
-						Level
 					</span>
-					<span href=""	class=" font-weight-bold">
-						{{ student.registration.program.level }}
-					</span>
+
 				</h6>
-				<hr>
+				<h6 class=" card-title d-flex justify-content-between ">
+					<span>
+						<i class=" tim-icons icon-coins text-danger-states"> </i>
+						CBZ Bank loan
+					</span>
+					<span>
+						<a href="http://www.cut.ac.zw/home/2020-downloads/january/scan0002.pdf" target="_blank"
+							rel="noopener noreferrer">
+							download application form
+						</a>
+					</span>
 
-				{{ student.registration.program.programme_name }}
+				</h6>
+
 
 			</div>
 		</div>
@@ -283,34 +268,34 @@
 	<div class=" col-lg-4">
 		<div class=" card card-chart ">
 			<div class=" card-header bg-primary">
-				<h4 class="">Student Learning and Research</h4>
+				<h4 class="">Campus Life</h4>
 			</div>
 			<div class="card-body px-3 ">
 				<h6 class=" card-title d-flex justify-content-between">
 					<span>
-						<i class=" tim-icons icon-globe-2 text-info"> </i> Status:
+
+						<i class=" tim-icons icon-istanbul text-success"> </i> Campus Accomodation :
 					</span>
-					<span class="badge badge-pill" [ngClass]="student.vle?'badge-success':'badge-danger'">{{ student.vle?'Active':'Not Active' }}</span>
-				</h6>
-				<h6 class=" card-title" *ngIf="student.vle">
-					<i class=" tim-icons icon-delivery-fast text-info"> </i> Classes Ready: <span
-						class="font-weight-bold"> ({{ student.vle.readyClasses }})</span>
-				</h6>
-				<h6 class=" card-title">
-					<i class=" tim-icons icon-single-copy-04 text-info"> </i> <a href="http://" target="_blank"
-						rel="noopener noreferrer"> Download Virtual Classroom Guide: </a>
-				</h6>
-				<h6 class=" card-title">
-					<i class=" tim-icons icon-planet text-info"> </i> <a href="http://" target="_blank"
-						rel="noopener noreferrer"> CUT Library </a>
-				</h6>
-				<h6 class=" card-title">
-					<i class=" tim-icons icon-planet text-info"> </i> <a href="http://" target="_blank"
-						rel="noopener noreferrer"> Institutional Repository</a>
+
+					<span class="badge badge- badge-danger small font-weight-light">no accomodation</span>
 				</h6>
 
-				<a class="text-uppercase" *ngIf="student.vle" href="http://" target="_blank" rel="noopener noreferrer">CUT Virtual Learning Environment
-					is ready, click here to continue</a>
+
+				<h6 class=" card-title d-flex justify-content-between ">
+					<span>
+						<i class=" tim-icons icon-globe-2 text-info"> </i> Off Campus Accomodation:
+					</span>
+					<span>
+						<a href="http://" target="_blank" rel="noopener noreferrer">Download Database</a>
+					</span>
+				</h6>
+				<h6 class=" card-title d-flex justify-content-between " *ngIf="student.vle">
+					<span>
+						<i class=" tim-icons icon-user-run text-info"> </i> Student Employment:
+					</span>
+
+
+				</h6>
 
 			</div>
 		</div>
@@ -318,40 +303,32 @@
 	<div class=" col-lg-4">
 		<div class=" card card-chart">
 			<div class=" card-header bg-primary">
-				<h4 class=" ">Student Access Services</h4>
+				<h4 class=" ">Student Downloads </h4>
 			</div>
 			<div class=" card-body px-3">
 				<h6 class=" card-title  d-flex justify-content-between">
 					<span>
-						<i class=" tim-icons icon-wifi text-success"> </i> WiFi :
+						<i class=" tim-icons icon-calendar-60 text-success"> </i> Student Handbook :
 					</span>
-					<span class="badge badge-pill" [ngClass]="student.accounts.wifi?'badge-success':'badge-danger'">{{ student.accounts.wifi?'Active':'Not Active' }}</span>
-
+					<span class="">
+						<a href="http://www.cut.ac.zw/home/2019-downloads/oct/student%20handbook%202019.pdf"
+							target="_blank" rel="noopener noreferrer">
+							Download
+						</a>
+					</span>
 				</h6>
 				<h6 class=" card-title  d-flex justify-content-between">
 					<span>
-						<i class=" tim-icons icon-badge text-success"> </i> Student ID :
+						<i class=" tim-icons icon-calendar-60 text-success"> </i> ICT Policy :
 					</span>
-					<span class="badge badge-pill" [ngClass]="student.accounts.student_id_card?'badge-success':'badge-danger'">{{ student.accounts.student_id_card?'Active':'Not Active' }}</span>
-
-				</h6>
-				<h6 class=" card-title  d-flex justify-content-between">
-					<span>
-						<i class=" tim-icons icon-bag-16 text-success"> </i> Canteen :
+					<span class="">
+						<a href="https://www.cut.ac.zw/downloads/ict/ICT%20policy%20-%20General%20User%20Final%20Draft.pdf"
+							target="_blank" rel="noopener noreferrer">
+							Download
+						</a>
 					</span>
-					<span class="badge badge-pill" [ngClass]="student.accounts.canteen?'badge-success':'badge-danger'">{{ student.accounts.canteen?'Active':'Not Active' }}</span>
-
 				</h6>
-				<h6 class=" card-title">
-					<i class=" tim-icons icon-istanbul text-success"> </i> My Accomodation :
 
-					<a href="http://"
-						target="_blank" rel="noopener noreferrer">Download OffCampus Database</a>
-					<br>
-					<span class="badge badge- badge-danger small font-weight-light">You have no accomodation on
-						campus</span>
-
-				</h6>
 
 			</div>
 		</div>

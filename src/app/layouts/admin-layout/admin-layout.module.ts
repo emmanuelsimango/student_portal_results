@@ -31,7 +31,7 @@ import { ModulesComponent } from 'src/app/pages/modules/modules.component';
     UserComponent,
     ResultsComponent,
 	BursaryComponent,
-	ModulesComponent
+	ModulesComponent,
   ]
 })
 export class AdminLayoutModule {}
