@@ -95,5 +95,10 @@ export class AuthService {
 		// console.log('pano',this._serverDetails.loginURL);
 		window.location.href = this._serverDetails.loginURL;
 
-    }
+	}
+	public vleLink():string {
+		const myAuth:MyAuth = JSON.parse(localStorage.getItem('auth'));
+		return `${this._serverDetails.vleLink}/${myAuth.reg_number}/${myAuth.token}`;
+
+	}
 }

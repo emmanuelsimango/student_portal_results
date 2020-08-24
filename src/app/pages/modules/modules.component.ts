@@ -21,7 +21,11 @@ export class ModulesComponent implements OnInit {
 	student: Student;
 	modules:Module[];
 	closeResult: string;
-	selectedModule:Module
+	selectedModule:Module;
+	pageM=1;
+	pageP=1;
+	pageA=1;
+	pageSize=5;
 	constructor(
 		private auth: AuthService,
 		private modalService: NgbModal

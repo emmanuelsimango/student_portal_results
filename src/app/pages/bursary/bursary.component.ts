@@ -10,9 +10,12 @@ import { Statement } from 'src/app/models/statement';
 
 @Component({
 	selector: "app-bursary",
-	templateUrl: "bursary.component.html"
+	templateUrl: "bursary.component.html",
+	styleUrls: ["./bursary.component.scss"]
 })
 export class BursaryComponent implements OnInit {
+	page = 1;
+	pageSize = 5
 	total: number;
 	student: Student;
 	statements: Statement[];
@@ -25,6 +28,8 @@ export class BursaryComponent implements OnInit {
 	) {
 		this.student = this.auth.is_Authenticated();
 		this.statements = this.student.bursary.statements;
+		console.log(this.statements.length);
+
 
 
 	}

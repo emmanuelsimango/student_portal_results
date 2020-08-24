@@ -15,7 +15,7 @@ export class DashboardComponent implements OnInit {
 	student:Student;
 	statements: Statement[]
 	constructor(
-		private auth:AuthService,
+		public auth:AuthService,
 		public bursary:BursaryService
 	) {
 		this.student = this.auth.is_Authenticated();

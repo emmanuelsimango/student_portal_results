@@ -4,5 +4,6 @@ export interface Assignment {
 	"assignment_id": number,
 	"assignment_information": string,
 	"due_date": string,
-	"upload_id": number
+	"upload_id": number,
+	"uploaded":false
 }

@@ -173,10 +173,9 @@
 		</button>
 	</div>
 	<div class="modal-body">
-		<table datatable class="table table-light">
+		<table datatable class="table table-striped">
 			<tbody>
-
-				<tr class="small" *ngFor="let material of selectedModule.reading_materials">
+				<tr class="small" *ngFor="let material of selectedModule.reading_materials  | slice: (pageM-1) * pageSize : (pageM-1) * pageSize + pageSize">
 					<td>
 						{{ material.upload_description }}
 					</td>
@@ -189,6 +188,8 @@
 				</tr>
 			</tbody>
 		</table>
+		<ngb-pagination *ngIf="selectedModule.reading_materials.length>pageSize"  [pageSize]="pageSize" [collectionSize]="selectedModule.reading_materials.length" class="text-dark" [(page)]="pageM" [boundaryLinks]="true"></ngb-pagination>
+
 		<p *ngIf="selectedModule.reading_materials.length<1">
 			No Materials
 		</p>
@@ -209,7 +210,7 @@
 		<table datatable class="table table-light">
 			<tbody>
 
-				<tr class="small" *ngFor="let paper of selectedModule.past_exam_papers">
+				<tr class="small" *ngFor="let paper of selectedModule.past_exam_papers | slice: (pageP-1) * pageSize : (pageP-1) * pageSize + pageSize">
 					<td>
 						<!-- {{ paper }} -->
 					</td>
@@ -222,6 +223,8 @@
 				</tr>
 			</tbody>
 		</table>
+		<ngb-pagination *ngIf="selectedModule.past_exam_papers.length>pageSize"  [pageSize]="pageSize" [collectionSize]="selectedModule.past_exam_papers.length" class="text-dark" [(page)]="pageP" [boundaryLinks]="true"></ngb-pagination>
+
 		<p *ngIf="selectedModule.past_exam_papers.length<1">
 			No Papers Found
 		</p>
@@ -239,9 +242,9 @@
 		</button>
 	</div>
 	<div class="modal-body">
-		<table datatable class="table table-light">
+		<table datatable class="table table-stripped">
 
-			<tbody *ngFor="let material of selectedModule.assignments">
+			<tbody *ngFor="let material of selectedModule.assignments | slice: (pageA-1) * pageSize : (pageA-1) * pageSize + pageSize">
 
 				<tr class="small">
 					<td>
@@ -264,6 +267,8 @@
 			</tbody>
 
 		</table>
+		<ngb-pagination *ngIf="selectedModule.assignments.length>pageSize"  [pageSize]="pageSize" [collectionSize]="selectedModule.assignments.length" class="text-dark" [(page)]="pageA" [boundaryLinks]="true"></ngb-pagination>
+
 		<p *ngIf="selectedModule.assignments.length<1">
 			No Assignments
 		</p>

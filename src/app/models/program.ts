@@ -5,6 +5,7 @@ export interface Program {
 	"programme_id": number,
 	"faculty_name": string,
 	"faculty_code": string,
-	"level": number
+	"level": number,
+	"attendance_type_name":string
 }
 

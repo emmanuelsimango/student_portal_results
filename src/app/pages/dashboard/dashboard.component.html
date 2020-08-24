@@ -3,7 +3,7 @@
 	<div class=" col-lg-4">
 		<div class=" card card-chart">
 			<div class=" card-header bg-primary">
-				<h4 class="">Registration</h4>
+				<h4 class="">Registration Records</h4>
 			</div>
 			<div class="card-body px-3">
 				<h6 class=" card-title d-flex justify-content-between ">
@@ -55,7 +55,7 @@
 				</h6>
 				<hr>
 
-				{{ student.registration.program.programme_name }}
+				{{ student.registration.program.programme_name }} - <span class="font-weight-bold"> {{ student.registration.program.attendance_type_name }} </span>
 
 			</div>
 		</div>
@@ -93,7 +93,7 @@
 						rel="noopener noreferrer"> Institutional Repository</a>
 				</h6>
 				<hr>
-				<a class="text-uppercase" *ngIf="student.vle" href="http://" target="_blank"
+				<a class="text-uppercase" *ngIf="student.vle" [href]="auth.vleLink()" target="_blank"
 					rel="noopener noreferrer">CUT Virtual Learning Environment
 					is ready, click here to continue</a>
 
@@ -137,14 +137,14 @@
 <div class=" row">
 	<div class=" col-lg-6 col-md-12">
 		<div class=" card card-tasks">
-			<div class=" card-header">
-				<h4 class=" title d-inline text-warning">Bursary </h4>
+			<div class=" card-header bg-warning py-3">
+				<h4 class=" title d-inline font-weight-bold ">Bursary </h4>
 				<i class=" tim-icons icon-money-coins float-right text-lg-right"></i>
 
 			</div>
 			<div class=" card-body py-2">
 				<h5 class="mb-2 d-flex justify-content-between pr-4">
-					<span>Available Balance: </span>
+					<span>Current Balance: </span>
 					<span class="text-right ml-4" [ngClass]="bursary.getBalance()<1 ?'text-success': 'text-danger'"> {{ bursary.getBalance() | currency }} </span></h5>
 				<h5 class="d-flex justify-content-between pr-4">
 					<span class="">
@@ -193,7 +193,7 @@
 	</div>
 	<div class=" col-lg-6 col-md-12">
 		<div class=" card">
-			<div class=" card-header">
+			<div class=" card-header bg-warning py-3">
 				<h4 class=" title d-inline">Newsroom/ Notice(s) </h4>
 				<i class=" tim-icons icon-bell-55 float-right text-lg-right"></i>
 			</div>
