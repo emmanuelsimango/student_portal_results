@@ -25,7 +25,9 @@ export class AuthService {
 	public is_Authenticated(): Student {
 
 		return this._currentStudentSubject.value;
-
+	}
+	public updateStudent(student:Student){
+		localStorage.setItem('currentStudent',JSON.stringify(student))
 	}
 	public studentSubject():BehaviorSubject< Student>{
 		return this._currentStudentSubject
@@ -34,9 +36,14 @@ export class AuthService {
 	public currentStudent(){
 		if (this.is_Authenticated) {
 			// return <Student>JSON.parse(localStorage.getItem('currentStudent')).records[0]
+			const myAuth:MyAuth = JSON.parse(localStorage.getItem('auth'));
+			this.tokenValid(myAuth.reg_number,myAuth.token)
 			return JSON.parse(localStorage.getItem('currentStudent'))
 		}
-		return this.router.navigateByUrl(this._serverDetails.loginURL);
+		localStorage.clear();
+		window.location.href = this._serverDetails.logoutURL;
+		return false;
+		// return this.router.navigateByUrl(this._serverDetails.loginURL);
 	}
 
 	public login(reg,pass){
@@ -44,7 +51,6 @@ export class AuthService {
 			myid:reg.toUpperCase(),
 			mycode:pass
 		};
-
 
 		const headers = new HttpHeaders({'Content-Type':'application/json; charset=utf-8'});
 		return this._http.post<any>(`${this._serverDetails.serverDetailsForApi}/student.signin.php`,data,{headers:headers})
@@ -60,6 +66,17 @@ export class AuthService {
 
 			return student;
 		}));
+	}
+
+	public tokenValid(reg,token){
+		 this._http.get<any>(`${this._serverDetails.studentServerDetails}/api/validateToken/${reg}/${token}`).subscribe(response=>{
+			if (!response.valid) {
+				localStorage.clear()
+				window.location.href = this._serverDetails.logoutURL
+			}
+
+
+		});
 	}
 
 	public auth(reg,token){
@@ -91,9 +108,9 @@ export class AuthService {
 
         // localStorage.removeItem('currentStudent');
 		this._currentStudentSubject.next(null);
-		this.router.navigateByUrl(this._serverDetails.loginURL);
+		this.router.navigateByUrl(this._serverDetails.logoutURL);
 		// console.log('pano',this._serverDetails.loginURL);
-		window.location.href = this._serverDetails.loginURL;
+		window.location.href = this._serverDetails.logoutURL;
 
 	}
 	public vleLink():string {

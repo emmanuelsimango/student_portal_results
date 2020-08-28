@@ -5,5 +5,5 @@ export interface Assignment {
 	"assignment_information": string,
 	"due_date": string,
 	"upload_id": number,
-	"uploaded":false
+	"uploaded":boolean
 }

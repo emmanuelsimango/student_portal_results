@@ -9,7 +9,7 @@ export class AdminLayoutComponent implements OnInit {
   public sidebarColor: string = "blue";
 
   constructor() {
-    // this.changeSidebarColor('primary')
+
   }
   changeSidebarColor(color){
     var sidebar = document.getElementsByClassName('sidebar')[0];
@@ -25,7 +25,8 @@ export class AdminLayoutComponent implements OnInit {
     }
   }
   changeDashboardColor(color){
-    var body = document.getElementsByTagName('body')[0];
+	var body = document.getElementsByTagName('body')[0];
+	localStorage.setItem('bg',color);
     if (body && color === 'white-content') {
         body.classList.add(color);
     }
@@ -35,6 +36,18 @@ export class AdminLayoutComponent implements OnInit {
   }
   ngOnInit() {
     this.changeSidebarColor('blue');
-    this.changeDashboardColor('white-content')
+	// this.changeSidebarColor('primary')
+	try {
+		const bg = localStorage.getItem('bg');
+		if (bg) {
+			this.changeDashboardColor(bg);
+		}else{
+			this.changeDashboardColor('white-content')
+
+		}
+	} catch (error) {
+		console.log(error);
+
+	}
   }
 }

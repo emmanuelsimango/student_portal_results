@@ -1,7 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { AuthService } from 'src/app/services/auth/auth-service.service';
 import { Student } from 'src/app/models/student';
-import { StudentPersonal } from 'src/app/models/student-personal';
 import { Profile } from 'src/app/models/profile';
 
 @Component({

@@ -40,7 +40,7 @@ const routes: Routes = [
 
 	{
 		path: "**",
-		redirectTo: "results"
+		redirectTo: "dashboard"
 	}
 ];
 

@@ -38,8 +38,7 @@
 						<i class=" tim-icons icon-paper text-danger-states"> </i>Total Reading Material:
 					</span>
 
-					<span
-						class="font-weight-bold">({{ getReadingMaterialTotal() }})</span>
+					<span class="font-weight-bold">({{ getReadingMaterialTotal() }})</span>
 				</h6>
 				<h6 class=" card-title d-flex justify-content-between">
 					<span>
@@ -56,8 +55,7 @@
 						<i class=" tim-icons icon-bag-16 text-success"> </i> Past Exam Papers:
 					</span>
 
-					<span
-						class="font-weight-bold"> ({{ getReadingPapersTotal() }})</span>
+					<span class="font-weight-bold"> ({{ getReadingPapersTotal() }})</span>
 				</h6>
 			</div>
 			<div class="card-body px-3 ">
@@ -78,8 +76,7 @@
 						<i class=" tim-icons icon-chat-33 text-danger-states"> </i>Posts:
 					</span>
 
-					<span
-						class="font-weight-bold">({{ getPostTotal() }})</span>
+					<span class="font-weight-bold">({{ getPostTotal() }})</span>
 				</h6>
 				<!-- <h6 class=" card-title d-flex justify-content-between">
 					<span>
@@ -175,7 +172,8 @@
 	<div class="modal-body">
 		<table datatable class="table table-striped">
 			<tbody>
-				<tr class="small" *ngFor="let material of selectedModule.reading_materials  | slice: (pageM-1) * pageSize : (pageM-1) * pageSize + pageSize">
+				<tr class="small"
+					*ngFor="let material of selectedModule.reading_materials  | slice: (pageM-1) * pageSize : (pageM-1) * pageSize + pageSize">
 					<td>
 						{{ material.upload_description }}
 					</td>
@@ -188,7 +186,9 @@
 				</tr>
 			</tbody>
 		</table>
-		<ngb-pagination *ngIf="selectedModule.reading_materials.length>pageSize"  [pageSize]="pageSize" [collectionSize]="selectedModule.reading_materials.length" class="text-dark" [(page)]="pageM" [boundaryLinks]="true"></ngb-pagination>
+		<ngb-pagination *ngIf="selectedModule.reading_materials.length>pageSize" [pageSize]="pageSize"
+			[collectionSize]="selectedModule.reading_materials.length" class="text-dark" [(page)]="pageM"
+			[boundaryLinks]="true"></ngb-pagination>
 
 		<p *ngIf="selectedModule.reading_materials.length<1">
 			No Materials
@@ -210,7 +210,8 @@
 		<table datatable class="table table-light">
 			<tbody>
 
-				<tr class="small" *ngFor="let paper of selectedModule.past_exam_papers | slice: (pageP-1) * pageSize : (pageP-1) * pageSize + pageSize">
+				<tr class="small"
+					*ngFor="let paper of selectedModule.past_exam_papers | slice: (pageP-1) * pageSize : (pageP-1) * pageSize + pageSize">
 					<td>
 						<!-- {{ paper }} -->
 					</td>
@@ -223,7 +224,9 @@
 				</tr>
 			</tbody>
 		</table>
-		<ngb-pagination *ngIf="selectedModule.past_exam_papers.length>pageSize"  [pageSize]="pageSize" [collectionSize]="selectedModule.past_exam_papers.length" class="text-dark" [(page)]="pageP" [boundaryLinks]="true"></ngb-pagination>
+		<ngb-pagination *ngIf="selectedModule.past_exam_papers.length>pageSize" [pageSize]="pageSize"
+			[collectionSize]="selectedModule.past_exam_papers.length" class="text-dark" [(page)]="pageP"
+			[boundaryLinks]="true"></ngb-pagination>
 
 		<p *ngIf="selectedModule.past_exam_papers.length<1">
 			No Papers Found
@@ -244,7 +247,9 @@
 	<div class="modal-body">
 		<table datatable class="table table-stripped">
 
-			<tbody *ngFor="let material of selectedModule.assignments | slice: (pageA-1) * pageSize : (pageA-1) * pageSize + pageSize">
+			<tbody
+				*ngFor="let material of selectedModule.assignments | slice: (pageA-1) * pageSize : (pageA-1) * pageSize + pageSize">
+
 
 				<tr class="small">
 					<td>
@@ -254,23 +259,36 @@
 						Due Date: {{ material.due_date | date}}
 					</td>
 				</tr>
-				<tr class="small">
+				<tr class="small" *ngIf="!material.uploaded;else uploaded">
+
+
 					<td>
-						<input type="file" name="assignment" id="">
+						<input type="file" name="file" id="file" #file accept=".pdf,.doc,.docx,zip">
 					</td>
 					<td>
-						<button class="btn btn-sm btn-success">
+						<button class="btn btn-sm btn-success" [disabled]="file.value" type="submit" (click)="uploadFile(file,material)">
 							Submit
 						</button>
 					</td>
+
 				</tr>
+				<ng-template #uploaded>
+					<tr>
+						<td class="text-center" colspan="2">
+							Assignment Sent <i class=" tim-icons icon-send text-success"> </i>
+						</td>
+					</tr>
+				</ng-template>
+
 			</tbody>
 
 		</table>
-		<ngb-pagination *ngIf="selectedModule.assignments.length>pageSize"  [pageSize]="pageSize" [collectionSize]="selectedModule.assignments.length" class="text-dark" [(page)]="pageA" [boundaryLinks]="true"></ngb-pagination>
+		<ngb-pagination *ngIf="selectedModule.assignments.length>pageSize" [pageSize]="pageSize"
+			[collectionSize]="selectedModule.assignments.length" class="text-dark" [(page)]="pageA"
+			[boundaryLinks]="true"></ngb-pagination>
 
 		<p *ngIf="selectedModule.assignments.length<1">
-			No Assignments
+			No Assignments <i class=" tim-icons icon-send text-success"> </i>
 		</p>
 
 	</div>

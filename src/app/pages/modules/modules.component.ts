@@ -2,11 +2,17 @@ import { Component, OnInit } from "@angular/core";
 import { AuthService } from 'src/app/services/auth/auth-service.service';
 import { Student } from 'src/app/models/student';
 import { Module } from 'src/app/models/module';
-import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { ReadingMaterial } from 'src/app/models/ReadingMaterial';
 import { ServerDetails } from 'src/app/services/serverDetails';
 import { ExamPaper } from 'src/app/models/ExamPaper';
 import { Assignment } from 'src/app/models/Assignment';
+import { FormGroup } from '@angular/forms';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { MyAuth } from 'src/app/models/auth';
+import { LoaderService } from 'src/app/services/loader.service';
+import { ToastrService } from 'ngx-toastr';
+
 
 declare const google: any;
 
@@ -17,21 +23,26 @@ declare const google: any;
 	styleUrls: ["modules.component.scss"]
 })
 export class ModulesComponent implements OnInit {
-	serverDetails:ServerDetails = new ServerDetails();
+	serverDetails: ServerDetails = new ServerDetails();
 	student: Student;
-	modules:Module[];
+	modules: Module[];
 	closeResult: string;
-	selectedModule:Module;
-	pageM=1;
-	pageP=1;
-	pageA=1;
-	pageSize=5;
+	selectedModule: Module;
+	pageM = 1;
+	pageP = 1;
+	pageA = 1;
+	pageSize = 5;
+	fileToUpload:any
 	constructor(
 		private auth: AuthService,
-		private modalService: NgbModal
+		private modalService: NgbModal,
+		private http:HttpClient,
+		private loader:LoaderService,
+		private toastr: ToastrService
 	) {
 		this.student = this.auth.is_Authenticated();
 		this.modules = this.student.registration.modules;
+
 		console.log(this.modules);
 
 	}
@@ -39,57 +50,88 @@ export class ModulesComponent implements OnInit {
 	ngOnInit() {
 
 	}
-	open(content,module:Module) {
+
+	uploadFile(file,assigment:Assignment) {
+		this.loader.is_loading.next(true);
+		this.fileToUpload = file.files[0];
+		let formData = new FormData();
+		formData.append('file', this.fileToUpload, this.fileToUpload.name);
+		formData.append('module_id',assigment.module_id.toString());
+		formData.append('assignment_id', assigment.assignment_id.toString());
+
+		const myAuth:MyAuth = JSON.parse(localStorage.getItem('auth'));
+		let headers:HttpHeaders = new HttpHeaders();
+		// headers.append('Content-Type','multipart/form-data');
+		// headers.append('accept', 'application/json');
+
+        console.log(`${this.serverDetails.portalURL}/index.php/cut_elearning/api/uploadAssignment/${myAuth.reg_number}/${myAuth.token}`);
+
+		this.http.post<any>(`${this.serverDetails.portalURL}/index.php/cut_elearning/api/uploadAssignment/${myAuth.reg_number}/${myAuth.token}`, formData,{headers:headers}).subscribe(val => {
+
+			if (!val.body.error) {
+				assigment.uploaded = true;
+				this.toastr.success('Assignment Uploaded Successfully', 'Upload Done!');
+				this.auth.updateStudent(this.student);
+
+			}
+			this.loader.is_loading.next(false);
+		});
+		return false;
+	}
+
+	open(content, module: Module) {
 		this.selectedModule = module;
 
-		this.modalService.open(content, {keyboard:true, size:'lg'}).result.then((result) => {
-		  this.closeResult = `Closed with: ${result}`;
+		this.modalService.open(content, { keyboard: true, size: 'lg' }).result.then((result) => {
+			this.closeResult = `Closed with: ${result}`;
 		}, (reason) => {
-		  this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+			this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
 		});
-	  }
+	}
+
 
 	private getDismissReason(reason: any): string {
 		if (reason === ModalDismissReasons.ESC) {
-		  return 'by pressing ESC';
+			return 'by pressing ESC';
 		} else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-		  return 'by clicking on a backdrop';
+			return 'by clicking on a backdrop';
 		} else {
-		  return  `with: ${reason}`;
+			return `with: ${reason}`;
 		}
-	  }
+	}
 
-	getFileURL(material:ReadingMaterial){
+
+	getFileURL(material: ReadingMaterial) {
 		return `${this.serverDetails.portalURL}\\${material.path}\\${material.upload_name}`;
 	}
-	getReadingMaterialTotal():number{
+	getReadingMaterialTotal(): number {
 		let total = 0;
-		this.modules.forEach(st=>{
-			total +=st.reading_materials.length;
+		this.modules.forEach(st => {
+			total += st.reading_materials.length;
 		})
 
 		return total
 	}
-	getReadingAssignmentsTotal():number{
+	getReadingAssignmentsTotal(): number {
 		let total = 0;
-		this.modules.forEach(st=>{
-			total +=st.assignments.length;
+		this.modules.forEach(st => {
+			total += st.assignments.length;
 		})
 
 		return total
 	}
-	getReadingPapersTotal():number{
+	getReadingPapersTotal(): number {
 		let total = 0;
-		this.modules.forEach(st=>{
-			total +=st.past_exam_papers.length;
+		this.modules.forEach(st => {
+			total += st.past_exam_papers.length;
 		})
 
 		return total
 	}
-	getPostTotal():number{
+	getPostTotal(): number {
 		let total = 0;
-		this.modules.forEach(st=>{
-			total +=st.posts.length;
+		this.modules.forEach(st => {
+			total += st.posts.length;
 		})
 
 		return total

@@ -16,7 +16,8 @@ import { ResultsComponent } from 'src/app/pages/results/results.component';
 import { BursaryComponent } from 'src/app/pages/bursary/bursary.component';
 import { ComponentsModule } from 'src/app/components/components.module';
 import { ModulesComponent } from 'src/app/pages/modules/modules.component';
-
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 @NgModule({
   imports: [
     CommonModule,
@@ -24,7 +25,12 @@ import { ModulesComponent } from 'src/app/pages/modules/modules.component';
     FormsModule,
     HttpClientModule,
 	NgbModule,
-	ComponentsModule
+	ComponentsModule,
+    ToastrModule.forRoot({
+		timeOut: 10000,
+		positionClass: 'toast-top-right',
+		preventDuplicates: true,
+	  }), // ToastrModule added
   ],
   declarations: [
     DashboardComponent,
@@ -32,6 +38,7 @@ import { ModulesComponent } from 'src/app/pages/modules/modules.component';
     ResultsComponent,
 	BursaryComponent,
 	ModulesComponent,
+
   ]
 })
 export class AdminLayoutModule {}

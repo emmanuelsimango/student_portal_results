@@ -17,8 +17,9 @@
 					<h4 *ngIf="selectedResult" class="card-title">{{selectedResult.periodname}} Semester {{ selectedResult.level }} Period
 						{{selectedResult.semester}} </h4>
 
+
 				</div>
-				<div class=" card-body" *ngIf="selectedResult">
+				<div class=" card-body" *ngIf="selectedResult;else no_result">
 					<div class=" ">
 						<table class=" table tablesorter" id="">
 							<thead class=" text-primary">
@@ -57,6 +58,13 @@
 						Carry : {{ selectedResult.supression}}
 					</span>
 				</div>
+				<ng-template #no_result>
+					<div class="card-body">
+						<p class="h4 text-center">
+							No results to display
+						</p>
+					</div>
+				</ng-template>
 			</div>
 		</div>
 		<div class=" col-md-4">

@@ -6,6 +6,7 @@ export interface Program {
 	"faculty_name": string,
 	"faculty_code": string,
 	"level": number,
-	"attendance_type_name":string
+	"attendance_type_name":string,
+	"completed":boolean
 }
 

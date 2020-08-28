@@ -8,6 +8,7 @@ import { BehaviorSubject } from 'rxjs';
 import { Statement } from '@angular/compiler';
 import { BursaryStatement } from 'src/app/models/bursaryStatement';
 import { state } from '@angular/animations';
+import { MyAuth } from 'src/app/models/auth';
 
 interface serverData {
 	'records':any
@@ -41,6 +42,21 @@ export class BursaryService {
 			// console.log(currentStudent.studentBursaryData)
 			// console.log(this.auth.currentStudent());
 			// console.log(currentStudent)
+
+			localStorage.setItem('currentStudent', JSON.stringify(currentStudent))
+			this.loader.is_loading.next(false);
+		});
+	}
+
+	public updateBursary2(){
+		const data:MyAuth = JSON.parse(localStorage.getItem('auth'))
+		this.loader.is_loading.next(true);
+		const headers = new HttpHeaders({'content-type':'application/json; charset=utf-8'});
+		this._http.post<BursaryStatement>(`${this.serverDetails.portalURL}/index.php/cut_elearning/api/getMyBursary/${data.reg_number}/${data.token}`,data,{headers:headers}).subscribe(bursary=>{
+			let currentStudent = this.auth.currentStudent()
+
+			currentStudent.b = bursary
+
 
 			localStorage.setItem('currentStudent', JSON.stringify(currentStudent))
 			this.loader.is_loading.next(false);
