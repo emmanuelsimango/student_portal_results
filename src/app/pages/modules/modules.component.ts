@@ -12,6 +12,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { MyAuth } from 'src/app/models/auth';
 import { LoaderService } from 'src/app/services/loader.service';
 import { ToastrService } from 'ngx-toastr';
+import { ModuleService } from 'src/app/services/moduleService.service';
 
 
 declare const google: any;
@@ -38,11 +39,15 @@ export class ModulesComponent implements OnInit {
 		private modalService: NgbModal,
 		private http:HttpClient,
 		private loader:LoaderService,
-		private toastr: ToastrService
+		private toastr: ToastrService,
+		private myModules:ModuleService
 	) {
+
 		this.student = this.auth.is_Authenticated();
 		this.modules = this.student.registration.modules;
-
+		this.myModules.updateModules().subscribe(modules=>{
+			this.modules = modules
+		});
 		console.log(this.modules);
 
 	}

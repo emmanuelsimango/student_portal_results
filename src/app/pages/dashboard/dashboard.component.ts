@@ -9,7 +9,8 @@ import { ModalModule } from 'ngb-modal';
 @Component({
 	selector: "app-dashboard",
 	templateUrl: "dashboard.component.html",
-	styleUrls: ["dashboard.component.scss"]
+	styleUrls: ["dashboard.component.scss"],
+	providers: [BursaryService]
 })
 export class DashboardComponent implements OnInit {
 	student:Student;

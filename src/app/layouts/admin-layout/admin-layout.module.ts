@@ -18,6 +18,7 @@ import { ComponentsModule } from 'src/app/components/components.module';
 import { ModulesComponent } from 'src/app/pages/modules/modules.component';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BursaryService } from 'src/app/services/auth/bursary.service';
 @NgModule({
   imports: [
     CommonModule,
@@ -39,6 +40,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 	BursaryComponent,
 	ModulesComponent,
 
-  ]
+  ],
+  providers:[BursaryService]
 })
 export class AdminLayoutModule {}
