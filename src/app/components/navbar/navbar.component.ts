@@ -8,6 +8,8 @@ import { Student } from 'src/app/models/student';
 import { StudentPersonal } from 'src/app/models/student-personal';
 import { Profile } from 'src/app/models/profile';
 import { MyAuth } from 'src/app/models/auth';
+import { NoticeService } from 'src/app/services/notice.service';
+import { MyNotice } from 'src/app/models/mynotice';
 
 @Component({
 	selector: "app-navbar",
@@ -25,19 +27,30 @@ export class NavbarComponent implements OnInit, OnDestroy {
 	myAuth:MyAuth;
 	student:Student;
 	profile:Profile;
+	notices:MyNotice[]
 
 	constructor(
 		location: Location,
 		private element: ElementRef,
 		private router: Router,
 		private modalService: NgbModal,
-		private auth: AuthService
+		private auth: AuthService,
+		private noticeService:NoticeService
 	) {
 		this.location = location;
 		this.sidebarVisible = false;
 		this.student =	this.auth.currentStudent()
 		this.profile =this.student.profile;
 		this.myAuth = JSON.parse(localStorage.getItem('auth'))
+		this.noticeService.getByCategory().subscribe(notices=>{
+			notices.forEach(noty=>{
+				if(noty.notices){
+					this.notices = noty.notices
+					return
+				}
+			})
+		})
+
 		// this.studentPersonal = JSON.parse(this.student.stu);
 
 

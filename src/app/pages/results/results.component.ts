@@ -4,49 +4,40 @@ import { Student } from 'src/app/models/student';
 import { Result } from 'src/app/models/result';
 import { StudentPersonal } from 'src/app/models/student-personal';
 import { ResultsService } from 'src/app/services/results.service';
+import { LoaderService } from 'src/app/services/loader.service';
 
 @Component({
 	selector: "app-results",
-	templateUrl: "results.component.html"
+	templateUrl: "results.component.html",
+
 })
 export class ResultsComponent implements OnInit {
 	student:Student;
-	studentResults: Result[];
-	selectedResult:Result;
-	resultOveral:Result
+	studentResults: Result;
+	resultOveral:Result;
+	loading:Boolean = true
 	constructor(
 		private auth:AuthService,
-		private result:ResultsService
+		private result:ResultsService,
+		public loaderService:LoaderService
 
 	) {
+		this.loaderService.is_loading.next(true)
+		this.result.getResults().subscribe(result=>{
+			console.log(result);
+
+			if(!result.error){
+				this.studentResults = result
+				this.loaderService.is_loading.next(false)
+			}
+			this.loading = false
+
+		});
 
 	 }
 
 	ngOnInit() {
-		this.update()
-		// this.student = this.auth.currentStudent();
 
-		// try {
-		// 	this.studentResults = JSON.parse(this.student.studentResultsData).results;
-		// 	this.selectedResult = this.studentResults[0];
-		// 	console.log(this.selectedResult);
 
-		// } catch (error) {
-		// 	console.log(error);
-
-		// }
-	 }
-	 update(){
-		 this.result.updateResults();
-		 try {
-			 this.student = this.auth.currentStudent();
-			this.studentResults = this.student.studentResultsData.results;
-			this.selectedResult = this.studentResults[0];
-			console.log(this.selectedResult);
-
-		} catch (error) {
-			console.log(error);
-
-		}
 	 }
 }

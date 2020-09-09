@@ -11,52 +11,50 @@
 			</a>
 		</div>
 		<hr class="mb-0">
-		<div class=" card-description">
-			<h6 class=" font-weight-light mb-0 d-flex justify-content-between ">
-				<span>
+		<table class=" card-description">
+			<tr class=" font-weight-light mb-0 ">
+				<td class="font-weight-bold" width="40%">
 					Reg Number:
-				</span>
-				<span class="font-weight-bold" >
+				</td>
+				<td  >
 
 					{{ myAuth.reg_number }}
-				</span>
-			 </h6>
-			<h6 class=" font-weight-light mb-0 d-flex justify-content-between ">
-				<span>
+				</td>
+			 </tr>
+			<tr class=" font-weight-light mb-0 ">
+				<td class="font-weight-bold">
 					Account Number:
-				</span>
-				<span class="font-weight-bold" >
+				</td>
+				<td >
 
 					{{ student.bursary.pastel_account }}
-				</span>
-			 </h6>
-			<h6 class=" font-weight-light mb-0 d-flex justify-content-between ">
-				<span>
+				</td>
+			 </tr>
+			<tr class=" font-weight-light mb-0 ">
+				<td class="font-weight-bold">
 					Name:
-				</span>
-				<span>
+				</td>
+				<td>
 
 					{{ profile.first_name}} {{profile.surname}}
-				</span>
-			 </h6>
-			<h6 class=" font-weight-light  mb-0 d-flex justify-content-between ">
-				<span>
-					Program:
-				</span>
-				<span>
+				</td>
+			 </tr>
+			 <tr class=" font-weight-light  mb-0 ">
+				 <td  class="font-weight-bold">
+					 Level:
+					</td>
+					<td >
+						{{ student.registration.program.level}}
+					</td>
+				</tr>
+			<tr class=" font-weight-light  mb-0">
+				<td colspan="2" >
+					<hr>
 					{{ student.registration.program.programme_name}}
-				</span>
-			 </h6>
-			<h6 class=" font-weight-light  mb-0 d-flex justify-content-between ">
-				<span>
-					Level:
-				</span>
-				<span class="font-weight-bold">
-					{{ student.registration.program.level}}
-				</span>
-			 </h6>
+				</td>
+				</tr>
 
-		</div>
+		</table>
 	</div>
 	<div class=" card-footer">
 		<div class=" button-container">

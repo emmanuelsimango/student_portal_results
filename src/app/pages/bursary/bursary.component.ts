@@ -31,6 +31,7 @@ export class BursaryComponent implements OnInit {
 		this.statements = this.student.bursary.statements;
 		this.bursary.getStatement().subscribe(statement=>{
 			console.log(statement);
+			this.statements = statement.statements
 
 		});
 		console.log(this.statements.length);

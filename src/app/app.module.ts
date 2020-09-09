@@ -15,6 +15,8 @@ import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { AppRoutingModule } from "./app-routing.module";
 import { ComponentsModule } from "./components/components.module";
 import { LoginComponent } from './pages/login/login.component';
+import { NoticesComponent } from './pages/notices/notices.component';
+import { NoticeComponent } from './pages/notice/notice.component';
 
 
 @NgModule({
@@ -30,7 +32,7 @@ import { LoginComponent } from './pages/login/login.component';
     AppRoutingModule,
     ToastrModule.forRoot()
   ],
-  declarations: [AppComponent, AdminLayoutComponent, AuthLayoutComponent, LoginComponent],
+  declarations: [AppComponent, AdminLayoutComponent, AuthLayoutComponent, LoginComponent, NoticesComponent, NoticeComponent],
   providers: [],
   bootstrap: [AppComponent]
 })

@@ -14,7 +14,9 @@ import { map } from 'rxjs/operators';
 interface serverData {
 	'records': any
 }
-@Injectable()
+@Injectable({
+	providedIn:'root'
+})
 export class BursaryService {
 	private serverDetails: ServerDetails = new ServerDetails();
 	private balance: BehaviorSubject<number> = new BehaviorSubject(0);
@@ -62,7 +64,7 @@ export class BursaryService {
 		});
 	}
 
-	public getStatement():Observable<BursaryStatement> {
+	public getStatement():Observable<any> {
 		const data: MyAuth = JSON.parse(localStorage.getItem('auth'))
 		this.loader.is_loading.next(true);
 		const headers = new HttpHeaders({ 'content-type': 'application/json; charset=utf-8' });
