@@ -4,10 +4,10 @@ export class ServerDetails {
 	// public serverDetailsForStorage = `${this.serverDetails}`;
 	// public portalURL = "http://portal.local";
 	// public studentServerDetails = "http://portal.local/index.php/cut_elearning";
-	public websiteContentUrl = `http://cutback`;
+	public websiteContentUrl = `https://www.cut.ac.zw/cut-back/public`;
 	public noticeAPI = `${this.websiteContentUrl}/api`;
-	 
-	public noticeImageStorage = "http://cutback/api";
+
+	public noticeImageStorage = `${this.noticeAPI}`;
 	public serverIp = 'http://portal.local';
 	public portalURL = `${this.serverIp}`;
 	public loginURL = `${this.portalURL}/index.php/portal/login`;

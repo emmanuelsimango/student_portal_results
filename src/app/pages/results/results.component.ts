@@ -5,6 +5,7 @@ import { Result } from 'src/app/models/result';
 import { StudentPersonal } from 'src/app/models/student-personal';
 import { ResultsService } from 'src/app/services/results.service';
 import { LoaderService } from 'src/app/services/loader.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
 	selector: "app-results",
@@ -19,7 +20,8 @@ export class ResultsComponent implements OnInit {
 	constructor(
 		private auth:AuthService,
 		private result:ResultsService,
-		public loaderService:LoaderService
+		public loaderService:LoaderService,
+		private toast:ToastrService
 
 	) {
 		this.loaderService.is_loading.next(true)
@@ -28,9 +30,13 @@ export class ResultsComponent implements OnInit {
 
 			if(!result.error){
 				this.studentResults = result
-				this.loaderService.is_loading.next(false)
+			}else{
+				this.toast.error(result.message)
 			}
+
+			this.loaderService.is_loading.next(false)
 			this.loading = false
+
 
 		});
 

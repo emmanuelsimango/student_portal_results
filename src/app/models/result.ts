@@ -7,5 +7,6 @@ export interface Result {
 	"gpa": string,
 	"TheDegreeClass": string,
 	"suppressionmsg":string,
-	error:boolean
+	"error":boolean,
+	"message":string
 }

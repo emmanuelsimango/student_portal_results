@@ -14,7 +14,7 @@
 
 
 				</div>
-				<div class=" card-body" *ngIf="studentResults;else no_result">
+				<div class=" card-body" *ngIf="studentResults">
 					<div class=" ">
 						<table class=" table tablesorter" id="">
 							<thead class=" text-primary">
@@ -55,7 +55,7 @@
 						Degree Class: {{ studentResults.TheDegreeClass}}
 					</span>
 				</div>
-				<ng-template *ngIf="!loading" #no_result >
+				<ng-template *ngIf="!loading && studentResults"  >
 					<div class="card-body">
 						<p class="h4 text-center">
 							No results to display
