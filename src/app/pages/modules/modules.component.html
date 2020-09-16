@@ -109,8 +109,7 @@
 
 						<tr class="small" *ngFor="let module of modules">
 							<td class="text-uppercase">
-								{{ module.module_code }} - {{ module.module_name }}
-							</td>
+								{{ module.module_code }}{{ module.module_unit_code }} - {{ module.module_name }}							</td>
 							<td>
 								Posts[{{ module.posts.length }}]
 							</td>

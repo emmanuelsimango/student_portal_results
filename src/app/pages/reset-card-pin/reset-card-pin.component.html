@@ -1,0 +1,76 @@
+<div class=" row">
+	<div class=" col-lg-5 col-md-6 mx-auto">
+		<div class=" card mt-4">
+			<!-- <div class=" card-header d-flex flex-row justify-content-between align-items-center bg-primary">
+				<h4 class=" card-title text-center"> Reset Card Pin </h4>
+			</div> -->
+			<div class="card-body">
+				<form #resetForm="ngForm" [ngClass]="pin.touched?'was-validated':''" (submit)="onSubmit(resetForm,alert)" autocomplete="off">
+
+					<div class="form-group">
+						<label for="">New Pin</label>
+						<input type="text" autofocus name="pin" id="pin" class="form-control" pattern="[0-9]*"
+							[ngClass]="{'is-invalid':pin.touched&&pin.errors}" placeholder="New Pin" required
+							minlength='4' maxlength=4 ngModel="pin" #pin="ngModel">
+						<!-- Invalid reporting -->
+						<div [hidden]="!pin.errors?.required" class="invalid-feedback small">
+							New pin is required
+						</div>
+						<div class="invalid-feedback small" [hidden]="!pin.errors?.minlength">
+							Pin should be a minimum of four digits
+						</div>
+						<div class="invalid-feedback small" [hidden]="!pin.errors?.maxlength">
+							Pin should be a maximum of four digits
+						</div>
+						<div class="invalid-feedback small" [hidden]="!pin.errors?.pattern">
+							Pin should contain only digits
+						</div>
+
+					</div>
+					<div class="form-group">
+						<label for="">Confirm Pin</label>
+						<input type="text" ngModel="confirm_pin"  #confirm_pin="ngModel" name="confirm_pin" minlength='4'
+							maxlength=4 id="confirm_pin" placeholder="Confirm New Pin" class="form-control" required>
+
+						<div class=" invalid-feedback" [hidden]="!confirm_pin.errors?.required">
+							Pin confirmation is required
+						</div>
+									</div>
+					<hr>
+					<p class="text-danger small">
+						To verify your identity, please enter your password in the field provided below
+					</p>
+					<div class="form-group">
+						<label for="">Password</label>
+						<input type="password" ngModel="password" #password="ngModel" name="password"
+							id="password" class="form-control" placeholder="Enter your password"
+							required>
+					</div>
+
+					<div class="form-group d-flex justify-content-center">
+						<button class="btn btn-success" [disabled]="!resetForm.valid ">
+							Change PIN
+						</button>
+						<!-- <input id="" class="btn btn-primary mx-auto" (click)="submit(pin.value,confirm_pin.value,password.value)" value="change pin"> -->
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+<ng-template #alert let-modal>
+	<div class="modal-header  bg-danger">
+		<h4 class=" text-center " id="" style="color: white;!immportant">Error <i class="fas fa-exclamation    "></i>
+			</h4>
+		<button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+			<span aria-hidden="true">×</span>
+		</button>
+	</div>
+	<div class="modal-body">
+		{{ error_msg }}
+	</div>
+	<div class="modal-footer justify-content-end">
+		<button type="button" class="btn btn-primary" (click)="modal.close('Save click')">Close</button>
+	</div>
+</ng-template>

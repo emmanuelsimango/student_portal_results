@@ -13,24 +13,24 @@ import { ToastrService } from 'ngx-toastr';
 
 })
 export class ResultsComponent implements OnInit {
-	student:Student;
+	student: Student;
 	studentResults: Result;
-	resultOveral:Result;
-	loading:Boolean = true
+	resultOveral: Result;
+	loading: Boolean = true
 	constructor(
-		private auth:AuthService,
-		private result:ResultsService,
-		public loaderService:LoaderService,
-		private toast:ToastrService
+		private auth: AuthService,
+		private result: ResultsService,
+		public loaderService: LoaderService,
+		private toast: ToastrService
 
 	) {
 		this.loaderService.is_loading.next(true)
-		this.result.getResults().subscribe(result=>{
+		this.result.getResults(null).subscribe(result => {
 			console.log(result);
 
-			if(!result.error){
+			if (!result.error) {
 				this.studentResults = result
-			}else{
+			} else {
 				this.toast.error(result.message)
 			}
 
@@ -38,12 +38,15 @@ export class ResultsComponent implements OnInit {
 			this.loading = false
 
 
-		});
+		},(error=>{
+			this.loaderService.is_loading.next(false)
+			this.loading = false
+		}));
 
-	 }
+	}
 
 	ngOnInit() {
 
 
-	 }
+	}
 }

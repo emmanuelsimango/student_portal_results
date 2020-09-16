@@ -55,13 +55,13 @@
 						Degree Class: {{ studentResults.TheDegreeClass}}
 					</span>
 				</div>
-				<ng-template *ngIf="!loading && studentResults"  >
+				<div *ngIf="!loading && !studentResults"  >
 					<div class="card-body">
 						<p class="h4 text-center">
 							No results to display
 						</p>
 					</div>
-				</ng-template>
+				</div>
 			</div>
 		</div>
 		<div class=" col-md-4">

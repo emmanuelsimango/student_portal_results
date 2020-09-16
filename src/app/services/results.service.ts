@@ -35,8 +35,11 @@ export class ResultsService {
 	// 	})
 	// }
 
-	public getResults():Observable<Result>{
+	public getResults(period):Observable<Result>{
 		const myAuth:MyAuth = JSON.parse(localStorage.getItem('auth'));
+		if(period){
+			this.http.get<Result>(`${this.serverDetails.studentServerDetails}/api/getMyResults/${myAuth.reg_number}/${myAuth.token}?p=${period}`);
+		}
 		return this.http.get<Result>(`${this.serverDetails.studentServerDetails}/api/getMyResults/${myAuth.reg_number}/${myAuth.token}?p=${this.auth.is_Authenticated().registration.period.period_id}`);
 	}
 

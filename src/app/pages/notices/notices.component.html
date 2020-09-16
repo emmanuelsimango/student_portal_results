@@ -16,14 +16,29 @@
 			<div class="card-body d-flex flex-column px-3">
 				<div class="row" *ngIf="notices">
 					<div class="col-lg-11 cursor-pointer" *ngFor="let notice of notices" (click)="open(notice_yacho,notice)">
-						<div class="card d-flex flex-row">
-							<img class="card-img rounded-0 rounded-right" src="assets/img/Student service portal.jpg" style="max-width:10rem" alt="">
+						<div class="card d-flex flex-row news-card border">
+							<div class="d-flex flex-column justify-content-center align-items-center" style="max-width: 120px;min-width: 120px;">
+								<span>
+									{{ notice.created_at | date:'d' }}
+								</span>
+								<span>
+									{{ notice.created_at | date:'MMM' }}
+								</span>
+								<span>
+									{{ notice.created_at | date:'y' }}
+								</span>
+							</div>
+							<!-- <img class="card-img rounded-0 rounded-right" src="assets/img/Student service portal.jpg" style="max-width:10rem" alt=""> -->
 							<div class="card-body px-1 bg-light">
 								<h5 class="card-title">{{ notice.title }}</h5>
-								<p class="card-ext small" [innerHTML]="notice.description | slice:0:150 ">
+								<p class="card-ext " [innerHTML]="(notice.description | slice:0:150 )">
+
 								</p>
-								<hr>
-								<a href="">attachment</a>
+								<button class="btn btn-link m-0">	Read More</button>
+								<hr class="mb-0 pb-0">
+								<a [href]="serverDetails.websiteContentUrl+'/'+ document.document.document_url" class="badge badge-pill badge-success" *ngFor="let document of notice.notice_documents" href="">
+									<i class="tim-icons icon-single-copy-04"></i>	{{ document.document.description }} ( <span class="small font-weight-light">	 {{ document.document.document_size }}kb </span>)
+								</a>
 
 							</div>
 						</div>
@@ -34,14 +49,28 @@
 					<ng-container *ngFor="let cate of noticeCategories">
 
 						<div class="col-lg-11 cursor-pointer" *ngFor="let notice of cate.notices"  (click)="open(notice_yacho,notice)" >
-							<div class="card d-flex flex-row">
-								<img class="card-img rounded-0 rounded-right" src="assets/img/Student service portal.jpg" style="max-width:10rem" alt="">
+							<div class="card d-flex flex-row news-card border">
+								<div class="d-flex flex-column justify-content-center align-items-center" style="max-width: 120px;min-width: 120px;">
+									<span>
+										{{ notice.created_at | date:'d' }}
+									</span>
+									<span>
+										{{ notice.created_at | date:'MMM' }}
+									</span>
+									<span>
+										{{ notice.created_at | date:'y' }}
+									</span>
+								</div>
+								<!-- <img class="card-img rounded-0 rounded-right" src="assets/img/Student service portal.jpg" style="max-width:10rem" alt=""> -->
 								<div class="card-body px-1 bg-light">
 									<h5 class="card-title">{{ notice.title }}</h5>
-									<p class="card-ext" [innerHTML]="notice.description | slice:0:150 ">
+									<p class="card-ext " [innerHTML]="(notice.description | slice:0:150)">
 									</p>
-									<hr>
-									<a href="">attachment</a>
+									<button class="btn btn-link m-0 m">	Read More</button>
+									<hr  class="mb-0 pb-0">
+									<a [href]="serverDetails.websiteContentUrl+'/'+ document.document.document_url" class="badge badge-pill badge-success" *ngFor="let document of notice.notice_documents" href="">
+										<i class="tim-icons icon-single-copy-04"></i>	{{ document.document.description }} ( <span class="small font-weight-light">	 {{ document.document.document_size }}kb </span>)
+									</a>
 
 								</div>
 							</div>

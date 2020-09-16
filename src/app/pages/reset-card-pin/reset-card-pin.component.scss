@@ -1,0 +1,11 @@
+input[type="text"]{
+	color: green;
+	-webkit-text-security: disc !important;
+}
+
+.btn-success{
+	background: rgb(0, 179, 250)!important;
+}
+.btn-success:disabled{
+	background: grey!important;
+}

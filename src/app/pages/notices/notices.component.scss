@@ -1,17 +1,14 @@
-.bg-light{
-	background:#519cff27!important
+.bg-light {
+	background: #519cff27 !important;
 }
-
-.card-ext{
-	p{
-
-		h1,h2,h3,h4,h5,h6{
-			font-size: .9rem!important;
-		}
-		strong{
-			font-size: .9rem !important;
-			font-weight: normal;
-		}
-	}
-
+.news-card{
+	max-height: 150px!important;
+}
+.card-ext {
+	all: unset;
+}
+b,
+strong {
+	font-size: 0.9rem !important;
+	font-weight: normal !important;
 }

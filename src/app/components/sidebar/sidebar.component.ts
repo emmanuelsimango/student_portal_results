@@ -25,26 +25,32 @@ export const ROUTES: RouteInfo[] = [
 		icon: "icon-money-coins",
 		class: ""
 	},
-	/*
-{
-  path: "/notifications",
-  title: "Notifications",
-  icon: "icon-bell-55",
-  class: ""
-},*/
 
-	//   {
-	//     path: "/user",
-	//     title: "My Profile",
-	//     icon: "icon-single-02",
-	//     class: ""
-	//   },
+	{
+		path: "/resetpin",
+		title: "Reset Card PIN",
+		icon: "icon-badge",
+		class: ""
+	},
+
 	{
 		path: "/results",
 		title: "Results",
 		icon: "icon-chart-bar-32",
 		class: ""
 	},
+	{
+	path: "/profile",
+	title: "My Profile",
+	icon: "icon-single-02",
+	class: ""
+	},
+	// {
+	// path: "/notices",
+	// title: "Notices",
+	// icon: "icon-bell-55",
+	// class: ""
+	// },
 ];
 
 @Component({

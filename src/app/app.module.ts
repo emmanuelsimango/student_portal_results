@@ -20,20 +20,20 @@ import { NoticeComponent } from './pages/notice/notice.component';
 
 
 @NgModule({
-  imports: [
-    BrowserAnimationsModule,
-    FormsModule,
-    HttpClientModule,
-    ComponentsModule,
-	NgbModule,
-	DataTablesModule,
-	RouterModule,
-	ReactiveFormsModule,
-    AppRoutingModule,
-    ToastrModule.forRoot()
-  ],
-  declarations: [AppComponent, AdminLayoutComponent, AuthLayoutComponent, LoginComponent, NoticesComponent, NoticeComponent],
-  providers: [],
-  bootstrap: [AppComponent]
+	imports: [
+		BrowserAnimationsModule,
+		FormsModule,
+		HttpClientModule,
+		ComponentsModule,
+		NgbModule,
+		DataTablesModule,
+		RouterModule,
+		ReactiveFormsModule,
+		AppRoutingModule,
+		ToastrModule.forRoot()
+	],
+	declarations: [AppComponent, AdminLayoutComponent, AuthLayoutComponent, LoginComponent, NoticesComponent, NoticeComponent],
+	providers: [],
+	bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }

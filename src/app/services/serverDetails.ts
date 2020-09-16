@@ -1,14 +1,13 @@
 export class ServerDetails {
-	// public serverDetails = "http://172.16.50.109/elearning.student.api/Procedures";
-	// public serverDetailsForApi = `${this.serverDetails}/api`;
-	// public serverDetailsForStorage = `${this.serverDetails}`;
-	// public portalURL = "http://portal.local";
-	// public studentServerDetails = "http://portal.local/index.php/cut_elearning";
+
 	public websiteContentUrl = `https://www.cut.ac.zw/cut-back/public`;
+	// public websiteContentUrl = `http://cutback`;
 	public noticeAPI = `${this.websiteContentUrl}/api`;
 
 	public noticeImageStorage = `${this.noticeAPI}`;
-	public serverIp = 'http://portal.local';
+	// public serverIp = 'https://www.cut.ac.zw/portal';
+	public serverIp = 'http://172.16.50.109/portal';
+	// public serverIp = 'http://portal.local';
 	public portalURL = `${this.serverIp}`;
 	public loginURL = `${this.portalURL}/index.php/portal/login`;
 	public logoutURL = `${this.portalURL}/index.php/cut_elearning/home/logout`;
