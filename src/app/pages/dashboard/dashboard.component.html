@@ -92,58 +92,60 @@
 					<span class="font-weight-bold"> ({{ student.vle.classes_ready }})</span>
 				</h6>
 				<h6 class=" card-title">
-					<i class=" tim-icons icon-single-copy-04 text-info"> </i> <a href="#" target="_blank"
+					<i class=" tim-icons icon-single-copy-04 text-info"> </i> <a href="#"
 						rel="noopener noreferrer"> Download Virtual Classroom Guide: </a>
 				</h6>
 				<h6 class=" card-title">
-					<i class=" tim-icons icon-planet text-info"> </i> <a href="https://www.cut.ac.zw/cutlib/" target="_blank"
+					<i class=" tim-icons icon-planet text-info"> </i> <a href="https://www.cut.ac.zw/cutlib/"
 						rel="noopener noreferrer"> CUT Library </a>
 				</h6>
 				<h6 class=" card-title">
-					<i class=" tim-icons icon-planet text-info"> </i> <a href="#" target="_blank"
+					<i class=" tim-icons icon-planet text-info"> </i> <a href="#"
 						rel="noopener noreferrer"> Institutional Repository</a>
 				</h6>
 				<hr>
-				<a class="text-uppercase" *ngIf="student.vle && !student.registration.program.completed" [href]="auth.vleLink()" target="_blank"
+				<a class="text-uppercase" *ngIf="student.vle && !student.registration.program.completed" [href]="auth.vleLink()"
 					rel="noopener noreferrer">CUT Virtual Learning Environment
 					is ready, click here to continue</a>
 
 			</div>
 		</div>
 	</div>
-	<div class=" col-lg-4">
-		<div class=" card card-chart">
-			<div class=" card-header bg-primary">
-				<h4 class=" ">Student Access Control</h4>
+	<div class=" col-lg-4 ">
+		<div class=" card">
+			<div class=" card-header bg-warning py-3">
+				<h4 class=" title d-inline">Newsroom/ Notice(s) </h4>
+				<i class=" tim-icons icon-bell-55 float-right text-lg-right"></i>
 			</div>
-			<div class=" card-body px-3">
-				<h6 class=" card-title  d-flex justify-content-between">
-					<span>
-						<i class=" tim-icons icon-wifi text-success"> </i> WiFi :
-					</span>
-					<span class="badge badge-pill"
-						[ngClass]="student.accounts.wifi?'badge-success':'badge-danger'">{{ student.accounts.wifi?'Active':'Not Active' }}</span>
+			<div class=" card-body">
+				<div class="  ">
+					<table class=" table tablesorter" id="">
+						<thead class=" text-primary  pt-0">
+							<tr>
+								<th colspan=3 class="pt-0"></th>
+								<th class="pt-0 text-center">date</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr class="small" *ngFor="let notice of student.notice.slice(-3);let i= index">
+								<td colspan="3">
+									<a [href]="notice.link" >
 
-				</h6>
-				<h6 class=" card-title  d-flex justify-content-between">
-					<span>
-						<i class=" tim-icons icon-badge text-success"> </i> Student ID :
-					</span>
-					<span class="badge badge-pill"
-						[ngClass]="student.accounts.student_id_card?'badge-success':'badge-danger'">{{ student.accounts.student_id_card?'Active':'Not Active' }}</span>
-
-				</h6>
-				<h6 class=" card-title  d-flex justify-content-between">
-					<span>
-						<i class=" tim-icons icon-bag-16 text-success"> </i> Canteen :
-					</span>
-					<span class="badge badge-pill"
-						[ngClass]="student.accounts.canteen?'badge-success':'badge-danger'">{{ student.accounts.canteen?'Active':'Not Active' }}</span>
-
-				</h6>
+										{{ notice.body }}
+									</a>
+								</td>
+								<td class=" text-center">{{ notice.date  }}</td>
+							</tr>
+						</tbody>
+					</table>
+					<a routerLink="/notices" class="btn btn-outline-light btn-link float-right">
+						All Notices and News
+					</a>
+				</div>
 			</div>
 		</div>
 	</div>
+
 </div>
 <div class=" row">
 	<div class=" col-lg-6 col-md-12">
@@ -178,13 +180,13 @@
 						Make Payment
 					</button> -->
 				</div>
-				<h6>Recent Transactions(5)</h6>
+				<h6>Recent Transactions(3)</h6>
 				<div class="container mb-2 py-2">
 
 
 					<table class="table ">
 						<tbody>
-							<tr class="small" *ngFor="let statement of statements.slice(-5)">
+							<tr class="small" *ngFor="let statement of statements |slice :0:3">
 								<td class="text-left">
 									{{ statement.transaction_date | date }}
 								</td>
@@ -202,40 +204,40 @@
 			</div>
 		</div>
 	</div>
-	<div class=" col-lg-6 col-md-12">
-		<div class=" card">
-			<div class=" card-header bg-warning py-3">
-				<h4 class=" title d-inline">Newsroom/ Notice(s) </h4>
-				<i class=" tim-icons icon-bell-55 float-right text-lg-right"></i>
+	<div class=" col-lg-6">
+		<div class=" card card-chart">
+			<div class=" card-header bg-primary">
+				<h4 class=" ">Student Access Control</h4>
 			</div>
-			<div class=" card-body">
-				<div class=" table-">
-					<table class=" table tablesorter" id="">
-						<thead class=" text-primary">
-							<tr>
-								<th colspan=3></th>
-								<th class=" text-center">date</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr class="small" *ngFor="let notice of student.notice.slice(-5);let i= index">
-								<td colspan="3">
-									<a [href]="notice.link" target="_blank">
+			<div class=" card-body px-3">
+				<h6 class=" card-title  d-flex justify-content-between">
+					<span>
+						<i class=" tim-icons icon-wifi text-success"> </i> WiFi :
+					</span>
+					<span class="badge badge-pill"
+						[ngClass]="student.accounts.wifi?'badge-success':'badge-danger'">{{ student.accounts.wifi?'Active':'Not Active' }}</span>
 
-										{{ notice.body }}
-									</a>
-								</td>
-								<td class=" text-center">{{ notice.date  }}</td>
-							</tr>
-						</tbody>
-					</table>
-					<a href="https://www.cut.ac.zw/welcome/news" target="_blank" class="btn btn-outline-light btn-link float-right">
-						All Notices and News
-					</a>
-				</div>
+				</h6>
+				<h6 class=" card-title  d-flex justify-content-between">
+					<span>
+						<i class=" tim-icons icon-badge text-success"> </i> Student ID :
+					</span>
+					<span class="badge badge-pill"
+						[ngClass]="student.accounts.student_id_card?'badge-success':'badge-danger'">{{ student.accounts.student_id_card?'Active':'Not Active' }}</span>
+
+				</h6>
+				<h6 class=" card-title  d-flex justify-content-between">
+					<span>
+						<i class=" tim-icons icon-bag-16 text-success"> </i> Canteen :
+					</span>
+					<span class="badge badge-pill"
+						[ngClass]="student.accounts.canteen?'badge-success':'badge-danger'">{{ student.accounts.canteen?'Active':'Not Active' }}</span>
+
+				</h6>
 			</div>
 		</div>
 	</div>
+
 </div>
 <div class=" row">
 

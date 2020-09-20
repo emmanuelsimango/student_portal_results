@@ -4,37 +4,38 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AuthService } from './auth-service.service';
 import { Student } from 'src/app/models/student';
 import { LoaderService } from '../loader.service';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { Statement } from '@angular/compiler';
 import { BursaryStatement } from 'src/app/models/bursaryStatement';
 import { state } from '@angular/animations';
 import { MyAuth } from 'src/app/models/auth';
+import { map } from 'rxjs/operators';
 
 interface serverData {
-	'records':any
+	'records': any
 }
 @Injectable({
-	providedIn: 'root'
+	providedIn:'root'
 })
 export class BursaryService {
 	private serverDetails: ServerDetails = new ServerDetails();
-	private balance:BehaviorSubject<number> = new BehaviorSubject(0);
-	private student:Student;
+	private balance: BehaviorSubject<number> = new BehaviorSubject(0);
+	private student: Student;
 	constructor(
-		private _http:HttpClient,
-		private auth:AuthService,
-		private loader:LoaderService
+		private _http: HttpClient,
+		private auth: AuthService,
+		private loader: LoaderService
 	) {
 		this.setBalance();
 	}
 
-	public updateBursary(student_id){
+	public updateBursary(student_id) {
 		const data = {
-			id:student_id
+			id: student_id
 		}
 		this.loader.is_loading.next(true);
-		const headers = new HttpHeaders({'content-type':'application/json; charset=utf-8'});
-		this._http.post<serverData>(`${this.serverDetails.serverDetailsForApi}/statement.read.php`,data,{headers:headers}).subscribe(bursary=>{
+		const headers = new HttpHeaders({ 'content-type': 'application/json; charset=utf-8' });
+		this._http.post<serverData>(`${this.serverDetails.serverDetailsForApi}/statement.read.php`, data, { headers: headers }).subscribe(bursary => {
 			let currentStudent = this.auth.currentStudent()
 			// console.log(currentStudent.studentBursaryData)
 			currentStudent.studentBursaryData = bursary.records[0].studentBursaryData
@@ -48,40 +49,60 @@ export class BursaryService {
 		});
 	}
 
-	public updateBursary2(){
-		const data:MyAuth = JSON.parse(localStorage.getItem('auth'))
+	public updateBursary2() {
+		const data: MyAuth = JSON.parse(localStorage.getItem('auth'))
 		this.loader.is_loading.next(true);
-		const headers = new HttpHeaders({'content-type':'application/json; charset=utf-8'});
-		this._http.post<BursaryStatement>(`${this.serverDetails.portalURL}/index.php/cut_elearning/api/getMyBursary/${data.reg_number}/${data.token}`,data,{headers:headers}).subscribe(bursary=>{
+		const headers = new HttpHeaders({ 'content-type': 'application/json; charset=utf-8' });
+		this._http.post<any>(`${this.serverDetails.portalURL}/index.php/cut_elearning/api/getMyBursary/${data.reg_number}/${data.token}`, data, { headers: headers }).subscribe(bursary => {
 			let currentStudent = this.auth.currentStudent()
 
-			currentStudent.b = bursary
+			currentStudent.bursary = bursary.body
 
 
 			localStorage.setItem('currentStudent', JSON.stringify(currentStudent))
 			this.loader.is_loading.next(false);
 		});
 	}
-	public setBalance(){
+
+	public getStatement():Observable<any> {
+		const data: MyAuth = JSON.parse(localStorage.getItem('auth'))
+		this.loader.is_loading.next(true);
+		const headers = new HttpHeaders({ 'content-type': 'application/json; charset=utf-8' });
+		return this._http.post<any>(`${this.serverDetails.portalURL}/index.php/cut_elearning/api/getMyBursary/${data.reg_number}/${data.token}`, data, { headers: headers })
+			.pipe(
+				map(bursary => {
+					let currentStudent:Student = this.auth.currentStudent()
+					// console.log(bursary);
+					currentStudent.bursary = bursary.body
+
+					// localStorage.setItem('currentStudent', JSON.stringify(currentStudent))
+					localStorage.setItem('currentStudent',JSON.stringify(currentStudent))
+					this.loader.is_loading.next(false)
+					return bursary.body;
+				})
+			);
+	}
+
+	public setBalance() {
 		this.student = this.auth.currentStudent();
 		const statement: BursaryStatement = this.student.bursary;
 
 		if (statement) {
-			let credit:number = 0;
-			let debit:number = 0;
+			let credit: number = 0;
+			let debit: number = 0;
 			console.log(statement);
 
-			statement.statements.forEach(sta=>{
-				credit  += parseFloat(sta.credit.toString());
+			statement.statements.forEach(sta => {
+				credit += parseFloat(sta.credit.toString());
 				debit += parseFloat(sta.debit.toString());
 			})
-			console.log(debit,credit);
+			console.log(debit, credit);
 
-			this.balance.next(debit-credit);
+			this.balance.next(debit - credit);
 		}
 	}
 
-	public getBalance():number {
+	public getBalance(): number {
 		return this.balance.value
 	}
 

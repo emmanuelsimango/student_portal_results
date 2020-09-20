@@ -3,6 +3,7 @@ import { HttpClientModule } from "@angular/common/http";
 import { RouterModule } from "@angular/router";
 import { CommonModule } from "@angular/common";
 import { FormsModule } from "@angular/forms";
+import { NgForm } from '@angular/forms';
 
 import { AdminLayoutRoutes } from "./admin-layout.routing";
 import { DashboardComponent } from "../../pages/dashboard/dashboard.component";
@@ -18,11 +19,14 @@ import { ComponentsModule } from 'src/app/components/components.module';
 import { ModulesComponent } from 'src/app/pages/modules/modules.component';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BursaryService } from 'src/app/services/auth/bursary.service';
+import { ResetCardPinComponent } from 'src/app/pages/reset-card-pin/reset-card-pin.component';
 @NgModule({
   imports: [
     CommonModule,
     RouterModule.forChild(AdminLayoutRoutes),
-    FormsModule,
+	FormsModule,
+	// NgForm,
     HttpClientModule,
 	NgbModule,
 	ComponentsModule,
@@ -38,7 +42,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ResultsComponent,
 	BursaryComponent,
 	ModulesComponent,
+	ResetCardPinComponent
 
-  ]
+  ],
+  providers:[BursaryService]
 })
 export class AdminLayoutModule {}

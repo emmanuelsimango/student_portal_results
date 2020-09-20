@@ -2,9 +2,19 @@
 	<div class=" row">
 		<div class=" col-md-12">
 			<div class=" card">
-				<div class=" card-header d-flex flex-row justify-content-between align-items-center bg-primary">
-					<h4 class=" card-title"> Transaction History </h4>
-					<button class="btn btn-success btn-sm" (click)="refresh()"> <i class="fas fa-sync-alt    "></i> </button>
+				<div class=" card-header d-flex flex-row justify-content-start align-items-center bg-primary">
+
+					<div class="form-group">
+					  <label for="">Transaction History</label>
+					  <select class="form-control" [(ngModel)]="pageSize">
+						<option>5</option>
+						<option>10</option>
+						<option>15</option>
+						<option>20</option>
+						<option>25</option>
+					  </select>
+					</div>
+					<!-- <button class="btn btn-success btn-sm" (click)="refresh()"> <i class="fas fa-sync-alt    "></i> </button> -->
 				</div>
 				<div class=" card-body" >
 					<div class=" ">

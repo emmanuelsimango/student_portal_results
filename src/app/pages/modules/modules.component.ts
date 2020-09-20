@@ -12,6 +12,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { MyAuth } from 'src/app/models/auth';
 import { LoaderService } from 'src/app/services/loader.service';
 import { ToastrService } from 'ngx-toastr';
+import { ModuleService } from 'src/app/services/moduleService.service';
+import { CourseWork } from 'src/app/models/CourseWork';
 
 
 declare const google: any;
@@ -28,21 +30,26 @@ export class ModulesComponent implements OnInit {
 	modules: Module[];
 	closeResult: string;
 	selectedModule: Module;
+	selectedCoursework:CourseWork[]
 	pageM = 1;
 	pageP = 1;
 	pageA = 1;
 	pageSize = 5;
 	fileToUpload:any
 	constructor(
-		private auth: AuthService,
+		public auth: AuthService,
 		private modalService: NgbModal,
 		private http:HttpClient,
 		private loader:LoaderService,
-		private toastr: ToastrService
+		private toastr: ToastrService,
+		private myModules:ModuleService
 	) {
+
 		this.student = this.auth.is_Authenticated();
 		this.modules = this.student.registration.modules;
-
+		this.myModules.updateModules().subscribe(modules=>{
+			this.modules = modules
+		});
 		console.log(this.modules);
 
 	}
@@ -81,13 +88,14 @@ export class ModulesComponent implements OnInit {
 
 	open(content, module: Module) {
 		this.selectedModule = module;
-
+		this.selectedCoursework = module.course_work
 		this.modalService.open(content, { keyboard: true, size: 'lg' }).result.then((result) => {
 			this.closeResult = `Closed with: ${result}`;
 		}, (reason) => {
 			this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
 		});
 	}
+
 
 
 	private getDismissReason(reason: any): string {

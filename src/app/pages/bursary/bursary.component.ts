@@ -11,7 +11,8 @@ import { Statement } from 'src/app/models/statement';
 @Component({
 	selector: "app-bursary",
 	templateUrl: "bursary.component.html",
-	styleUrls: ["./bursary.component.scss"]
+	styleUrls: ["./bursary.component.scss"],
+	providers: [BursaryService ]
 })
 export class BursaryComponent implements OnInit {
 	page = 1;
@@ -28,6 +29,11 @@ export class BursaryComponent implements OnInit {
 	) {
 		this.student = this.auth.is_Authenticated();
 		this.statements = this.student.bursary.statements;
+		this.bursary.getStatement().subscribe(statement=>{
+			console.log(statement);
+			this.statements = statement.statements
+
+		});
 		console.log(this.statements.length);
 
 
@@ -45,7 +51,7 @@ export class BursaryComponent implements OnInit {
 
 	}
 	public refresh() {
-		this.bursary.updateBursary(this.student.studentId)
+		this.bursary.updateBursary2()
 		this.initStudent();
 	}
 }

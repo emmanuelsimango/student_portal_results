@@ -1,0 +1,106 @@
+<div class=" row">
+	<div class=" col-lg-12">
+		<div class=" card card-chart mb-4">
+			<div class=" card-header ">
+				<ul class="nav nav-pills">
+					<li class="nav-item">
+						<a class="nav-link" [ngClass]="selectedCategory?'':'active'"
+							(click)="changeNotices(null)">All</a>
+					</li>
+					<li class="nav-item mx-1" *ngFor="let category of noticeCategories">
+						<a class="nav-link" [ngClass]="selectedCategory==category?'active':''"
+							(click)="changeNotices(category)">{{ category.name }}</a>
+					</li>
+				</ul>
+			</div>
+			<div class="card-body d-flex flex-column px-3">
+				<div class="row" *ngIf="notices">
+					<div class="col-lg-11 cursor-pointer" *ngFor="let notice of notices" (click)="open(notice_yacho,notice)">
+						<div class="card d-flex flex-row news-card border">
+							<div class="d-flex flex-column justify-content-center align-items-center" style="max-width: 120px;min-width: 120px;">
+								<span>
+									{{ notice.created_at | date:'d' }}
+								</span>
+								<span>
+									{{ notice.created_at | date:'MMM' }}
+								</span>
+								<span>
+									{{ notice.created_at | date:'y' }}
+								</span>
+							</div>
+							<!-- <img class="card-img rounded-0 rounded-right" src="assets/img/Student service portal.jpg" style="max-width:10rem" alt=""> -->
+							<div class="card-body px-1 bg-light">
+								<h5 class="card-title">{{ notice.title }}</h5>
+								<p class="card-ext " [innerHTML]="(notice.description | slice:0:150 )">
+
+								</p>
+								<button class="btn btn-link m-0">	Read More</button>
+								<hr class="mb-0 pb-0">
+								<a [href]="serverDetails.websiteContentUrl+'/'+ document.document.document_url" class="badge badge-pill badge-success" *ngFor="let document of notice.notice_documents" href="">
+									<i class="tim-icons icon-single-copy-04"></i>	{{ document.document.description }} ( <span class="small font-weight-light">	 {{ document.document.document_size }}kb </span>)
+								</a>
+
+							</div>
+						</div>
+					</div>
+
+				</div>
+				<div class="row" *ngIf="!notices">
+					<ng-container *ngFor="let cate of noticeCategories">
+
+						<div class="col-lg-11 cursor-pointer" *ngFor="let notice of cate.notices"  (click)="open(notice_yacho,notice)" >
+							<div class="card d-flex flex-row news-card border">
+								<div class="d-flex flex-column justify-content-center align-items-center" style="max-width: 120px;min-width: 120px;">
+									<span>
+										{{ notice.created_at | date:'d' }}
+									</span>
+									<span>
+										{{ notice.created_at | date:'MMM' }}
+									</span>
+									<span>
+										{{ notice.created_at | date:'y' }}
+									</span>
+								</div>
+								<!-- <img class="card-img rounded-0 rounded-right" src="assets/img/Student service portal.jpg" style="max-width:10rem" alt=""> -->
+								<div class="card-body px-1 bg-light">
+									<h5 class="card-title">{{ notice.title }}</h5>
+									<p class="card-ext " [innerHTML]="(notice.description | slice:0:150)">
+									</p>
+									<button class="btn btn-link m-0 m">	Read More</button>
+									<hr  class="mb-0 pb-0">
+									<a [href]="serverDetails.websiteContentUrl+'/'+ document.document.document_url" class="badge badge-pill badge-success" *ngFor="let document of notice.notice_documents" href="">
+										<i class="tim-icons icon-single-copy-04"></i>	{{ document.document.description }} ( <span class="small font-weight-light">	 {{ document.document.document_size }}kb </span>)
+									</a>
+
+								</div>
+							</div>
+					</div>
+				</ng-container>
+
+				</div>
+
+			</div>
+
+		</div>
+	</div>
+</div>
+
+<ng-template #notice_yacho let-modal>
+	<div class="modal-header bg-primary">
+		<h4 class="" id="modal-basic-title">{{ selectedNotice.title }}
+			</h4>
+		<button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+			<span aria-hidden="true">×</span>
+		</button>
+	</div>
+	<div class="modal-body">
+		<p [innerHTML]="selectedNotice.description">
+
+		</p>
+
+
+	</div>
+	<div class="modal-footer justify-content-end">
+		<button type="button" class="btn btn-primary" (click)="modal.close('Save click')">Close</button>
+	</div>
+</ng-template>

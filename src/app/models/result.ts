@@ -1,9 +1,12 @@
+import { ResultModule } from './result_module';
+
 export interface Result {
-	"gpa": string,
-	"level": number,
-	"modules":[]
-	"decision": string,
-	"semester": number,
+	"modules": ResultModule[],
 	"periodname": string,
-	"supression": string
+	"humandecision": string,
+	"gpa": string,
+	"TheDegreeClass": string,
+	"suppressionmsg":string,
+	"error":boolean,
+	"message":string
 }

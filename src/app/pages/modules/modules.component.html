@@ -21,7 +21,8 @@
 			</div>
 			<div class="card-body px-3 border-top">
 
-				<a class="text-uppercase" href="http://" target="_blank" rel="noopener noreferrer">Your VLE Account is
+				<a class="text-uppercase" [href]="auth.vleLink()"  rel="noopener noreferrer">Your VLE
+					Account is
 					ready, click here to continue</a>
 
 
@@ -108,8 +109,7 @@
 
 						<tr class="small" *ngFor="let module of modules">
 							<td class="text-uppercase">
-								{{ module.module_code }} - {{ module.module_name }}
-							</td>
+								{{ module.module_code }}{{ module.module_unit_code }} - {{ module.module_name }}							</td>
 							<td>
 								Posts[{{ module.posts.length }}]
 							</td>
@@ -122,8 +122,10 @@
 							<td class="cursor-pointer" (click)="open(assignments,module)">
 								Assignments [{{ module.assignments.length }}]
 							</td>
-							<td>
+							<td class="cursor-pointer" (click)="open(course_work,module)">
+
 								CSWK
+
 							</td>
 							<td>
 								<span>
@@ -151,10 +153,10 @@
 			<div class=" card card-chart">
 
 				<div class="card-body px-3 ">
-					<h3 class="font-weight-light">
+					<h4 class="font-weight-light ">
 
 						No Modules Found
-					</h3>
+					</h4>
 				</div>
 			</div>
 		</div>
@@ -181,7 +183,7 @@
 						{{ material.document_size }}kb
 					</td>
 					<td>
-						<a class="" [href]="getFileURL(material)" target="_blank" rel="noopener noreferrer">Download</a>
+						<a class="" [href]="getFileURL(material)"  rel="noopener noreferrer">Download</a>
 					</td>
 				</tr>
 			</tbody>
@@ -266,7 +268,8 @@
 						<input type="file" name="file" id="file" #file accept=".pdf,.doc,.docx,zip">
 					</td>
 					<td>
-						<button class="btn btn-sm btn-success" [disabled]="file.value" type="submit" (click)="uploadFile(file,material)">
+						<button class="btn btn-sm btn-success" [disabled]="file.value" type="submit"
+							(click)="uploadFile(file,material)">
 							Submit
 						</button>
 					</td>
@@ -291,6 +294,59 @@
 			No Assignments <i class=" tim-icons icon-send text-success"> </i>
 		</p>
 
+	</div>
+	<div class="modal-footer justify-content-end">
+		<button type="button" class="btn btn-primary" (click)="modal.close('Save click')">Close</button>
+	</div>
+</ng-template>
+<ng-template #course_work let-modal>
+	<div class="modal-header bg-primary">
+		<h4 class="" id="modal-basic-title">Coursework for {{ selectedModule.module_code }} -
+			{{ selectedModule.module_name }}</h4>
+		<button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+			<span aria-hidden="true">×</span>
+		</button>
+	</div>
+	<div class="modal-body">
+		<table datatable class="table table-stripped text-center">
+			<thead>
+				<tr>
+					<th>
+						Title
+					</th>
+					<th>
+						Total Marks
+					</th>
+					<th>
+						Mark
+					</th>
+					<!-- <th class="text-center">
+						Exam Percentage(%)
+					</th> -->
+				</tr>
+			</thead>
+			<tbody *ngFor="let material of selectedCoursework ">
+
+
+				<tr class="small">
+					<td>
+						{{ material.title }}
+					</td>
+					<td>
+						{{ material.total_marks }}
+					</td>
+					<td >
+						{{ material.mark }}
+					</td>
+					<!-- <td class="text-center">
+						{{ material.exam_percentage }}
+					</td> -->
+				</tr>
+
+
+			</tbody>
+
+		</table>
 	</div>
 	<div class="modal-footer justify-content-end">
 		<button type="button" class="btn btn-primary" (click)="modal.close('Save click')">Close</button>

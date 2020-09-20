@@ -4,67 +4,64 @@
 		<div class=" col-md-8">
 			<div class=" card">
 				<div class=" card-header d-flex flex-row justify-content-between align-items-center">
-					<span>
+					<!-- <span>
 						<label for="period">
-							Change Period:
+							Period:
 						</label>
-						<select class="form-control" name="period" [(ngModel)]="selectedResult" id="period">
-							<option [ngValue]="res" *ngFor="let res of studentResults">
-								{{res.periodname}}
-							</option>
-						</select>
-					</span>
-					<h4 *ngIf="selectedResult" class="card-title">{{selectedResult.periodname}} Semester {{ selectedResult.level }} Period
-						{{selectedResult.semester}} </h4>
+						{{ studentResults.periodname }}
+					</span> -->
+					<h4 *ngIf="studentResults" class="card-title">{{studentResults.periodname}} </h4>
 
 
 				</div>
-				<div class=" card-body" *ngIf="selectedResult;else no_result">
+				<div class=" card-body" *ngIf="studentResults">
 					<div class=" ">
 						<table class=" table tablesorter" id="">
 							<thead class=" text-primary">
 								<tr>
 									<th>Code</th>
 									<th>Module Name</th>
-									<th>Mark</th>
+									<th class="text-center">Mark</th>
+									<th class="text-center">GPE</th>
+									<th class="text-center">Credits</th>
 									<th class=" text-center">Grade</th>
-									<th>GPE</th>
 								</tr>
 							</thead>
 							<tbody>
-								<tr *ngFor="let module of selectedResult.modules">
+								<tr *ngFor="let module of studentResults.modules">
 									<td>{{module.modulecode}}</td>
 									<td>{{module.modulename}}</td>
-									<td>{{module.mark}}</td>
-									<td class=" text-center">{{module.gd}}</td>
-									<td>{{module.gpe}}</td>
+									<td class="text-center">{{module.mark}}</td>
+									<td class="text-center">{{module.class}}</td>
+									<td class="text-center">{{module.CreditsEarned}}</td>
+									<td class=" text-center">{{module.decision}}</td>
 								</tr>
 							</tbody>
 						</table>
 					</div>
 				</div>
-				<div *ngIf="selectedResult" class="card-footer align-items-center">
-					<span  class="">
-						{{selectedResult.periodname}} <br> Level: {{selectedResult.level}} Semester: {{selectedResult.semester}}
-					</span>
-					<hr>
+				<div *ngIf="studentResults" class="card-footer align-items-center">
+
 					<span>
-						Decision : {{ selectedResult.decision }}
+						Decision : {{ studentResults.humandecision }}
 					</span>
-					<span class=" ml-4"  *ngIf="selectedResult.gpa">
-						GPA : {{ selectedResult.gpa}}
+					<span class=" ml-4"  *ngIf="studentResults.gpa">
+						GPA : {{ studentResults.gpa}}
 					</span>
-					<span class="badge badge-danger mx-4"  *ngIf="selectedResult.supression">
-						Carry : {{ selectedResult.supression}}
+					<span class="badge badge-danger mx-4"  *ngIf="studentResults.suppressionmsg">
+						 {{ studentResults.suppressionmsg}}
+					</span>
+					<span class=" mx-4"  *ngIf="studentResults.TheDegreeClass">
+						Degree Class: {{ studentResults.TheDegreeClass}}
 					</span>
 				</div>
-				<ng-template #no_result>
+				<div *ngIf="!loading && !studentResults"  >
 					<div class="card-body">
 						<p class="h4 text-center">
 							No results to display
 						</p>
 					</div>
-				</ng-template>
+				</div>
 			</div>
 		</div>
 		<div class=" col-md-4">
