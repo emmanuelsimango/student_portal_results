@@ -45,6 +45,13 @@ export class AuthService {
 		return false;
 		// return this.router.navigateByUrl(this._serverDetails.loginURL);
 	}
+	public getAuth():MyAuth{
+		return JSON.parse(localStorage.getItem('auth'))
+	}
+
+	public activateWifi():Observable<any>{
+		return this._http.get(`${this._serverDetails.studentServerDetails}/api/changeWifi/${this.getAuth().reg_number}/${this.getAuth().token}`);
+	}
 
 	public login(reg,pass){
 		const data = {

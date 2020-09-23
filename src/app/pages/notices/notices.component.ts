@@ -14,6 +14,7 @@ export class NoticesComponent implements OnInit {
 	noticeCategories: NoticeCategory[];
 	notices: MyNotice[];
 	selectedCategory: NoticeCategory;
+	allNotices:MyNotice[]
 	selectedNotice:MyNotice
 	closeResult: string;
 	serverDetails:ServerDetails = new ServerDetails();
@@ -22,6 +23,10 @@ export class NoticesComponent implements OnInit {
 			this.noticeCategories = categories
 			console.log(categories);
 		})
+		this.noticeService.getAll().subscribe(notices=>{
+			this.allNotices = notices
+		});
+
 	}
 
 	ngOnInit(): void {

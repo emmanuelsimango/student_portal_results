@@ -92,7 +92,7 @@
 					<span class="font-weight-bold"> ({{ student.vle.classes_ready }})</span>
 				</h6>
 				<h6 class=" card-title">
-					<i class=" tim-icons icon-single-copy-04 text-info"> </i> <a href="#"
+					<i class=" tim-icons icon-single-copy-04 text-info"> </i> <a href="\assets\files\CUT Student VLE User Manual.pdf"
 						rel="noopener noreferrer"> Download Virtual Classroom Guide: </a>
 				</h6>
 				<h6 class=" card-title">
@@ -215,7 +215,10 @@
 						<i class=" tim-icons icon-wifi text-success"> </i> WiFi :
 					</span>
 					<span class="badge badge-pill"
-						[ngClass]="student.accounts.wifi?'badge-success':'badge-danger'">{{ student.accounts.wifi?'Active':'Not Active' }}</span>
+						[ngClass]="student.accounts.wifi?'badge-success':'badge-danger'">{{ student.accounts.wifi?'Active':'Not Active' }}
+						<a class="badge badge-primary badge-pill cursor-pointer" [hidden]="student.accounts.wifi" (click)="activateWifi()" >activate</a>
+					</span>
+
 
 				</h6>
 				<h6 class=" card-title  d-flex justify-content-between">
@@ -336,6 +339,17 @@
 					</span>
 					<span class="">
 						<a href="https://www.cut.ac.zw/downloads/ict/ICT%20policy%20-%20General%20User%20Final%20Draft.pdf"
+							target="_blank" rel="noopener noreferrer">
+							Download
+						</a>
+					</span>
+				</h6>
+				<h6 class=" card-title  d-flex justify-content-between">
+					<span>
+						<i class=" tim-icons icon-calendar-60 text-success"> </i> VLE Manual :
+					</span>
+					<span class="">
+						<a href="\assets\files\CUT Student VLE User Manual.pdf"
 							target="_blank" rel="noopener noreferrer">
 							Download
 						</a>

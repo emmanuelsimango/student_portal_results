@@ -16,7 +16,7 @@ import { Statement } from 'src/app/models/statement';
 })
 export class BursaryComponent implements OnInit {
 	page = 1;
-	pageSize = 5
+	pageSize = 10
 	total: number;
 	student: Student;
 	statements: Statement[];

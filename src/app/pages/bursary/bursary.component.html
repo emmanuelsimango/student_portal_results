@@ -7,11 +7,8 @@
 					<div class="form-group">
 					  <label for="">Transaction History</label>
 					  <select class="form-control" [(ngModel)]="pageSize">
-						<option>5</option>
-						<option>10</option>
-						<option>15</option>
-						<option>20</option>
-						<option>25</option>
+						<option *ngFor="let number of [5,10,15,20,25,30,35]" >{{ number }}</option>
+
 					  </select>
 					</div>
 					<!-- <button class="btn btn-success btn-sm" (click)="refresh()"> <i class="fas fa-sync-alt    "></i> </button> -->
