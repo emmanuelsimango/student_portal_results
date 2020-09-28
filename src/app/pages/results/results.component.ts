@@ -31,7 +31,7 @@ export class ResultsComponent implements OnInit {
 			if (!result.error) {
 				this.studentResults = result
 			} else {
-				this.toast.error(result.message)
+				// this.toast.error(result.message)
 			}
 
 			this.loaderService.is_loading.next(false)
