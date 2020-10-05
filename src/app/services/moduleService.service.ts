@@ -7,6 +7,8 @@ import { Observable } from 'rxjs';
 import { AuthService } from './auth/auth-service.service';
 import { Student } from '../models/student';
 import { map } from 'rxjs/operators';
+import { Registration } from '../models/registration';
+import { RegistrationTemplate } from '../models/registrationTemplate';
 
 @Injectable({
 	providedIn: 'root'
@@ -26,11 +28,18 @@ export class ModuleService {
 			map(info=>{
 				const student:Student = this.auth.currentStudent();
 				student.registration.modules = info;
-				
+
 				localStorage.setItem('currentStudent',JSON.stringify(student))
 				return info
 			}),
 		);
+	}
+
+	getRegistrationRequirements():Observable<RegistrationTemplate>{
+		return this._http.get<RegistrationTemplate>(`${this.serverDetails.studentServerDetails}/api/getNextLevelRegistrationRequirements/${this.auth.getAuth().reg_number}/${this.auth.getAuth().token}`);
+	}
+	confirmRegistration():Observable<any>{
+		return this._http.get<any>(`${this.serverDetails.studentServerDetails}/api/confirmRegistration/${this.auth.getAuth().reg_number}/${this.auth.getAuth().token}`)
 	}
 
 }

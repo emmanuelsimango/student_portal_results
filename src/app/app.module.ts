@@ -17,6 +17,7 @@ import { ComponentsModule } from "./components/components.module";
 import { LoginComponent } from './pages/login/login.component';
 import { NoticesComponent } from './pages/notices/notices.component';
 import { NoticeComponent } from './pages/notice/notice.component';
+import { RegisterComponent } from './pages/register/register.component';
 
 
 @NgModule({

@@ -21,6 +21,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BursaryService } from 'src/app/services/auth/bursary.service';
 import { ResetCardPinComponent } from 'src/app/pages/reset-card-pin/reset-card-pin.component';
+import { RegisterComponent } from 'src/app/pages/register/register.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -42,7 +43,8 @@ import { ResetCardPinComponent } from 'src/app/pages/reset-card-pin/reset-card-p
     ResultsComponent,
 	BursaryComponent,
 	ModulesComponent,
-	ResetCardPinComponent
+	ResetCardPinComponent,
+	RegisterComponent
 
   ],
   providers:[BursaryService]

@@ -29,6 +29,24 @@ export class AuthService {
 	public updateStudent(student:Student){
 		localStorage.setItem('currentStudent',JSON.stringify(student))
 	}
+	// public updateStudentData(){
+	// 	return this._http.post<any>(`${this._serverDetails.studentServerDetails}/api/getHomeData/${this.getAuth().reg_number}/${this.getAuth().token}`,this.getAuth())
+	// 	.pipe(map(response => {
+	// 		console.log(response)
+	// 		// login successful if there's a jwt token in the response when using laravel passport
+	// 		if (response.body) {
+	// 			// store user details and jwt token in local storage to keep user logged in between page refreshes
+	// 			localStorage.setItem('currentStudent', JSON.stringify(response.body));
+	// 			this._currentStudentSubject.next(response.body);
+	// 			this.router.navigate(['dashboard'])
+	// 		}else{
+	// 			this.router.navigateByUrl(this._serverDetails.loginURL+"?e=1");
+
+	// 		}
+
+	// 		return response.body;
+	// 	}));
+	// }
 	public studentSubject():BehaviorSubject< Student>{
 		return this._currentStudentSubject
 	}
@@ -103,7 +121,7 @@ export class AuthService {
 
 			}else{
 				this.router.navigateByUrl(this._serverDetails.loginURL+"?e=1");
-				
+
 			}
 
 			return response.body;

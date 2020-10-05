@@ -7,6 +7,10 @@ import { Statement } from 'src/app/models/statement';
 import { ModalModule } from 'ngb-modal';
 import { ToastrService } from 'ngx-toastr';
 import { LoaderService } from 'src/app/services/loader.service';
+import { ModuleService } from 'src/app/services/moduleService.service';
+import { ServerDetails } from 'src/app/services/serverDetails';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Router } from '@angular/router';
 
 @Component({
 	selector: "app-dashboard",
@@ -16,16 +20,21 @@ import { LoaderService } from 'src/app/services/loader.service';
 })
 export class DashboardComponent implements OnInit {
 	student:Student;
-	statements: Statement[]
+	statements: Statement[];
+	serverDetails:ServerDetails = new ServerDetails();
+	msg:String
 	constructor(
 		public auth:AuthService,
 		public bursary:BursaryService,
 		public toast:ToastrService,
-		public loader:LoaderService
+		public loader:LoaderService,
+		private moduleService:ModuleService,
+		private modalService: NgbModal,
+		private router:Router
 
 	) {
 		this.student = this.auth.is_Authenticated();
-		this.statements = this.student.bursary.statements
+		this.statements = this.student.bursary.statements;
 
 	}
 
@@ -47,6 +56,30 @@ export class DashboardComponent implements OnInit {
 			console.log(error)
 			this.loader.is_loading.next(false)
 		}))
+	}
+
+	getNextRegistration(modal:NgbModal){
+		this.loader.is_loading.next(true)
+		this.moduleService.getRegistrationRequirements().subscribe(response=>{
+			if (!response.valid) {
+				window.location.href = this.serverDetails.logoutURL;
+			}
+			if (!response.body.open) {
+				this.msg = "Online Registration for this period is  not active!!"
+				this.modalService.open(modal)
+			}else if(response.body.open){
+				// const balance = this.bursary.getBalance();
+				// if(balance>response.body.fees){
+				// 	this.msg = "You have insufficient funds!!";
+				// 	this.modalService.open(modal);
+				// 	this.loader.is_loading.next(false);
+				// 	return;
+				// }
+				this.router.navigate(['register'])
+			}
+
+			this.loader.is_loading.next(false);
+		},	(error=>{this.loader.is_loading.next(false)}));
 	}
 
 }

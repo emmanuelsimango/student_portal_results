@@ -18,8 +18,23 @@
 							Active Period:
 						</ng-template>
 					</span>
-					<span>
+					<span class="font-weight-bold">
 						{{ student.registration.period.period_name }}
+					</span>
+				</h6>
+				<h6 class=" card-title d-flex justify-content-between">
+
+					<span *ngIf="student.registration.modules.length<1;else activeL">
+						<i class=" tim-icons icon-bell-55 text-danger-states"> </i>
+						Last Active Level
+					</span>
+
+					<ng-template #activeL>
+						<i class=" tim-icons icon-bell-55 text-danger-states"> </i>
+						Level
+					</ng-template>
+					<span href="" class=" font-weight-bold">
+						{{ student.registration.program.level }}
 					</span>
 				</h6>
 				<h6 class=" card-title d-flex justify-content-between"
@@ -29,8 +44,10 @@
 					</span>
 					<span class="font-weight-bold"> ({{student.registration.modules.length}})</span>
 				</h6>
+
 				<ng-template #not_registered>
-					<h6 class=" card-title d-flex justify-content-between">
+					<hr>
+					<h6 class=" card-title d-flex justify-content-between align-items-center">
 
 						<span>
 							<i class=" tim-icons icon-bulb-63 text-danger-states"> </i>
@@ -43,8 +60,8 @@
 								</span>
 							</ng-template>
 						</span>
-						<a href="" class="badge badge-danger small" *ngIf="!student.registration.program.completed;else completed">
-							register
+						<a (click)="getNextRegistration(alert)" class="btn btn-round btn-warning  cursor-pointer text-white p-2 " *ngIf="!student.registration.program.completed;else completed">
+							register now
 						</a>
 						<ng-template #completed>
 							<a href="" class="badge badge-success small">
@@ -54,16 +71,7 @@
 					</h6>
 
 				</ng-template>
-				<h6 class=" card-title d-flex justify-content-between">
 
-					<span>
-						<i class=" tim-icons icon-bell-55 text-danger-states"> </i>
-						Level
-					</span>
-					<span href="" class=" font-weight-bold">
-						{{ student.registration.program.level }}
-					</span>
-				</h6>
 				<hr>
 
 				{{ student.registration.program.programme_name }} - <span class="font-weight-bold"> {{ student.registration.program.attendance_type_name }} </span>
@@ -361,3 +369,18 @@
 		</div>
 	</div>
 </div>
+
+<ng-template #alert let-modal>
+
+	<a  class="btn btn-link float-left text-danger mr-0" (click)="modal.dismiss('Cross click')" >
+		x
+	</a>
+	<div class="modal-body">
+
+		<div class="alert alert-info" role="alert">
+			{{ msg }}
+		</div>
+
+	</div>
+
+</ng-template>
