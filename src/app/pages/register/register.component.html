@@ -22,7 +22,7 @@
 							{{ auth.is_Authenticated().registration.program.level }}
 						</td>
 					</tr>
-					<tr class="text-primary border-top">
+					<tr class="text-primary border-top" *ngIf="regTemplate.body.nextPeriod && regTemplate.body.nextPeriod.period_name">
 						<td class="py-1">
 							Current Active Period:
 						</td>
@@ -30,7 +30,7 @@
 							{{ regTemplate.body.nextPeriod.period_name }}
 						</td>
 					</tr>
-					<tr class="text-primary">
+					<tr class="text-primary" *ngIf="regTemplate.body.nextPeriod && regTemplate.body.nextPeriod.period_name">
 						<td class="py-1">
 							Current Registration Level:
 						</td>
@@ -38,7 +38,7 @@
 							{{ regTemplate.body.nextLevel.academic_level }}-{{ regTemplate.body.nextLevel.semester }}
 						</td>
 					</tr>
-					<tr class="border-top">
+					<tr class="border-top" *ngIf="regTemplate.body.nextPeriod && regTemplate.body.nextPeriod.period_name">
 						<td class="py-1">
 							Required Balance:
 						</td>
@@ -54,12 +54,21 @@
 							{{ balance | currency}}
 						</td>
 					</tr>
+
+					<tr class="" *ngIf="!regTemplate.body.nextPeriod || !regTemplate.body.nextPeriod.period_name">
+						<td class="py-1 text-danger font-weight-bold" colspan="2">
+							You are not allowed to register online please visit the registration Office
+						</td>
+						<!-- <td class="pl-3 py-1">
+							{{ balance | currency}}
+						</td> -->
+					</tr>
 				</table>
 
 
 
 			</div>
-			<div class="card-body" *ngIf="regTemplate && (regTemplate.body.fees<=balance)" >
+			<div class="card-body" *ngIf="regTemplate && (regTemplate.body.fees>=balance) && (regTemplate.body.nextPeriod && regTemplate.body.nextPeriod.period_name)" >
 				<h6>
 					Modules
 				</h6>
