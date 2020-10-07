@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Module } from 'src/app/models/module';
+import { RegistrationModule } from 'src/app/models/RegistrationModule';
 import { RegistrationTemplate } from 'src/app/models/registrationTemplate';
 import { AuthService } from 'src/app/services/auth/auth-service.service';
 import { BursaryService } from 'src/app/services/auth/bursary.service';
@@ -14,8 +16,9 @@ import { ServerDetails } from 'src/app/services/serverDetails';
 })
 export class RegisterComponent implements OnInit {
 	serverDetails:ServerDetails = new ServerDetails()
-
 	regTemplate:RegistrationTemplate;
+	regModuleTemplate: any[]
+	moduleTemplate:Module
 	msg:String;
 	balance:number
 	constructor(
@@ -30,6 +33,23 @@ export class RegisterComponent implements OnInit {
 			const balance = this.bursaryService.getBalance();
 			this.balance = balance
 			this.regTemplate = response
+
+
+			if (response.body.module) {
+				console.log(response.body.module);
+
+				console.log(Object.entries(response.body.module));
+
+				this.regModuleTemplate = Object.entries(response.body.module);
+				this.regModuleTemplate.forEach(mod=>{
+					console.log(mod[1]);
+
+				})
+
+			}
+
+
+
 			this.loader.is_loading.next(false)
 
 		},(error=>{this.loader.is_loading.next(false)}));

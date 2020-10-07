@@ -79,7 +79,7 @@ export class DashboardComponent implements OnInit {
 			}
 
 			this.loader.is_loading.next(false);
-		},	(error=>{this.loader.is_loading.next(false)}));
+		},	(error=>{console.log(error); this.loader.is_loading.next(false)}));
 	}
 
 }

@@ -1,5 +1,5 @@
 <div class=" row">
-	<div class=" col-lg-12 order-1">
+	<div class=" col-lg-12 ">
 		<div class="card">
 			<div class="card-body small">
 				<h6 class="mb-3">
@@ -7,7 +7,7 @@
 				</h6>
 				<table class="table table-full-width   " *ngIf="regTemplate">
 					<tr>
-						<td class="py-1" >
+						<td class="py-1">
 							Last Active Period:
 						</td>
 						<td class="pl-3 py-1">
@@ -22,7 +22,8 @@
 							{{ auth.is_Authenticated().registration.program.level }}
 						</td>
 					</tr>
-					<tr class="text-primary border-top" *ngIf="regTemplate.body.nextPeriod && regTemplate.body.nextPeriod.period_name">
+					<tr class="text-primary border-top"
+						*ngIf="regTemplate.body.nextPeriod && regTemplate.body.nextPeriod.period_name">
 						<td class="py-1">
 							Current Active Period:
 						</td>
@@ -30,7 +31,8 @@
 							{{ regTemplate.body.nextPeriod.period_name }}
 						</td>
 					</tr>
-					<tr class="text-primary" *ngIf="regTemplate.body.nextPeriod && regTemplate.body.nextPeriod.period_name">
+					<tr class="text-primary"
+						*ngIf="regTemplate.body.nextPeriod && regTemplate.body.nextPeriod.period_name">
 						<td class="py-1">
 							Current Registration Level:
 						</td>
@@ -38,7 +40,8 @@
 							{{ regTemplate.body.nextLevel.academic_level }}-{{ regTemplate.body.nextLevel.semester }}
 						</td>
 					</tr>
-					<tr class="border-top" *ngIf="regTemplate.body.nextPeriod && regTemplate.body.nextPeriod.period_name">
+					<tr class="border-top"
+						*ngIf="regTemplate.body.nextPeriod && regTemplate.body.nextPeriod.period_name">
 						<td class="py-1">
 							Required Balance:
 						</td>
@@ -68,7 +71,10 @@
 
 
 			</div>
-			<div class="card-body" *ngIf="regTemplate && (regTemplate.body.fees>=balance) && (regTemplate.body.nextPeriod && regTemplate.body.nextPeriod.period_name)" >
+			<div class="alert alert-info" role="alert" *ngIf="regTemplate.body.nextPeriod && regTemplate.body.nextPeriod.period_name">
+				<strong>Your registration for {{ regTemplate.body.nextLevel.academic_level }}-{{ regTemplate.body.nextLevel.semester }}</strong>
+			</div>
+			<!-- <div class="card-body" *ngIf="regTemplate && (regTemplate.body.fees>=balance) && (regTemplate.body.nextPeriod && regTemplate.body.nextPeriod.period_name) && (regModuleTemplate.length==1)" >
 				<h6>
 					Modules
 				</h6>
@@ -85,7 +91,6 @@
 						</tr>
 					</thead>
 					<tbody>
-
 						<tr  class="small" *ngFor="let item of regTemplate.body.module;let i = index" >
 							<td>{{ i+1 }}</td>
 							<td>
@@ -104,92 +109,58 @@
 
 				</div>
 
-				<!-- <div  class="small d-flex flex-row justify-content-between	" >
-					<p >
-						<span class="text-success">
-							Expected Balance: {{ regTemplate.body.fees|currency }}
-						</span>
-						<br>
-						<span [ngClass]="balance>regTemplate.body.fees?'text-danger':'text-success'">
-							Your Current Balance: {{ balance|currency  }}
-						</span>
-					</p>
+			</div> -->
+		</div>
+	</div>
+	<div class=" col-lg-6 mx-auto" *ngFor="let template of regModuleTemplate;let i = index">
+		<div class="card h-100">
+			<div class="card-body" *ngIf="regModuleTemplate && (regTemplate.body.fees>=balance) && (regTemplate.body.nextPeriod && regTemplate.body.nextPeriod.period_name) ">
+				<h6>
+					Modules
+				</h6>
+				<table class="table ">
+					<thead class="thead-light">
+						<tr class="small">
+							<th>#</th>
+							<th>
+								Module Code
+							</th>
+							<th>
+								Module Name
+							</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr class="small" *ngFor="let item of template[1];let i = index">
+							<td>{{ i+1 }}</td>
+							<td>
+								{{ item.module_code }}{{ item.module_unit_code }}
+							</td>
+							<td>
+								{{ item.module_name }}
+							</td>
+						</tr>
+					</tbody>
+				</table>
 
-				</div> -->
+			</div>
+			<div class="card-footer d-flex flex-row justify-content-end mt-3 ">
+				<button (click)="confirmRegistration(alert)" class="btn btn-primary ">
+					Register Now
+				</button>
+
 			</div>
 		</div>
 	</div>
-	<!-- <div class="col-lg-4 mx-auto order-0">
-		<div class="card">
-			<div class="card-body small">
-				<h6 class="mb-3">
-					Registration Details
-				</h6>
-				<table class=" table-full-width   " *ngIf="regTemplate">
-					<tr>
-						<td>
-							Last Active Period:
-						</td>
-						<td class="pl-3">
-							{{ auth.is_Authenticated().registration.period.period_name }}
-						</td>
-					</tr>
-					<tr>
-						<td>
-							Level:
-						</td>
-						<td class="pl-3">
-							{{ auth.is_Authenticated().registration.program.level }}
-						</td>
-					</tr>
-					<tr class="text-primary border-top">
-						<td>
-							Current Active Period:
-						</td>
-						<td class="pl-3">
-							{{ regTemplate.body.nextPeriod.period_name }}
-						</td>
-					</tr>
-					<tr class="text-primary">
-						<td>
-							Level:
-						</td>
-						<td class="pl-3">
-							{{ regTemplate.body.nextLevel.academic_level }}-{{ regTemplate.body.nextLevel.semester }}
-						</td>
-					</tr>
-					<tr class="border-top">
-						<td>
-							Required Balance:
-						</td>
-						<td class="pl-3" *ngIf="regTemplate">
-							{{ regTemplate.body.fees |currency }}
-						</td>
-					</tr>
-					<tr class="">
-						<td>
-							Current Balance:
-						</td>
-						<td class="pl-3">
-							{{ balance | currency}}
-						</td>
-					</tr>
-				</table>
-
-
-
-			</div>
-		</div>
-	</div> -->
 </div>
 <ng-template #alert let-modal>
 
-	<a  class="btn btn-link float-left text-danger mr-0" (click)="modal.dismiss('Cross click')" >
+	<a class="btn btn-link float-left text-danger mr-0" (click)="modal.dismiss('Cross click')">
 		x
 	</a>
 	<div class="modal-body text-center">
 
-		<div class="alert alert-warning text-center"  role="alert">
+		<div class="alert alert-warning text-center" role="alert">
 			{{ msg }}
 		</div>
 
