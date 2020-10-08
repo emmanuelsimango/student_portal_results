@@ -19,11 +19,17 @@
 					</span>
 				</h6>
 			</div>
-			<div class="card-body px-3 border-top">
+			<div class="card-body border-top">
+				<div class=" d-flex justify-content-center">
 
-				<a class="text-uppercase" [href]="auth.vleLink()"  rel="noopener noreferrer">Your VLE
+					<a class="btn btn-outline-light btn-link "  [href]="auth.vleLink()" >
+						<img src="assets/img/oem.png" style="max-height: 1.5rem;" class=" border-right  " />
+						Continue to CUT VLE</a>
+					</div>
+
+				<!-- <a class="text-uppercase" [href]="auth.vleLink()"  rel="noopener noreferrer">Your VLE
 					Account is
-					ready, click here to continue</a>
+					ready, click here to continue</a> -->
 
 
 			</div>
@@ -100,7 +106,7 @@
 	<div class=" col-lg-12">
 		<div class=" card card-chart mt-4">
 			<div class=" card-header">
-				<h4 class=" card-title">Modules</h4>
+				<h6 >Modules</h6>
 			</div>
 			<div class="card-body px-3 ">
 				<hr>
@@ -109,32 +115,33 @@
 
 						<tr class="small" *ngFor="let module of modules">
 							<td class="text-uppercase">
-								{{ module.module_code }}{{ module.module_unit_code }} - {{ module.module_name }}							</td>
-							<td>
+								{{ module.module_code }}{{ module.module_unit_code }} - {{ module.module_name }}
+							</td>
+							<!-- <td>
 								Posts[{{ module.posts.length }}]
-							</td>
-							<td class="cursor-pointer" (click)="open(reading_material,module)">
+							</td> -->
+							<!-- <td class="cursor-pointer" (click)="open(reading_material,module)">
 								Reading Material [{{ module.reading_materials.length }}]
-							</td>
+							</td> -->
 							<td class="cursor-pointer" (click)="open(exam_papers,module)">
 								Past Exam Papers [{{ module.past_exam_papers.length }}]
 							</td>
-							<td class="cursor-pointer" (click)="open(assignments,module)">
+							<!-- <td class="cursor-pointer" (click)="open(assignments,module)">
 								Assignments [{{ module.assignments.length }}]
-							</td>
-							<td class="cursor-pointer" (click)="open(course_work,module)">
+							</td> -->
+							<!-- <td class="cursor-pointer" (click)="open(course_work,module)">
 
 								CSWK
 
-							</td>
-							<td>
+							</td> -->
+							<!-- <td>
 								<span>
 
 									VLE <span class="badge badge-pill small"
 										[ngClass]="module.vle_status?'badge-success':'badge-danger'">
 										{{ module.vle_status?'active':'not active' }}</span>
 								</span>
-							</td>
+							</td> -->
 						</tr>
 
 					</tbody>
