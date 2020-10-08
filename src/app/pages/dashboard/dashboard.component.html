@@ -112,9 +112,14 @@
 						rel="noopener noreferrer"> Institutional Repository</a>
 				</h6>
 				<hr>
-				<a class="text-uppercase" *ngIf="student.vle && !student.registration.program.completed" [href]="auth.vleLink()"
-					rel="noopener noreferrer">CUT Virtual Learning Environment
-					is ready, click here to continue</a>
+				<div class="d-flex justify-content-center ">
+
+					<a class="btn btn-outline-light btn-link " *ngIf="student.vle && !student.registration.program.completed" [href]="auth.vleLink()"
+					rel="noopener noreferrer">
+					<img src="assets/img/oem.png" style="max-height: 1.5rem;" class=" border-right pr-2" />
+					Continue to CUT VLE</a>
+				</div>
+
 
 			</div>
 		</div>

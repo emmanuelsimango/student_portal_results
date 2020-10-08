@@ -38,8 +38,8 @@ export class ModuleService {
 	getRegistrationRequirements():Observable<RegistrationTemplate>{
 		return this._http.get<RegistrationTemplate>(`${this.serverDetails.studentServerDetails}/api/getNextLevelRegistrationRequirements/${this.auth.getAuth().reg_number}/${this.auth.getAuth().token}`);
 	}
-	confirmRegistration():Observable<any>{
-		return this._http.get<any>(`${this.serverDetails.studentServerDetails}/api/confirmRegistration/${this.auth.getAuth().reg_number}/${this.auth.getAuth().token}`)
+	confirmRegistration(choice):Observable<any>{
+		return this._http.get<any>(`${this.serverDetails.studentServerDetails}/api/confirmRegistration/${this.auth.getAuth().reg_number}/${this.auth.getAuth().token}/${choice}`)
 	}
 
 }

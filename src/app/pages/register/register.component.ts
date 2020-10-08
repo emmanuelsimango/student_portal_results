@@ -58,17 +58,20 @@ export class RegisterComponent implements OnInit {
 	ngOnInit(): void {
 	}
 
-	confirmRegistration(modal:NgbModal){
+	confirmRegistration(modal:NgbModal,template){
+
+		const choice = template[0];
 		this.loader.is_loading.next(true)
 		const balance = this.bursaryService.getBalance();
 		this.balance = balance
+
 		// if (this.balance > this.regTemplate.body.fees) {
 		// 	this.msg = "You have insufficient balance to register online";
 		// 	this.modalService.open(modal)
 		// 	this.loader.is_loading.next(false)
 		// 	return
 		// }
-		this.moduleService.confirmRegistration().subscribe(response=>{
+		this.moduleService.confirmRegistration(choice).subscribe(response=>{
 			if(response.body.error){
 				this.msg = response.body.message
 				this.modalService.open(modal)
