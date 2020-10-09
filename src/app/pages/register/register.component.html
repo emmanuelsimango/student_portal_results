@@ -116,10 +116,18 @@
 			</div> -->
 		</div>
 	</div>
-	<div class="col-12" *ngIf="regTemplate && regTemplate.body.nextPeriod && regTemplate.body.nextPeriod.period_name && (regModuleTemplate.length>1)">
-		<div class="alert alert-info small text-center" role="alert">
+	<div class="col-12" *ngIf="regTemplate && regTemplate.body.nextPeriod && regTemplate.body.nextPeriod.period_name && (regModuleTemplate.length>1) &&  (regTemplate.body.fees>=balance) ">
+		<div class="alert alert-warning small text-center" role="alert">
 
-				<p class="text-white h5 pb-0 mb-0">Your registration for {{ regTemplate.body.nextLevel.academic_level }}-{{ regTemplate.body.nextLevel.semester }} has the following options</p>
+				<p class="text-white h5 pb-0 mb-0">Registration  for level {{ regTemplate.body.nextLevel.academic_level }}-{{ regTemplate.body.nextLevel.semester }} has the following options, Kindly choose your preference</p>
+
+		</div>
+	</div>
+
+	<div class="col-12" *ngIf="regTemplate.body.module.length < 1 ">
+		<div class="alert alert-warning small text-center" role="alert">
+
+				<p class="text-white h5 pb-0 mb-0">Modules not ready, please contact system admin!!</p>
 
 		</div>
 	</div>
@@ -127,9 +135,14 @@
 	<div class="  mx-auto" [ngClass]="regModuleTemplate.length>1?'col-lg-6':'col-lg-12'"  *ngFor="let template of regModuleTemplate;let i = index">
 		<div class="card h-100"  *ngIf="regModuleTemplate && (regTemplate.body.fees>=balance) && (regTemplate.body.nextPeriod && regTemplate.body.nextPeriod.period_name) ">
 			<div class="card-body pb-0 mb-0">
-				<h6>
+				<h6 *ngIf="regModuleTemplate.length>1;else default" >
 					Option {{ i+1 }} : {{ template[1][0].registration_choice_name }}
 				</h6>
+				<ng-template #default>
+					<h6>
+						Modules
+					</h6>
+				</ng-template>
 				<table class="table pb-0 mb-0">
 					<thead class="thead-light">
 						<tr class="small">
@@ -156,7 +169,7 @@
 				</table>
 
 			</div>
-			<div class="card-footer d-flex flex-row justify-content-center p-1">
+			<div class="card-footer d-flex flex-row justify-content-start p-1">
 				<button (click)="confirmRegistration(alert,template)" class="btn btn-primary ">
 					Register Now
 				</button>
