@@ -1,5 +1,5 @@
 <div class=" row" *ngIf="modules.length>0;else no_modules">
-	<div class=" col-lg-4">
+	<div class=" col-lg-6">
 		<div class=" card card-chart mb-4">
 			<div class=" card-header">
 				<h5 class=" ">Modules Summary</h5>
@@ -22,10 +22,10 @@
 			<div class="card-body border-top">
 				<div class=" d-flex justify-content-center">
 
-					<a class="btn btn-outline-light btn-link "  [href]="auth.vleLink()" >
+					<a class="btn btn-outline-light btn-link " [href]="auth.vleLink()">
 						<img src="assets/img/oem.png" style="max-height: 1.5rem;" class=" border-right  " />
 						Continue to CUT VLE</a>
-					</div>
+				</div>
 
 				<!-- <a class="text-uppercase" [href]="auth.vleLink()"  rel="noopener noreferrer">Your VLE
 					Account is
@@ -35,45 +35,8 @@
 			</div>
 		</div>
 	</div>
-	<div class=" col-lg-4">
-		<div class=" card card-chart">
-			<div class=" card-header">
-				<h5 class=" ">Learning Summary</h5>
-				<h6 class=" card-title d-flex justify-content-between">
-					<span>
 
-						<i class=" tim-icons icon-paper text-danger-states"> </i>Total Reading Material:
-					</span>
-
-					<span class="font-weight-bold">({{ getReadingMaterialTotal() }})</span>
-				</h6>
-				<h6 class=" card-title d-flex justify-content-between">
-					<span>
-
-						<i class=" tim-icons icon-pencil text-success"> </i> Assignments:
-					</span>
-
-					<span class="font-weight-bold">
-						({{ getReadingAssignmentsTotal() }})</span>
-				</h6>
-				<h6 class=" card-title  d-flex justify-content-between">
-					<span>
-
-						<i class=" tim-icons icon-bag-16 text-success"> </i> Past Exam Papers:
-					</span>
-
-					<span class="font-weight-bold"> ({{ getReadingPapersTotal() }})</span>
-				</h6>
-			</div>
-			<div class="card-body px-3 ">
-
-				<!-- <a class="text-uppercase" href="http://" target="_blank" rel="noopener noreferrer">Your VLE Account is ready, click here to continue</a> -->
-
-
-			</div>
-		</div>
-	</div>
-	<div class=" col-lg-4">
+	<div class=" col-lg-6">
 		<div class=" card card-chart">
 			<div class=" card-header">
 				<h5 class=" ">Miscellenous Summary</h5>
@@ -85,14 +48,20 @@
 
 					<span class="font-weight-bold">({{ getPostTotal() }})</span>
 				</h6>
-				<!-- <h6 class=" card-title d-flex justify-content-between">
+				<span>
+
+					<i class=" tim-icons icon-bag-16 text-success"> </i> Past Exam Papers:
+				</span>
+
+				<span class="font-weight-bold"> ({{ getReadingPapersTotal() }})</span>
+				<h6 class=" card-title d-flex justify-content-between">
 					<span>
 
 						<i class=" tim-icons icon-notes text-success"> </i> VLE Active Modules:
 					</span>
 					 <span
 						class="font-weight-bold"> ({{ student.vle.classes_ready }})</span>
-				</h6> -->
+				</h6>
 			</div>
 			<div class="card-body px-3 border-top">
 
@@ -115,7 +84,7 @@
 
 						<tr class="small" *ngFor="let module of modules">
 							<td class="text-uppercase">
-								{{ module.module_code }}{{ module.module_unit_code }} - {{ module.module_name }}							</td>
+								{{ module.module_code }}{{ module.module_unit_code }} - {{ module.module_name }} </td>
 							<!-- <td>
 								Posts[{{ module.posts.length }}]
 							</td> -->
@@ -125,6 +94,7 @@
 							<td class="cursor-pointer" (click)="open(exam_papers,module)">
 								Past Exam Papers [{{ module.past_exam_papers.length }}]
 							</td>
+
 							<!-- <td class="cursor-pointer" (click)="open(assignments,module)">
 								Assignments [{{ module.assignments.length }}]
 							</td> -->
@@ -189,7 +159,7 @@
 						{{ material.document_size }}kb
 					</td>
 					<td>
-						<a class="" [href]="getFileURL(material)"  rel="noopener noreferrer">Download</a>
+						<a class="" [href]="getFileURL(material)" rel="noopener noreferrer">Download</a>
 					</td>
 				</tr>
 			</tbody>
@@ -341,7 +311,7 @@
 					<td>
 						{{ material.total_marks }}
 					</td>
-					<td >
+					<td>
 						{{ material.mark }}
 					</td>
 					<!-- <td class="text-center">
