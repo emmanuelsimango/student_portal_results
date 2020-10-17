@@ -8,6 +8,7 @@ export interface RegistrationTemplate {
 	"body": {
 		"open": boolean,
 		"fees": number,
+		"is_exempted":boolean,
 		"module": any,
 		"nextPeriod": Student_period,
 		"nextLevel": {

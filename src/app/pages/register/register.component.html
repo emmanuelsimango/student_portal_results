@@ -116,7 +116,7 @@
 			</div> -->
 		</div>
 	</div>
-	<div class="col-12" *ngIf="regTemplate && regTemplate.body.nextPeriod && regTemplate.body.nextPeriod.period_name && (regModuleTemplate.length>1) &&  (regTemplate.body.fees>=balance) ">
+	<div class="col-12" *ngIf="regTemplate && regTemplate.body.nextPeriod && regTemplate.body.nextPeriod.period_name && (regModuleTemplate.length>1) &&  (regTemplate.body.fees>=balance || regTemplate.body.is_exempted) ">
 		<div class="alert alert-warning small text-center" role="alert">
 
 				<p class="text-white h5 pb-0 mb-0">Registration  for level {{ regTemplate.body.nextLevel.academic_level }}-{{ regTemplate.body.nextLevel.semester }} has the following options, Kindly choose your preference</p>
@@ -133,7 +133,7 @@
 	</div>
 
 	<div class="  mx-auto" [ngClass]="regModuleTemplate.length>1?'col-lg-6':'col-lg-12'"  *ngFor="let template of regModuleTemplate;let i = index">
-		<div class="card h-100"  *ngIf="regModuleTemplate && (regTemplate.body.fees>=balance) && (regTemplate.body.nextPeriod && regTemplate.body.nextPeriod.period_name) ">
+		<div class="card h-100"  *ngIf="regModuleTemplate && (regTemplate.body.fees>=balance || regTemplate.body.is_exempted ) && (regTemplate.body.nextPeriod && regTemplate.body.nextPeriod.period_name) ">
 			<div class="card-body pb-0 mb-0">
 				<h6 *ngIf="regModuleTemplate.length>1;else default" >
 					Option {{ i+1 }} : {{ template[1][0].registration_choice_name }}
