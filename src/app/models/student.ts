@@ -1,6 +1,4 @@
-import { StudentPersonal } from './student-personal';
 import { StudentSettings } from './student-settings';
-import { StudentContact } from './student-contact';
 import { Profile } from './profile';
 import { Registration } from './registration';
 import { Student_account_status } from './student_account_status';
