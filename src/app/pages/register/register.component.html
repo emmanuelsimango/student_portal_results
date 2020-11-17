@@ -66,7 +66,7 @@
 							{{ balance | currency}}
 						</td> -->
 					</tr>
-					<tr class="" *ngIf="regTemplate && (regTemplate.body.fees<balance)  ">
+					<tr class="" *ngIf="regTemplate && (regTemplate.body.fees<balance && !regTemplate.body.is_exempted )  ">
 						<td class="py-1 text-danger font-weight-bold" colspan="2">
 							You are not allowed to register online, please update your fees payment
 						</td>
@@ -127,7 +127,7 @@
 	<div class="col-12" *ngIf="regTemplate.body.module.length < 1 ">
 		<div class="alert alert-warning small text-center" role="alert">
 
-				<p class="text-white h5 pb-0 mb-0">Modules not ready, please contact system admin!!</p>
+				<p class="text-white h5 pb-0 mb-0">Your registration course configuration are pending, please contact Registry Office on +263 67 2122203-5 Extension 1147!!</p>
 
 		</div>
 	</div>

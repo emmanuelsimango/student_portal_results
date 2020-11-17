@@ -50,8 +50,10 @@ export class DashboardComponent implements OnInit {
 				this.toast.error(response.body.message);
 			}else{
 				this.toast.success(response.body.message);
+				this.auth.refresh()
 			}
 			this.loader.is_loading.next(false)
+
 		},(error=>{
 			console.log(error)
 			this.loader.is_loading.next(false)
@@ -65,7 +67,7 @@ export class DashboardComponent implements OnInit {
 				window.location.href = this.serverDetails.logoutURL;
 			}
 			if (!response.body.open) {
-				this.msg = "Online Registration for this period is  not active!!"
+				this.msg = "Your registration minimum payment configuration are pending, please contact Bursary office on +263 67 2122203-5 Exension 1127"
 				this.modalService.open(modal)
 			}else if(response.body.open){
 				// const balance = this.bursary.getBalance();

@@ -29,25 +29,7 @@ export class BursaryService {
 		this.setBalance();
 	}
 
-	public updateBursary(student_id) {
-		const data = {
-			id: student_id
-		}
-		this.loader.is_loading.next(true);
-		const headers = new HttpHeaders({ 'content-type': 'application/json; charset=utf-8' });
-		this._http.post<serverData>(`${this.serverDetails.serverDetailsForApi}/statement.read.php`, data, { headers: headers }).subscribe(bursary => {
-			let currentStudent = this.auth.currentStudent()
-			// console.log(currentStudent.studentBursaryData)
-			currentStudent.studentBursaryData = bursary.records[0].studentBursaryData
-			// console.log(bursary.records[0].studentBursaryData)
-			// console.log(currentStudent.studentBursaryData)
-			// console.log(this.auth.currentStudent());
-			// console.log(currentStudent)
 
-			localStorage.setItem('currentStudent', JSON.stringify(currentStudent))
-			this.loader.is_loading.next(false);
-		});
-	}
 
 	public updateBursary2() {
 		const data: MyAuth = JSON.parse(localStorage.getItem('auth'))

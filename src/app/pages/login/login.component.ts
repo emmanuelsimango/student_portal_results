@@ -56,16 +56,7 @@ export class LoginComponent implements OnInit {
 
 
 
-		this.auth.login(this.reg_number, this.password)
-			.subscribe(data => {
-				this.router.navigate([this.returnUrl]);
-				this.loader.is_loading.next(false);
-			}, error => {
-				this.loader.is_loading.next(false);
-				console.log(error);
 
-				this.loginError = true
-			});
 	}
 
 

@@ -5,7 +5,6 @@ import { Router } from "@angular/router";
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService } from 'src/app/services/auth/auth-service.service';
 import { Student } from 'src/app/models/student';
-import { StudentPersonal } from 'src/app/models/student-personal';
 import { Profile } from 'src/app/models/profile';
 import { MyAuth } from 'src/app/models/auth';
 import { NoticeService } from 'src/app/services/notice.service';

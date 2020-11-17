@@ -1,20 +1,27 @@
 
 	<div class=" row">
 
-		<div class=" col-md-8">
+		<div class=" col-md-8 order-2">
 			<div class=" card">
 				<div class=" card-header d-flex flex-row justify-content-between align-items-center">
 					<!-- <span>
-						<label for="period">
+						<label for="period" *ngIf="studentPeriods && studentPeriods.length>0">
 							Period:
 						</label>
-						{{ studentResults.periodname }}
-					</span> -->
-					<h4 *ngIf="studentResults" class="card-title">{{studentResults.periodname}} </h4>
 
+					</span> -->
+					<!-- <h4 *ngIf="studentResults" class="card-title">{{studentResults.periodname}} </h4> -->
+					<h4 *ngIf="studentPeriods &&(studentResults && (studentResults.modules.length>0))" class="card-title">{{studentPeriods[0].period_name}} </h4>
+					<!-- <select disabled (change)="changeResultsPeriod(period.value)" #period name="period" id="period" *ngIf="studentPeriods && studentPeriods.length>0">
+						<option *ngFor="let period of studentPeriods" [value]="period.period_id" >
+							{{ period.academic_level }} -
+							{{ period.semester }}
+							{{ period.period_name }}
+						</option>
+					</select> -->
 
 				</div>
-				<div class=" card-body" *ngIf="studentResults">
+				<div class=" card-body" *ngIf="(studentResults && (studentResults.modules.length>0)); else message">
 					<div class=" ">
 						<table class=" table tablesorter" id="">
 							<thead class=" text-primary">
@@ -40,10 +47,16 @@
 						</table>
 					</div>
 				</div>
+				<ng-template #message>
+					<div class="card-body" *ngIf="!loading" >
+						<div class="alert alert-warning" role="alert" >
+							Results not available. For queries contact exams department on +263 67 2122203-5 Extension 1183
+						</div>
+					</div>
+				</ng-template>
 				<div *ngIf="studentResults" class="card-footer align-items-center">
-
-					<span>
-						Decision : {{ studentResults.humandecision }}
+					<span *ngIf="studentResults.humandecision" >
+						Decision : {{ studentResults.humandecision  }}
 					</span>
 					<span class=" ml-4"  *ngIf="studentResults.gpa">
 						GPA : {{ studentResults.gpa}}
@@ -59,19 +72,18 @@
 					<div class="card-body">
 						<p class="h4 text-center">
 							No results to display
-
-
 						</p>
-						<div class="alert alert-warning" role="alert">
-								NB: Result are available online for Seven(7) Days from the date of publishing
-						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-		<div class=" col-md-4">
+		<div class=" col-md-4 order-1">
 			<app-student-profile></app-student-profile>
 		</div>
-
+		<div class="col-12">
+			<div class="alert alert-warning" role="alert">
+				NB: Result are available online for Seven(7) Days from the date of publishing
+			</div>
+		</div>
 	</div>
 

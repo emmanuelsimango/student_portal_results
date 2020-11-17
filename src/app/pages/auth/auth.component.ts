@@ -17,7 +17,7 @@ export class AuthComponent implements OnInit {
 	constructor(
 		private route: ActivatedRoute,
 		private auth: AuthService,
-		private router:Router
+		private router: Router
 
 	) {
 	}
@@ -29,13 +29,19 @@ export class AuthComponent implements OnInit {
 		if (this.regNumber && this.token) {
 			// get return url from route parameters or default to '/'
 			this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/dashboard';
-			this.auth.auth(this.regNumber, this.token).subscribe(info=>{
+			this.auth.auth(this.regNumber, this.token).subscribe(info => {
 				if (info) {
 					console.log(this.returnUrl);
 
 					this.router.navigate([this.returnUrl]);
 				}
-			},(error=>{console.log(error)}))
+			}, (
+				error => {
+					console.log(error)
+					this.router.navigate(['error']);
+				}
+
+			))
 
 
 		}

@@ -78,6 +78,8 @@ export class RegisterComponent implements OnInit {
 				this.loader.is_loading.next(false)
 				return;
 			}else{
+				console.log(response);
+
 				this.msg = "You've Successfully Registered";
 
 			}

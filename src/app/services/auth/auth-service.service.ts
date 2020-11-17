@@ -26,6 +26,11 @@ export class AuthService {
 
 		return this._currentStudentSubject.value;
 	}
+
+	public refresh(){
+		window.location.href = this._serverDetails.portalURL;
+	}
+
 	public updateStudent(student:Student){
 		localStorage.setItem('currentStudent',JSON.stringify(student))
 	}
@@ -71,27 +76,27 @@ export class AuthService {
 		return this._http.get(`${this._serverDetails.studentServerDetails}/api/changeWifi/${this.getAuth().reg_number}/${this.getAuth().token}`);
 	}
 
-	public login(reg,pass){
-		const data = {
-			myid:reg.toUpperCase(),
-			mycode:pass
-		};
+	// public login(reg,pass){
+	// 	const data = {
+	// 		myid:reg.toUpperCase(),
+	// 		mycode:pass
+	// 	};
 
-		const headers = new HttpHeaders({'Content-Type':'application/json; charset=utf-8'});
-		return this._http.post<any>(`${this._serverDetails.serverDetailsForApi}/student.signin.php`,data,{headers:headers})
-		.pipe(map(student => {
-			// console.log(student)
-			// login successful if there's a jwt token in the response when using laravel passport
-			if (student) {
-				// store user details and jwt token in local storage to keep user logged in between page refreshes
-				localStorage.setItem('currentStudent', JSON.stringify(student.records[0]));
-				this._currentStudentSubject.next(student);
+	// 	const headers = new HttpHeaders({'Content-Type':'application/json; charset=utf-8'});
+	// 	return this._http.post<any>(`${this._serverDetails.serverDetailsForApi}/student.signin.php`,data,{headers:headers})
+	// 	.pipe(map(student => {
+	// 		// console.log(student)
+	// 		// login successful if there's a jwt token in the response when using laravel passport
+	// 		if (student) {
+	// 			// store user details and jwt token in local storage to keep user logged in between page refreshes
+	// 			localStorage.setItem('currentStudent', JSON.stringify(student.records[0]));
+	// 			this._currentStudentSubject.next(student);
 
-			}
+	// 		}
 
-			return student;
-		}));
-	}
+	// 		return student;
+	// 	}));
+	// }
 
 	public tokenValid(reg,token){
 		 this._http.get<any>(`${this._serverDetails.studentServerDetails}/api/validateToken/${reg}/${token}`).subscribe(response=>{
