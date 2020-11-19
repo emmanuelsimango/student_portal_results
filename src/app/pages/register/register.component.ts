@@ -79,14 +79,15 @@ export class RegisterComponent implements OnInit {
 				return;
 			}else{
 				console.log(response);
-
 				this.msg = "You've Successfully Registered";
 
 			}
+			console.log(response)
 			this.modalService.open(modal)
 			this.loader.is_loading.next(false)
 			window.location.href = this.serverDetails.serverIp;
 		},(error=>{
+			console.log(error);
 			this.loader.is_loading.next(false)
 		}));
 	}

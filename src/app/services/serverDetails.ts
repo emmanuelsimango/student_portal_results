@@ -6,8 +6,8 @@ export class ServerDetails {
 
 	public noticeImageStorage = `${this.noticeAPI}`;
 	// public serverIp = 'https://www.cut.ac.zw/portal';
-	public serverIp = 'http://172.16.50.109/portal';
-	// public serverIp = 'http://portal.local';
+	// public serverIp = 'http://172.16.50.109/portal';
+	public serverIp = 'http://portal.local';
 	public portalURL = `${this.serverIp}`;
 	public loginURL = `${this.portalURL}/index.php/portal/login`;
 	public logoutURL = `${this.portalURL}/index.php/cut_elearning/home/logout`;

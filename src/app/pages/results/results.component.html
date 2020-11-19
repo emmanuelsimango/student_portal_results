@@ -12,13 +12,13 @@
 					</span> -->
 					<!-- <h4 *ngIf="studentResults" class="card-title">{{studentResults.periodname}} </h4> -->
 					<h4 *ngIf="studentPeriods &&(studentResults && (studentResults.modules.length>0))" class="card-title">{{studentPeriods[0].period_name}} </h4>
-					<!-- <select disabled (change)="changeResultsPeriod(period.value)" #period name="period" id="period" *ngIf="studentPeriods && studentPeriods.length>0">
+					<select  (change)="changeResultsPeriod(period.value)" #period name="period" id="period" *ngIf="studentPeriods && studentPeriods.length>0">
 						<option *ngFor="let period of studentPeriods" [value]="period.period_id" >
 							{{ period.academic_level }} -
 							{{ period.semester }}
 							{{ period.period_name }}
 						</option>
-					</select> -->
+					</select>
 
 				</div>
 				<div class=" card-body" *ngIf="(studentResults && (studentResults.modules.length>0)); else message">
@@ -68,13 +68,13 @@
 						Degree Class: {{ studentResults.TheDegreeClass}}
 					</span>
 				</div>
-				<div *ngIf="!loading && !studentResults"  >
+				<!-- <div *ngIf="!loading && !studentResults"  >
 					<div class="card-body">
 						<p class="h4 text-center">
 							No results to display
 						</p>
 					</div>
-				</div>
+				</div> -->
 			</div>
 		</div>
 		<div class=" col-md-4 order-1">

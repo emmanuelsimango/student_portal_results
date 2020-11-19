@@ -81,7 +81,7 @@ export class DashboardComponent implements OnInit {
 			}
 
 			this.loader.is_loading.next(false);
-		},	(error=>{console.log(error); this.loader.is_loading.next(false)}));
+		},	(error=>{console.log(error); this.loader.is_loading.next(false),alert("Failed to complete request, please contact ICT Helpdesk, if problem persist")}));
 	}
 
 }
