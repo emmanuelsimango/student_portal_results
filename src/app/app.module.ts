@@ -18,6 +18,8 @@ import { LoginComponent } from './pages/login/login.component';
 import { NoticesComponent } from './pages/notices/notices.component';
 import { NoticeComponent } from './pages/notice/notice.component';
 import { RegisterComponent } from './pages/register/register.component';
+import { ErrorComponent } from './pages/auth/error/error.component';
+import { StudentDataComponent } from './pages/auth/error/student-data/student-data.component';
 
 
 @NgModule({
@@ -33,7 +35,7 @@ import { RegisterComponent } from './pages/register/register.component';
 		AppRoutingModule,
 		ToastrModule.forRoot()
 	],
-	declarations: [AppComponent, AdminLayoutComponent, AuthLayoutComponent, LoginComponent, NoticesComponent, NoticeComponent],
+	declarations: [AppComponent, AdminLayoutComponent, AuthLayoutComponent, LoginComponent, NoticesComponent, NoticeComponent, ErrorComponent, StudentDataComponent],
 	providers: [],
 	bootstrap: [AppComponent]
 })

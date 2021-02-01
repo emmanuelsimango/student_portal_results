@@ -112,8 +112,14 @@ export class AuthService {
 		console.log(`${this._serverDetails.studentServerDetails}/api/getHomeData/${reg}/${token}`)
 		return this._http.post<any>(`${this._serverDetails.studentServerDetails}/api/getHomeData/${reg}/${token}`,myAuth,{headers:headers})
 		.pipe(map(response => {
-			console.log(response)
+			console.log(response);
 			// login successful if there's a jwt token in the response when using laravel passport
+
+			// if (!response.has_data) {
+			// 	this.router.navigate(['error/not_registered']);
+			// 	return response;
+			// }
+
 			if (response.body) {
 				// store user details and jwt token in local storage to keep user logged in between page refreshes
 				localStorage.setItem('currentStudent', JSON.stringify(response.body));
