@@ -3,10 +3,10 @@ import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from
 import { AuthService } from './auth-service.service';
 import { Notice } from 'src/app/models/notice';
 import { Student } from 'src/app/models/student';
-import { Transaction } from 'src/app/models/Transaction';
 import { StudentPersonal } from 'src/app/models/student-personal';
 import { BursaryService } from './bursary.service';
 import { ToastrService } from 'ngx-toastr';
+import { Transaction } from 'src/app/models/transaction';
 
 @Injectable({
 	providedIn: 'root',

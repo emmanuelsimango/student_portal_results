@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { AuthService } from 'src/app/services/auth/auth-service.service';
 import { Student } from 'src/app/models/student';
-import { Transaction } from 'src/app/models/Transaction';
+
 import { BursaryService } from 'src/app/services/auth/bursary.service';
 import { Router } from '@angular/router';
 import { LoaderService } from 'src/app/services/loader.service';
