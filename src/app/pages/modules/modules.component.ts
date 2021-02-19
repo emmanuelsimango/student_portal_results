@@ -109,8 +109,8 @@ export class ModulesComponent implements OnInit {
 	}
 
 
-	getFileURL(material: ReadingMaterial) {
-		return `${this.serverDetails.portalURL}\\${material.path}\\${material.upload_name}`;
+	getFileURL(path) {
+		return `${this.serverDetails.past_exam_papers}/${path}`;
 	}
 	getReadingMaterialTotal(): number {
 		let total = 0;

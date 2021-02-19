@@ -222,13 +222,13 @@
 				<tr class="small"
 					*ngFor="let paper of selectedModule.past_exam_papers | slice: (pageP-1) * pageSize : (pageP-1) * pageSize + pageSize">
 					<td>
-						<!-- {{ paper }} -->
+						{{ paper.description }}
 					</td>
 					<td>
-						<!-- {{ material.document_size }}kb -->
+						{{ paper.document_size }}kb
 					</td>
 					<td>
-						<!-- <a class="" [href]="getFileURL(material)" target="_blank" rel="noopener noreferrer">Download</a> -->
+						<a class="badge badge-pill badge-primary" [href]="getFileURL(paper.document_path)" target="_blank" rel="noopener noreferrer">   Download</a>
 					</td>
 				</tr>
 			</tbody>
