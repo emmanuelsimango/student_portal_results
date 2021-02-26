@@ -17,7 +17,8 @@ export class RegisterComponent implements OnInit {
 
 	regTemplate:RegistrationTemplate;
 	msg:String;
-	balance:number
+	balance:number;
+	hasManyTemplates:boolean;
 	constructor(
 		private moduleService:ModuleService,
 		private bursaryService:BursaryService,
@@ -30,6 +31,10 @@ export class RegisterComponent implements OnInit {
 			const balance = this.bursaryService.getBalance();
 			this.balance = balance
 			this.regTemplate = response
+			console.log(this.regTemplate.body.module);
+			// this.convertObjectToIterable(this.regTemplate.body.module);
+			console.log(response);
+
 			this.loader.is_loading.next(false)
 
 		},(error=>{this.loader.is_loading.next(false)}));
@@ -38,18 +43,36 @@ export class RegisterComponent implements OnInit {
 	ngOnInit(): void {
 	}
 
-	confirmRegistration(modal:NgbModal){
+	objectLength(myObj):number{
+		return Object.keys(myObj).length
+	}
+
+	convertObjectToIterable(myObj){
+		const spaghettiProperties = Object.keys(myObj);
+
+		// Step 2. Create an empty array.
+		const neededArray = [];
+
+		// Step 3. Iterate throw all keys.
+		let i = 0;
+		for (let prop of spaghettiProperties ) {
+			neededArray.push(myObj[prop]);
+			// neededArray[i].['name'] = prop;
+
+			i++;
+		}
+		console.log(neededArray)
+	}
+
+	confirmRegistration(modal:NgbModal,choice){
 		this.loader.is_loading.next(true)
 		const balance = this.bursaryService.getBalance();
 		this.balance = balance
-		// if (this.balance > this.regTemplate.body.fees) {
-		// 	this.msg = "You have insufficient balance to register online";
-		// 	this.modalService.open(modal)
-		// 	this.loader.is_loading.next(false)
-		// 	return
-		// }
-		this.moduleService.confirmRegistration().subscribe(response=>{
-			if(response.body.error){
+
+		console.log(choice)
+		this.moduleService.confirmRegistration(choice).subscribe(response=>{
+			console.log(response)
+			if(response.body?.error){
 				this.msg = response.body.message
 				this.modalService.open(modal)
 				this.loader.is_loading.next(false)
@@ -62,7 +85,11 @@ export class RegisterComponent implements OnInit {
 			this.loader.is_loading.next(false)
 			window.location.href = this.serverDetails.serverIp;
 		},(error=>{
+			console.log(error)
+			this.msg = "Failed to register, please try again later!!"
+			this.modalService.open(modal)
 			this.loader.is_loading.next(false)
+			window.location.href = this.serverDetails.serverIp;
 		}));
 	}
 

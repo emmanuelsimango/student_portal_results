@@ -7,7 +7,8 @@ export interface RegistrationTemplate {
 	"body": {
 		"open": boolean,
 		"fees": number,
-		"module": [{
+		"is_exempted":{},
+		"module": [[{
 			"module_code": string,
 			"module_unit_code": number,
 			"module_id": number,
@@ -15,7 +16,7 @@ export interface RegistrationTemplate {
 			"is_optional": boolean,
             "has_selective": number,
             "registration_choice_id": number
-		}],
+		}]],
 		"nextPeriod": Student_period,
 		"nextLevel": {
 			"semester": number,

@@ -36,10 +36,37 @@ export class ModuleService {
 	}
 
 	getRegistrationRequirements():Observable<RegistrationTemplate>{
-		return this._http.get<RegistrationTemplate>(`${this.serverDetails.studentServerDetails}/api/getNextLevelRegistrationRequirements/${this.auth.getAuth().reg_number}/${this.auth.getAuth().token}`);
+		// console.log(`${this.serverDetails.studentServerDetails}/api/getNextLevelRegistrationRequirements/${this.auth.getAuth().reg_number}/${this.auth.getAuth().token}`)
+		return this._http.
+						get<RegistrationTemplate>(`${this.serverDetails.studentServerDetails}/api/getNextLevelRegistrationRequirements/${this.auth.getAuth().reg_number}/${this.auth.getAuth().token}`).
+							pipe(map(response=>{
+								console.log(response)
+								if(response.body.module){
+									response.body.module= this.convertObjectToIterable(response.body.module)
+								}
+								return response;
+							}));
 	}
-	confirmRegistration():Observable<any>{
-		return this._http.get<any>(`${this.serverDetails.studentServerDetails}/api/confirmRegistration/${this.auth.getAuth().reg_number}/${this.auth.getAuth().token}`)
+
+	convertObjectToIterable(myObj):any {
+		const spaghettiProperties = Object.keys(myObj);
+
+		// Step 2. Create an empty array.
+		const neededArray = [];
+
+		// Step 3. Iterate throw all keys.
+		let i = 0;
+		for (let prop of spaghettiProperties ) {
+			neededArray.push(myObj[prop]);
+			// neededArray[i].['name'] = prop;
+
+			i++;
+		}
+		return neededArray
+	}
+
+	confirmRegistration(choice):Observable<any>{
+		return this._http.get<any>(`${this.serverDetails.studentServerDetails}/api/confirmRegistration/${this.auth.getAuth().reg_number}/${this.auth.getAuth().token}/${choice}`)
 	}
 
 }

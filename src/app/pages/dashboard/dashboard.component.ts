@@ -60,7 +60,10 @@ export class DashboardComponent implements OnInit {
 
 	getNextRegistration(modal:NgbModal){
 		this.loader.is_loading.next(true)
+		// alert("pano	")
 		this.moduleService.getRegistrationRequirements().subscribe(response=>{
+			// console.log(response);
+
 			if (!response.valid) {
 				window.location.href = this.serverDetails.logoutURL;
 			}
@@ -68,18 +71,15 @@ export class DashboardComponent implements OnInit {
 				this.msg = "Online Registration for this period is  not active!!"
 				this.modalService.open(modal)
 			}else if(response.body.open){
-				// const balance = this.bursary.getBalance();
-				// if(balance>response.body.fees){
-				// 	this.msg = "You have insufficient funds!!";
-				// 	this.modalService.open(modal);
-				// 	this.loader.is_loading.next(false);
-				// 	return;
-				// }
 				this.router.navigate(['register'])
 			}
 
 			this.loader.is_loading.next(false);
-		},	(error=>{this.loader.is_loading.next(false)}));
+		},	(error=>{
+			console.log(error);
+
+			this.loader.is_loading.next(false)
+		}));
 	}
 
 }
