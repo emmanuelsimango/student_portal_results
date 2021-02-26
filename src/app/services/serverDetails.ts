@@ -1,7 +1,7 @@
 export class ServerDetails {
 
-	// public websiteContentUrl = `https://www.cut.ac.zw/cut-back/public`;
-	public websiteContentUrl = `http://cutback`;
+	public websiteContentUrl = `https://www.cut.ac.zw/cut-back/public`;
+	// public websiteContentUrl = `http://cutback`;
 	public noticeAPI = `${this.websiteContentUrl}/api`;
 
 	public noticeImageStorage = `${this.noticeAPI}`;

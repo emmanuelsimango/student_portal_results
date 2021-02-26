@@ -15,9 +15,9 @@
 			</div>
 			<div class="card-body d-flex flex-column px-3">
 				<div class="row" *ngIf="notices">
-					<div class="col-lg-11 cursor-pointer" *ngFor="let notice of notices" (click)="open(notice_yacho,notice)">
-						<div class="card d-flex flex-row news-card border">
-							<div class="d-flex flex-column justify-content-center align-items-center" style="max-width: 120px;min-width: 120px;">
+					<div class="col-lg-6 col-sm-12 cursor-pointer" *ngFor="let notice of notices" (click)="open(notice_yacho,notice)">
+						<div class="card d-flex flex-row flex-sm-column flex-md-row border">
+							<div class="d-flex flex-column justify-content-center align-items-center bg-warning text-white" style="max-width: 120px;min-width: 120px;">
 								<span>
 									{{ notice.created_at | date:'d' }}
 								</span>
@@ -29,15 +29,15 @@
 								</span>
 							</div>
 							<!-- <img class="card-img rounded-0 rounded-right" src="assets/img/Student service portal.jpg" style="max-width:10rem" alt=""> -->
-							<div class="card-body px-1 bg-light">
-								<h5 class="card-title">{{ notice.title }}</h5>
-								<p class="card-ext " [innerHTML]="(notice.description | slice:0:150 )">
+							<div class="card-body px-1">
+								<h5 class="">{{ notice.title }}</h5>
+								<p class="small " [innerHTML]="(notice.description | slice:0:130 )">
 
 								</p>
-								<button class="btn btn-link m-0">	Read More</button>
+
 								<hr class="mb-0 pb-0">
-								<a [href]="serverDetails.websiteContentUrl+'/'+ document.document.document_url" class="badge badge-pill badge-success" *ngFor="let document of notice.notice_documents" href="">
-									<i class="tim-icons icon-single-copy-04"></i>	{{ document.document.description }} ( <span class="small font-weight-light">	 {{ document.document.document_size }}kb </span>)
+								<a [href]="serverDetails.websiteContentUrl+'/'+ document.document.document_url" class="badge badge-pill badge-success" *ngFor="let document of notice.notice_documents">
+									<i class="tim-icons icon-single-copy-04"></i>	{{ document.document.description | slice: 0:30}} ( <span class="small font-weight-light">	 {{ document.document.document_size }}kb </span>)
 								</a>
 
 							</div>
@@ -46,11 +46,11 @@
 
 				</div>
 				<div class="row" *ngIf="!notices">
-					<ng-container *ngFor="let cate of noticeCategories">
+					<!-- <ng-container *ngFor="let cate of noticeCategories"> -->
 
-						<div class="col-lg-11 cursor-pointer" *ngFor="let notice of cate.notices"  (click)="open(notice_yacho,notice)" >
-							<div class="card d-flex flex-row news-card border">
-								<div class="d-flex flex-column justify-content-center align-items-center" style="max-width: 120px;min-width: 120px;">
+						<div class="col-lg-12 col-sm-12 cursor-pointer" *ngFor="let notice of allNotices "  (click)="open(notice_yacho,notice)" >
+							<div class="card d-flex flex-row flex-sm-column flex-md-row border">
+								<div class="d-flex flex-column justify-content-center align-items-center bg-warning text-white" style="max-width: 120px;min-width: 120px;">
 									<span>
 										{{ notice.created_at | date:'d' }}
 									</span>
@@ -62,20 +62,21 @@
 									</span>
 								</div>
 								<!-- <img class="card-img rounded-0 rounded-right" src="assets/img/Student service portal.jpg" style="max-width:10rem" alt=""> -->
-								<div class="card-body px-1 bg-light">
-									<h5 class="card-title">{{ notice.title }}</h5>
-									<p class="card-ext " [innerHTML]="(notice.description | slice:0:150)">
+								<div class="card-body px-1">
+									<!-- <h5 class="">{{ notice.title }}</h5> -->
+									<p class="small " [innerHTML]="(notice.description | slice:0:250 )">
+
 									</p>
-									<button class="btn btn-link m-0 m">	Read More</button>
-									<hr  class="mb-0 pb-0">
-									<a [href]="serverDetails.websiteContentUrl+'/'+ document.document.document_url" class="badge badge-pill badge-success" *ngFor="let document of notice.notice_documents" href="">
-										<i class="tim-icons icon-single-copy-04"></i>	{{ document.document.description }} ( <span class="small font-weight-light">	 {{ document.document.document_size }}kb </span>)
+
+									<hr class="mb-0 pb-0">
+									<a [href]="serverDetails.websiteContentUrl+'/'+ document.document.document_url" class="badge badge-pill badge-success" *ngFor="let document of notice.notice_documents">
+										<i class="tim-icons icon-single-copy-04"></i>	{{ document.document.description | slice: 0:30}} ( <span class="small font-weight-light">	 {{ document.document.document_size }}kb </span>)
 									</a>
 
 								</div>
 							</div>
 					</div>
-				</ng-container>
+				<!-- </ng-container> -->
 
 				</div>
 
