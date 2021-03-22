@@ -86,8 +86,8 @@ export class RegisterComponent implements OnInit {
 			window.location.href = this.serverDetails.serverIp;
 		},(error=>{
 			console.log(error)
-			this.msg = "Failed to register, please try again later!!"
-			this.modalService.open(modal)
+			// this.msg = "Failed to register, please try again later!!"
+			// this.modalService.open(modal)
 			this.loader.is_loading.next(false)
 			window.location.href = this.serverDetails.serverIp;
 		}));

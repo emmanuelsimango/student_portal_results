@@ -11,6 +11,7 @@ import { ModuleService } from 'src/app/services/moduleService.service';
 import { ServerDetails } from 'src/app/services/serverDetails';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';
+import { NoticeService } from "src/app/services/notice.service";
 
 @Component({
 	selector: "app-dashboard",
@@ -30,12 +31,16 @@ export class DashboardComponent implements OnInit {
 		public loader:LoaderService,
 		private moduleService:ModuleService,
 		private modalService: NgbModal,
-		private router:Router
+		private router:Router,
+		private noticeService:NoticeService
 
 	) {
 		this.student = this.auth.is_Authenticated();
 		this.statements = this.student.bursary.statements;
+		// this.noticeService.getStudentsNotice().subscribe(notice=>{
+		// 	console.log(notice);
 
+		// })
 	}
 
 	ngOnInit() {

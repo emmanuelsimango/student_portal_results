@@ -75,7 +75,8 @@
 				<hr>
 
 				{{ student.registration.program.programme_name }} - <span class="font-weight-bold"> {{ student.registration.program.attendance_type_name }} </span>
-
+				<hr>
+				<!-- <a href='https://www.paynow.co.zw/Payment/Link/?q=c2VhcmNoPWVtbWFudWVsc2ltYW5nbyU0MGdtYWlsLmNvbSZhbW91bnQ9MC4wMCZyZWZlcmVuY2U9Jmw9MA%3d%3d' target='_blank'><img src='https://www.paynow.co.zw/Content/Buttons/Medium_buttons/button_pay-now_medium.png' style='border:0' /></a> -->
 			</div>
 		</div>
 	</div>
@@ -140,7 +141,7 @@
 								<th class="pt-0 text-center">date</th>
 							</tr>
 						</thead>
-						<tbody>
+						<tbody *ngIf="student.notice">
 							<tr class="small" *ngFor="let notice of student.notice.slice(-3);let i= index">
 								<td colspan="3">
 									<a [href]="notice.link" >

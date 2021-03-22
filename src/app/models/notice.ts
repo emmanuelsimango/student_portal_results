@@ -3,5 +3,6 @@ export interface Notice {
 	body:string,
 	date:string,
 	link:string,
-	class: string
+	class: string,
+	certification_id:number
 }

@@ -20,4 +20,9 @@ export class NoticeService {
 	public getAll():Observable<MyNotice[]>{
 		return this._http.get<MyNotice[]>(`${this.serverDetail.noticeAPI}/notice/all`);
 	}
+
+	public getStudentsNotice():Observable<MyNotice[]>{
+		return this._http.get<MyNotice[]>(`${this.serverDetail.noticeAPI}/notice/studentPortal`);
+	}
+
 }

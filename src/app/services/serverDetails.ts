@@ -14,7 +14,7 @@ export class ServerDetails {
 	public vleLink = `${this.portalURL}/index.php/cut_elearning/api/loginToVitualLearning`;
 	public serverDetails = `${this.serverIp}/results/Procedures`;
 	// public past_exam_papers = `http://197.155.232.34/pastexam/`
-	public past_exam_papers = `http://10.20.40.14/pastexam/`
+	public past_exam_papers = `http://library.cut.ac.zw/pastexam/`
 
 	// public studentServerDetails = `${this.serverIp}/portal/index.php/cut_elearning`;
 	public studentServerDetails = `${this.serverIp}/index.php/cut_elearning`;
