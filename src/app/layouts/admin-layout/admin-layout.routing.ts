@@ -26,6 +26,6 @@ export const AdminLayoutRoutes: Routes = [
 	{ path: "notices", component: NoticesComponent },
 	{ path: "resetpin", component: ResetCardPinComponent },
 	{ path: "register", component: RegisterComponent },
-	{ path: 'payments', loadChildren: () => import('../admin-layout/payments/payments.module').then(m => m.PaymentsModule) },
+	{ path: 'payments', loadChildren: () => import('../../pages/payments/payments.module').then(m => m.PaymentsModule) },
 
 ];

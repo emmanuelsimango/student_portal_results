@@ -1,6 +1,6 @@
 <div class=" row">
 
-	<div class=" col-lg-4">
+	<div class=" col-lg-4 col-md-6 col-sm-12  mb-4">
 		<div class=" card card-chart">
 			<div class=" card-header bg-primary">
 				<h4 class="">Registration Records</h4>
@@ -60,7 +60,9 @@
 								</span>
 							</ng-template>
 						</span>
-						<a (click)="getNextRegistration(alert)" class="btn btn-round btn-warning  cursor-pointer text-white p-2 " *ngIf="!student.registration.program.completed;else completed">
+						<a (click)="getNextRegistration(alert)"
+							class="btn btn-round btn-warning  cursor-pointer text-white p-2 "
+							*ngIf="!student.registration.program.completed;else completed">
 							register now
 						</a>
 						<ng-template #completed>
@@ -74,96 +76,14 @@
 
 				<hr>
 
-				{{ student.registration.program.programme_name }} - <span class="font-weight-bold"> {{ student.registration.program.attendance_type_name }} </span>
+				{{ student.registration.program.programme_name }} - <span class="font-weight-bold"> {{
+					student.registration.program.attendance_type_name }} </span>
 				<hr>
 				<!-- <a href='https://www.paynow.co.zw/Payment/Link/?q=c2VhcmNoPWVtbWFudWVsc2ltYW5nbyU0MGdtYWlsLmNvbSZhbW91bnQ9MC4wMCZyZWZlcmVuY2U9Jmw9MA%3d%3d' target='_blank'><img src='https://www.paynow.co.zw/Content/Buttons/Medium_buttons/button_pay-now_medium.png' style='border:0' /></a> -->
 			</div>
 		</div>
 	</div>
-	<div class=" col-lg-4">
-		<div class=" card card-chart ">
-			<div class=" card-header bg-primary">
-				<h4 class="">Student Learning and Research</h4>
-			</div>
-			<div class="card-body px-3 ">
-				<h6 class=" card-title d-flex justify-content-between">
-					<span>
-						<i class=" tim-icons icon-globe-2 text-info"> </i> Status:
-					</span>
-					<span class="badge badge-pill"
-						[ngClass]="student.vle?'badge-success':'badge-danger'">{{ student.vle?'Active':'Not Active' }}</span>
-				</h6>
-				<h6 class=" card-title d-flex justify-content-between" *ngIf="student.vle">
-					<span class="">
-
-						<i class=" tim-icons icon-delivery-fast text-info"> </i> Classes Ready:
-					</span>
-					<span class="font-weight-bold"> ({{ student.vle.classes_ready }})</span>
-				</h6>
-				<h6 class=" card-title">
-					<i class=" tim-icons icon-single-copy-04 text-info"> </i> <a href="assets/files/CUT Student VLE User Manual.pdf"
-						rel="noopener noreferrer"> Download Virtual Classroom Guide: </a>
-				</h6>
-				<h6 class=" card-title">
-					<i class=" tim-icons icon-planet text-info"> </i> <a href="https://www.cut.ac.zw/cutlib/"
-						rel="noopener noreferrer"> CUT Library </a>
-				</h6>
-				<h6 class=" card-title">
-					<i class=" tim-icons icon-planet text-info"> </i> <a href="#"
-						rel="noopener noreferrer"> Institutional Repository</a>
-				</h6>
-				<hr>
-				<div class="d-flex justify-content-center ">
-
-					<a class="btn btn-outline-light btn-link " *ngIf="student.vle && !student.registration.program.completed" [href]="auth.vleLink()"
-					rel="noopener noreferrer">
-					<img src="assets/img/oem.png" style="max-height: 1.5rem;" class=" border-right pr-2" />
-					Continue to CUT VLE</a>
-				</div>
-
-
-
-			</div>
-		</div>
-	</div>
-	<div class=" col-lg-4 ">
-		<div class=" card">
-			<div class=" card-header bg-warning py-3">
-				<h4 class=" title d-inline">Newsroom/ Notice(s) </h4>
-				<i class=" tim-icons icon-bell-55 float-right text-lg-right"></i>
-			</div>
-			<div class=" card-body">
-				<div class="  ">
-					<table class=" table tablesorter" id="">
-						<thead class=" text-primary  pt-0">
-							<tr>
-								<th colspan=3 class="pt-0"></th>
-								<th class="pt-0 text-center">date</th>
-							</tr>
-						</thead>
-						<tbody *ngIf="student.notice">
-							<tr class="small" *ngFor="let notice of student.notice.slice(-3);let i= index">
-								<td colspan="3">
-									<a [href]="notice.link" >
-
-										{{ notice.body }}
-									</a>
-								</td>
-								<td class=" text-center">{{ notice.date  }}</td>
-							</tr>
-						</tbody>
-					</table>
-					<a routerLink="/notices" class="btn btn-outline-light btn-link float-right">
-						All Notices and News
-					</a>
-				</div>
-			</div>
-		</div>
-	</div>
-
-</div>
-<div class=" row">
-	<div class=" col-lg-6 col-md-12">
+	<div class=" col-lg-4 col-md-6 col-sm-12  mb-4">
 		<div class=" card card-tasks">
 			<div class=" card-header bg-warning py-3">
 				<h4 class=" title d-inline font-weight-bold ">Bursary </h4>
@@ -171,9 +91,22 @@
 
 			</div>
 			<div class=" card-body py-2">
+				<div class="d-flex justify-content-between">
+
+					<button routerLink="/bursary" class="btn btn-outline-light btn-link">
+						View Bursary
+					</button>
+					<button routerLink="/payments"
+						class="btn btn-outline-light btn-link  font-weight-bold  my-bold-font font-italic">
+						 paynow
+					</button>
+				</div>
+				<hr>
 				<h5 class="mb-2 d-flex justify-content-between pr-4">
 					<span>Current Balance: </span>
-					<span class="text-right ml-4" [ngClass]="bursary.getBalance()<1 ?'text-success': 'text-danger'"> {{ bursary.getBalance() | currency }} </span></h5>
+					<span class="text-right ml-4" [ngClass]="bursary.getBalance()<1 ?'text-success': 'text-danger'"> {{
+						bursary.getBalance() | currency }} </span>
+				</h5>
 				<h5 class="d-flex justify-content-between pr-4">
 					<span class="">
 						Account Number:
@@ -186,20 +119,14 @@
 						Debits <span class="text-dark"> {{ 4000 | currency }} </span>
 					</span> -->
 				</h5>
-				<div class="d-flex justify-content-between">
-
-					<button routerLink="/bursary" class="btn btn-outline-light btn-link">
-						View Bursary
-					</button>
-					<!-- <button class="btn btn-outline-primary ">
-						Make Payment
-					</button> -->
-				</div>
-				<h6>Recent Transactions(3)</h6>
-				<div class="container mb-2 py-2">
+				<!-- <hr> -->
+			 <h6 class="border " routerLink="/payments" >
 
 
-					<table class="table ">
+
+					<img src="https://developers.paynow.co.zw/docs/assets/Paynow%20Badge-vector-hires%20DARK.svg">
+
+					<!-- <table class="table ">
 						<tbody>
 							<tr class="small" *ngFor="let statement of statements |slice :0:3">
 								<td class="text-left">
@@ -214,12 +141,66 @@
 							</tr>
 
 						</tbody>
-					</table>
-				</div>
+					</table> -->
+
+			</h6>
 			</div>
 		</div>
 	</div>
-	<div class=" col-lg-6">
+	<div class=" col-lg-4 col-md-12 col-sm-12 mb-4">
+		<div class=" card card-chart  ">
+			<div class=" card-header bg-primary">
+				<h4 class="">Student Learning and Research</h4>
+			</div>
+			<div class="card-body px-3 ">
+				<h6 class=" card-title d-flex justify-content-between">
+					<span>
+						<i class=" tim-icons icon-globe-2 text-info"> </i> Status:
+					</span>
+					<span class="badge badge-pill" [ngClass]="student.vle?'badge-success':'badge-danger'">{{
+						student.vle?'Active':'Not Active' }}</span>
+				</h6>
+				<h6 class=" card-title d-flex justify-content-between" *ngIf="student.vle">
+					<span class="">
+
+						<i class=" tim-icons icon-delivery-fast text-info"> </i> Classes Ready:
+					</span>
+					<span class="font-weight-bold"> ({{ student.vle.classes_ready }})</span>
+				</h6>
+				<h6 class=" card-title">
+					<i class=" tim-icons icon-single-copy-04 text-info"> </i> <a
+						href="assets/files/CUT Student VLE User Manual.pdf" rel="noopener noreferrer"> Download Virtual
+						Classroom Guide: </a>
+				</h6>
+				<h6 class=" card-title">
+					<i class=" tim-icons icon-planet text-info"> </i> <a href="https://www.cut.ac.zw/cutlib/"
+						rel="noopener noreferrer"> CUT Library </a>
+				</h6>
+				<h6 class=" card-title">
+					<i class=" tim-icons icon-planet text-info"> </i> <a href="#" rel="noopener noreferrer">
+						Institutional Repository</a>
+				</h6>
+				<hr>
+				<div class="d-flex justify-content-center ">
+
+					<a class="btn btn-outline-light btn-link "
+						*ngIf="student.vle && !student.registration.program.completed" [href]="auth.vleLink()"
+						rel="noopener noreferrer">
+						<img src="assets/img/oem.png" style="max-height: 1.5rem;" class=" border-right pr-2" />
+						Continue to CUT VLE</a>
+				</div>
+
+
+
+			</div>
+		</div>
+	</div>
+
+
+</div>
+<div class=" row">
+
+	<div class=" col-lg-6 mb-4">
 		<div class=" card card-chart">
 			<div class=" card-header bg-primary">
 				<h4 class=" ">Student Access Control</h4>
@@ -239,7 +220,8 @@
 						<i class=" tim-icons icon-badge text-success"> </i> Student ID :
 					</span>
 					<span class="badge badge-pill"
-						[ngClass]="student.accounts.student_id_card?'badge-success':'badge-danger'">{{ student.accounts.student_id_card?'Active':'Not Active' }}</span>
+						[ngClass]="student.accounts.student_id_card?'badge-success':'badge-danger'">{{
+						student.accounts.student_id_card?'Active':'Not Active' }}</span>
 
 				</h6>
 				<h6 class=" card-title  d-flex justify-content-between">
@@ -247,9 +229,44 @@
 						<i class=" tim-icons icon-bag-16 text-success"> </i> Canteen :
 					</span>
 					<span class="badge badge-pill"
-						[ngClass]="student.accounts.canteen?'badge-success':'badge-danger'">{{ student.accounts.canteen?'Active':'Not Active' }}</span>
+						[ngClass]="student.accounts.canteen?'badge-success':'badge-danger'">{{
+						student.accounts.canteen?'Active':'Not Active' }}</span>
 
 				</h6>
+			</div>
+		</div>
+	</div>
+	<div class=" col-lg-6 mb-4 ">
+		<div class=" card">
+			<div class=" card-header bg-warning py-3">
+				<h4 class=" title d-inline">Newsroom/ Notice(s) </h4>
+				<i class=" tim-icons icon-bell-55 float-right text-lg-right"></i>
+			</div>
+			<div class=" card-body">
+				<div class="  ">
+					<table class=" table tablesorter" id="">
+						<thead class=" text-primary  pt-0">
+							<tr>
+								<th colspan=3 class="pt-0"></th>
+								<th class="pt-0 text-center">date</th>
+							</tr>
+						</thead>
+						<tbody *ngIf="student.notice">
+							<tr class="small" *ngFor="let notice of student.notice.slice(-3);let i= index">
+								<td colspan="3">
+									<a [href]="notice.link">
+
+										{{ notice.body }}
+									</a>
+								</td>
+								<td class=" text-center">{{ notice.date }}</td>
+							</tr>
+						</tbody>
+					</table>
+					<a routerLink="/notices" class="btn btn-outline-light btn-link float-right">
+						All Notices and News
+					</a>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -257,7 +274,7 @@
 </div>
 <div class=" row">
 
-	<div class=" col-lg-4">
+	<div class=" col-lg-4 mb-4">
 		<div class=" card card-chart">
 			<div class=" card-header bg-primary">
 				<h4 class="">Student Financial Aid</h4>
@@ -294,7 +311,7 @@
 			</div>
 		</div>
 	</div>
-	<div class=" col-lg-4">
+	<div class=" col-lg-4 mb-4">
 		<div class=" card card-chart ">
 			<div class=" card-header bg-primary">
 				<h4 class="">Campus Life</h4>
@@ -306,7 +323,8 @@
 						<i class=" tim-icons icon-istanbul text-success"> </i> Campus Accomodation :
 					</span>
 
-					<span class="badge  badge-success small font-weight-light"> <a class="text-white" href="https://www.cut.ac.zw/hostel"> apply now</a></span>
+					<span class="badge  badge-success small font-weight-light"> <a class="text-white"
+							href="https://www.cut.ac.zw/hostel"> apply now</a></span>
 				</h6>
 
 
@@ -329,7 +347,7 @@
 			</div>
 		</div>
 	</div>
-	<div class=" col-lg-4">
+	<div class=" col-lg-4 mb-4">
 		<div class=" card card-chart">
 			<div class=" card-header bg-primary">
 				<h4 class=" ">Student Downloads </h4>
@@ -362,8 +380,8 @@
 						<i class=" tim-icons icon-calendar-60 text-success"> </i> VLE Manual :
 					</span>
 					<span class="">
-						<a href="assets/files/CUT Student VLE User Manual.pdf"
-							target="_blank" rel="noopener noreferrer">
+						<a href="assets/files/CUT Student VLE User Manual.pdf" target="_blank"
+							rel="noopener noreferrer">
 							Download
 						</a>
 					</span>
@@ -377,7 +395,7 @@
 
 <ng-template #alert let-modal>
 
-	<a  class="btn btn-link float-left text-danger mr-0" (click)="modal.dismiss('Cross click')" >
+	<a class="btn btn-link float-left text-danger mr-0" (click)="modal.dismiss('Cross click')">
 		x
 	</a>
 	<div class="modal-body">

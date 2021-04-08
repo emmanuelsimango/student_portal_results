@@ -3,11 +3,11 @@ export class ServerDetails {
 	public websiteContentUrl = `https://www.cut.ac.zw/cut-back/public`;
 	// public websiteContentUrl = `http://cutback`;
 	public noticeAPI = `${this.websiteContentUrl}/api`;
-
+	public paynowUrl = `http://library.cut.ac.zw:443/api/v1/`;
 	public noticeImageStorage = `${this.noticeAPI}`;
-	public serverIp = 'https://www.cut.ac.zw/portal';
+	// public serverIp = 'https://www.cut.ac.zw/portal';
 	// public serverIp = 'http://172.16.50.109/portal';
-	// public serverIp = 'http://localhost/portal';
+	public serverIp = 'http://localhost/portal';
 	public portalURL = `${this.serverIp}`;
 	public loginURL = `${this.portalURL}/index.php/portal/login`;
 	public logoutURL = `${this.portalURL}/index.php/cut_elearning/home/logout`;
