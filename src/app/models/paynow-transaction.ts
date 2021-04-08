@@ -1,0 +1,15 @@
+export interface PaynowTransaction {
+	id: number,
+	reg_number: string,
+	first_name: string,
+	surname: string,
+	payment_code: number,
+	payment_description: string,
+	status: string,
+	confirmed:string,
+	pollurl: string,
+	browserurl: string,
+	hash: string,
+	updated_at: string,
+	created_at: string,
+}
