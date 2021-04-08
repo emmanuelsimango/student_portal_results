@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { Observable } from "rxjs";
 import { CartItem } from "../models/cart-item";
 import { PaynowRequest } from "../models/paynow-request";
 import { PaynowTransaction } from "../models/paynow-transaction";
@@ -41,7 +42,17 @@ export class PaynowServiceService {
 				cart: cartItems,
 			};
 
-			return this._http.post<PaynowTransaction>(`${this.paynowServiceUrl}/res`,data,this.httpOptions);
+			return this._http.post<PaynowTransaction>(`${this.paynowServiceUrl}/paynow`,data,this.httpOptions);
 		}
+	}
+
+	/**
+	 * getTransactions
+	 */
+	public getTransactions(): Observable<PaynowTransaction>{
+		const data = {
+			reg_number:this.auth.getAuth().reg_number
+		};
+		return this._http.post<PaynowTransaction>(`${this.paynowServiceUrl}/paynow/student`,data,this.httpOptions);
 	}
 }

@@ -15,7 +15,7 @@ export class PaymentsComponent implements OnInit {
 
 	model: Payment = {
 		amount: 0.0,
-		email: null,
+		email: "example@gmail.com",
 	};
 	error_msg: string
 
