@@ -6,6 +6,7 @@ import { StudentPersonal } from 'src/app/models/student-personal';
 import { ResultsService } from 'src/app/services/results.service';
 import { LoaderService } from 'src/app/services/loader.service';
 import { ToastrService } from 'ngx-toastr';
+import { Period } from "src/app/models/period";
 
 @Component({
 	selector: "app-results",
@@ -16,7 +17,9 @@ export class ResultsComponent implements OnInit {
 	student: Student;
 	studentResults: Result;
 	resultOveral: Result;
-	loading: Boolean = true
+	loading: Boolean = true;
+	periods:Period[];
+	selected_period:Period;
 	constructor(
 		private auth: AuthService,
 		private result: ResultsService,
@@ -43,10 +46,44 @@ export class ResultsComponent implements OnInit {
 			this.loading = false
 		}));
 
+		this.auth.getResultsPeriods().subscribe(periods=>{
+			this.periods = periods;
+			// if(periods.length>0){
+				console.log(periods);
+
+				this.getResults(periods[0].period_id)
+			// }
+		});
 	}
 
 	ngOnInit() {
 
+
+	}
+
+
+
+	getResults(period){
+		console.log(period);
+
+		this.loaderService.is_loading.next(true)
+		this.result.getResults(period).subscribe(result => {
+			console.log(result);
+
+			if (!result.error) {
+				this.studentResults = result
+			} else {
+				this.toast.error(result.message)
+			}
+
+			this.loaderService.is_loading.next(false)
+			this.loading = false
+
+
+		},(error=>{
+			this.loaderService.is_loading.next(false)
+			this.loading = false
+		}));
 
 	}
 }

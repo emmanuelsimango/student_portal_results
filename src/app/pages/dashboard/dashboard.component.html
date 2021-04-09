@@ -76,7 +76,7 @@
 
 				{{ student.registration.program.programme_name }} - <span class="font-weight-bold"> {{ student.registration.program.attendance_type_name }} </span>
 				<hr>
-				<a href="https://www.cut.ac.zw/hostel" class="btn btn-outline-light btn-link float-right">
+				<a *ngIf="canGetAccomodation()" href="https://www.cut.ac.zw/hostel" class="btn btn-outline-light btn-link float-right">
 					Apply for Accomodation
 				</a>
 				<!-- <a href='https://www.paynow.co.zw/Payment/Link/?q=c2VhcmNoPWVtbWFudWVsc2ltYW5nbyU0MGdtYWlsLmNvbSZhbW91bnQ9MC4wMCZyZWZlcmVuY2U9Jmw9MA%3d%3d' target='_blank'><img src='https://www.paynow.co.zw/Content/Buttons/Medium_buttons/button_pay-now_medium.png' style='border:0' /></a> -->
@@ -206,7 +206,7 @@
 						<tbody>
 							<tr class="small" *ngFor="let statement of statements |slice :0:3">
 								<td class="text-left">
-									{{ statement.transaction_date | date }}
+									{{ statement.transaction_date }}
 								</td>
 								<td>
 									{{ statement.transaction_description }}

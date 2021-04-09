@@ -1,78 +1,93 @@
+<div class="row">
+	<div class="col-md-4">
+		<app-student-profile></app-student-profile>
+	</div>
 
-	<div class=" row">
-		<div class=" col-md-4">
-			<app-student-profile></app-student-profile>
-		</div>
-
-		<div class=" col-md-8">
-			<div class=" card">
-				<div class=" card-header d-flex flex-row justify-content-between align-items-center">
-					<!-- <span>
+	<div class="col-md-8">
+		<div class="card">
+			<div
+				class="card-header d-flex flex-row justify-content-between align-items-center"
+			>
+				<!-- <span>
 						<label for="period">
 							Period:
 						</label>
 						{{ studentResults.periodname }}
 					</span> -->
-					<h4 *ngIf="studentResults" class="card-title">{{studentResults.periodname}} </h4>
-
-
+				<div class="form-group">
+					<label for="period_id">Period</label>
+					<select *ngIf="periods"
+						class="form-control"
+						name="period_id"
+						id="period_id"
+						#period
+						[(ngModel)]="selected_period"
+						(change)="getResults(period.value)"
+					>
+						<option [value]="period.period_id" *ngFor="let period of periods" selected  >
+							{{ period.period_name }}
+						</option>
+					</select>
 				</div>
-				<div class=" card-body" *ngIf="studentResults">
-					<div class=" ">
-						<table class=" table tablesorter" id="">
-							<thead class=" text-primary">
-								<tr>
-									<th>Code</th>
-									<th>Module Name</th>
-									<th class="text-center">Mark</th>
-									<th class="text-center">GPE</th>
-									<th class="text-center">Credits</th>
-									<th class=" text-center">Grade</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr *ngFor="let module of studentResults.modules">
-									<td>{{module.modulecode}}</td>
-									<td>{{module.modulename}}</td>
-									<td class="text-center">{{module.mark}}</td>
-									<td class="text-center">{{module.class}}</td>
-									<td class="text-center">{{module.CreditsEarned}}</td>
-									<td class=" text-center">{{module.decision}}</td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
+
+				<h4 *ngIf="studentResults" class="card-title">
+					{{ studentResults.periodname }}
+				</h4>
+			</div>
+			<div class="card-body" *ngIf="studentResults">
+				<div class=" ">
+					<table class="table tablesorter" id="">
+						<thead class="text-primary">
+							<tr>
+								<th>Code</th>
+								<th>Module Name</th>
+								<th class="text-center">Mark</th>
+								<th class="text-center">GPE</th>
+								<th class="text-center">Credits</th>
+								<th class="text-center">Grade</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr *ngFor="let module of studentResults.modules">
+								<td>{{ module.modulecode }}</td>
+								<td>{{ module.modulename }}</td>
+								<td class="text-center">{{ module.mark }}</td>
+								<td class="text-center">{{ module.class }}</td>
+								<td class="text-center">
+									{{ module.CreditsEarned }}
+								</td>
+								<td class="text-center">
+									{{ module.decision }}
+								</td>
+							</tr>
+						</tbody>
+					</table>
 				</div>
-				<div *ngIf="studentResults" class="card-footer align-items-center">
-
-					<span>
-						Decision : {{ studentResults.humandecision }}
-					</span>
-					<span class=" ml-4"  *ngIf="studentResults.gpa">
-						GPA : {{ studentResults.gpa}}
-					</span>
-					<span class="badge badge-danger mx-4"  *ngIf="studentResults.suppressionmsg">
-						 {{ studentResults.suppressionmsg}}
-					</span>
-					<span class=" mx-4"  *ngIf="studentResults.TheDegreeClass">
-						Degree Class: {{ studentResults.TheDegreeClass}}
-					</span>
-				</div>
-				<div *ngIf="!loading && !studentResults"  >
-					<div class="card-body">
-						<p class="h4 text-center">
-							No results to display
-
-
-						</p>
-						<div class="alert alert-warning" role="alert">
-								NB: Result are available online for Seven(7) Days from the date of publishing
-						</div>
+			</div>
+			<div *ngIf="studentResults" class="card-footer align-items-center">
+				<span> Decision : {{ studentResults.humandecision }} </span>
+				<span class="ml-4" *ngIf="studentResults.gpa">
+					GPA : {{ studentResults.gpa }}
+				</span>
+				<span
+					class="badge badge-danger mx-4"
+					*ngIf="studentResults.suppressionmsg"
+				>
+					{{ studentResults.suppressionmsg }}
+				</span>
+				<span class="mx-4" *ngIf="studentResults.TheDegreeClass">
+					Degree Class: {{ studentResults.TheDegreeClass }}
+				</span>
+			</div>
+			<div *ngIf="!loading && !studentResults">
+				<div class="card-body">
+					<p class="h4 text-center">No results to display</p>
+					<div class="alert alert-warning" role="alert">
+						NB: Result are available online for Seven(7) Days from
+						the date of publishing
 					</div>
 				</div>
 			</div>
 		</div>
-
-
 	</div>
-
+</div>
