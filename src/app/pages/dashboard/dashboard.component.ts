@@ -87,4 +87,8 @@ export class DashboardComponent implements OnInit {
 		}));
 	}
 
+	canGetAccomodation():boolean{
+		return this.student.registration.program.level == "1.1";
+	}
+
 }

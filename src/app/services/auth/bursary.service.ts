@@ -90,7 +90,7 @@ export class BursaryService {
 		if (statement) {
 			let credit: number = 0;
 			let debit: number = 0;
-			console.log(statement);
+			// console.log(statement);
 
 			statement.statements.forEach(sta => {
 				credit += parseFloat(sta.credit.toString());

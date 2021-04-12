@@ -7,6 +7,7 @@ import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { Notice } from 'src/app/models/notice';
 import { MyAuth } from 'src/app/models/auth';
+import { Period } from 'src/app/models/period';
 
 @Injectable({
 	providedIn: 'root'
@@ -47,6 +48,8 @@ export class AuthService {
 	// 		return response.body;
 	// 	}));
 	// }
+
+
 	public studentSubject():BehaviorSubject< Student>{
 		return this._currentStudentSubject
 	}
@@ -70,6 +73,22 @@ export class AuthService {
 	public activateWifi():Observable<any>{
 		return this._http.get(`${this._serverDetails.studentServerDetails}/api/changeWifi/${this.getAuth().reg_number}/${this.getAuth().token}`);
 	}
+
+
+	/**
+	 * getResultsPeriods
+	 */
+	public getResultsPeriods():Observable<Period[]> {
+		return this._http.get<any>(`${this._serverDetails.studentServerDetails}/api/getResultPeriods/${this.getAuth().reg_number}/${this.getAuth().token}`)
+			.pipe(
+				map(result=>{
+				if (result.body) {
+					return result.body
+				}
+			})
+		);
+	}
+
 
 	public login(reg,pass){
 		const data = {

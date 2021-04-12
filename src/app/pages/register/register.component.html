@@ -73,7 +73,9 @@
 			</div>
 			<div class="card-body"
 				*ngIf="regTemplate && (regTemplate.body.fees>=balance) && (regTemplate.body.nextPeriod && regTemplate.body.nextPeriod.period_name) || (regTemplate && regTemplate.body.is_exempted)">
-
+				<div class="alert alert-primary text-center" *ngIf="regTemplate.body.module.length==0" >
+					Registration template not found, contact students records on +263672129435
+				</div>
 				<ng-container *ngIf="regTemplate.body.module.length==1;else multi_template">
 					<div class="col-sm-12">
 						<h6>
