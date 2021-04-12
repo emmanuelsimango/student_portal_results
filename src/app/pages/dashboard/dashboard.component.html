@@ -1,12 +1,12 @@
 <div class=" row">
 
-	<div class=" col-lg-4 col-md-6 col-sm-12  mb-4">
+	<div class="mb-4  col-lg-4 col-md-6 col-sm-12">
 		<div class=" card card-chart">
 			<div class=" card-header bg-primary">
 				<h4 class="">Registration Records</h4>
 			</div>
-			<div class="card-body px-3">
-				<h6 class=" card-title d-flex justify-content-between ">
+			<div class="px-3 card-body">
+				<h6 class=" card-title d-flex justify-content-between">
 					<span>
 						<i class=" tim-icons icon-book-bookmark text-danger-states"> </i>
 						<span *ngIf="student.registration.modules.length<1;else activeP">
@@ -61,7 +61,7 @@
 							</ng-template>
 						</span>
 						<a (click)="getNextRegistration(alert)"
-							class="btn btn-round btn-warning  cursor-pointer text-white p-2 "
+							class="p-2 text-white cursor-pointer btn btn-round btn-warning "
 							*ngIf="!student.registration.program.completed;else completed">
 							register now
 						</a>
@@ -83,35 +83,35 @@
 			</div>
 		</div>
 	</div>
-	<div class=" col-lg-4 col-md-6 col-sm-12  mb-4">
+	<div class="mb-4  col-lg-4 col-md-6 col-sm-12">
 		<div class=" card card-tasks">
-			<div class=" card-header bg-warning py-3">
-				<h4 class=" title d-inline font-weight-bold ">Bursary </h4>
-				<i class=" tim-icons icon-money-coins float-right text-lg-right"></i>
+			<div class="py-3  card-header bg-warning">
+				<h4 class=" title d-inline font-weight-bold">Bursary </h4>
+				<i class="float-right  tim-icons icon-money-coins text-lg-right"></i>
 
 			</div>
-			<div class=" card-body py-2">
+			<div class="py-2  card-body">
 				<div class="d-flex justify-content-between">
 
 					<button routerLink="/bursary" class="btn btn-outline-light btn-link">
 						View Bursary
 					</button>
 					<button routerLink="/payments"
-						class="btn btn-outline-light btn-link  font-weight-bold  my-bold-font font-italic">
-						 paynow
+						class="btn btn-outline-light btn-link font-weight-bold my-bold-font font-italic">
+						 make payment
 					</button>
 				</div>
 				<hr>
-				<h5 class="mb-2 d-flex justify-content-between pr-4">
+				<h5 class="pr-4 mb-2 d-flex justify-content-between">
 					<span>Current Balance: </span>
-					<span class="text-right ml-4" [ngClass]="bursary.getBalance()<1 ?'text-success': 'text-danger'"> {{
+					<span class="ml-4 text-right" [ngClass]="bursary.getBalance()<1 ?'text-success': 'text-danger'"> {{
 						bursary.getBalance() | currency }} </span>
 				</h5>
-				<h5 class="d-flex justify-content-between pr-4">
+				<h5 class="pr-4 d-flex justify-content-between">
 					<span class="">
 						Account Number:
 					</span>
-					<span class=" ml-4"> {{ student.bursary.pastel_account }} </span>
+					<span class="ml-4 "> {{ student.bursary.pastel_account }} </span>
 					<!-- <span class="text-success">
 						Credits <span class="text-dark">{{ 6400 | currency }}</span>
 					</span>
@@ -147,12 +147,12 @@
 			</div>
 		</div>
 	</div>
-	<div class=" col-lg-4 col-md-12 col-sm-12 mb-4">
-		<div class=" card card-chart  ">
+	<div class="mb-4  col-lg-4 col-md-12 col-sm-12">
+		<div class=" card card-chart">
 			<div class=" card-header bg-primary">
 				<h4 class="">Student Learning and Research</h4>
 			</div>
-			<div class="card-body px-3 ">
+			<div class="px-3 card-body ">
 				<h6 class=" card-title d-flex justify-content-between">
 					<span>
 						<i class=" tim-icons icon-globe-2 text-info"> </i> Status:
@@ -186,7 +186,7 @@
 					<a class="btn btn-outline-light btn-link "
 						*ngIf="student.vle && !student.registration.program.completed" [href]="auth.vleLink()"
 						rel="noopener noreferrer">
-						<img src="assets/img/oem.png" style="max-height: 1.5rem;" class=" border-right pr-2" />
+						<img src="assets/img/oem.png" style="max-height: 1.5rem;" class="pr-2  border-right" />
 						Continue to CUT VLE</a>
 				</div>
 
@@ -200,22 +200,22 @@
 </div>
 <div class=" row">
 
-	<div class=" col-lg-6 mb-4">
+	<div class="mb-4  col-lg-6">
 		<div class=" card card-chart">
 			<div class=" card-header bg-primary">
-				<h4 class=" ">Student Access Control</h4>
+				<h4 class="">Student Access Control</h4>
 			</div>
-			<div class=" card-body px-3">
-				<!-- <h6 class=" card-title  d-flex justify-content-between">
+			<div class="px-3  card-body">
+				<!-- <h6 class=" card-title d-flex justify-content-between">
 					<span>
 						<i class=" tim-icons icon-wifi text-success"> </i> WiFi :
 					</span>
 					<span class="badge badge-pill"
 						[ngClass]="student.accounts.wifi?'badge-success':'badge-danger'">{{ student.accounts.wifi?'Active':'Not Active' }}
-						<a class="badge badge-primary badge-pill cursor-pointer" [hidden]="student.accounts.wifi" (click)="activateWifi()" >activate</a>
+						<a class="cursor-pointer badge badge-primary badge-pill" [hidden]="student.accounts.wifi" (click)="activateWifi()" >activate</a>
 					</span>
 				</h6> -->
-				<h6 class=" card-title  d-flex justify-content-between">
+				<h6 class=" card-title d-flex justify-content-between">
 					<span>
 						<i class=" tim-icons icon-badge text-success"> </i> Student ID :
 					</span>
@@ -224,7 +224,7 @@
 						student.accounts.student_id_card?'Active':'Not Active' }}</span>
 
 				</h6>
-				<h6 class=" card-title  d-flex justify-content-between">
+				<h6 class=" card-title d-flex justify-content-between">
 					<span>
 						<i class=" tim-icons icon-bag-16 text-success"> </i> Canteen :
 					</span>
@@ -236,16 +236,16 @@
 			</div>
 		</div>
 	</div>
-	<div class=" col-lg-6 mb-4 ">
+	<div class="mb-4  col-lg-6">
 		<div class=" card">
-			<div class=" card-header bg-warning py-3">
+			<div class="py-3  card-header bg-warning">
 				<h4 class=" title d-inline">Newsroom/ Notice(s) </h4>
-				<i class=" tim-icons icon-bell-55 float-right text-lg-right"></i>
+				<i class="float-right  tim-icons icon-bell-55 text-lg-right"></i>
 			</div>
 			<div class=" card-body">
-				<div class="  ">
-					<table class=" table tablesorter" id="">
-						<thead class=" text-primary  pt-0">
+				<div class="">
+					<table class="table  tablesorter" id="">
+						<thead class="pt-0  text-primary">
 							<tr>
 								<th colspan=3 class="pt-0"></th>
 								<th class="pt-0 text-center">date</th>
@@ -259,11 +259,11 @@
 										{{ notice.body }}
 									</a>
 								</td>
-								<td class=" text-center">{{ notice.date }}</td>
+								<td class="text-center ">{{ notice.date }}</td>
 							</tr>
 						</tbody>
 					</table>
-					<a routerLink="/notices" class="btn btn-outline-light btn-link float-right">
+					<a routerLink="/notices" class="float-right btn btn-outline-light btn-link">
 						All Notices and News
 					</a>
 				</div>
@@ -274,13 +274,13 @@
 </div>
 <div class=" row">
 
-	<div class=" col-lg-4 mb-4">
+	<div class="mb-4  col-lg-4">
 		<div class=" card card-chart">
 			<div class=" card-header bg-primary">
 				<h4 class="">Student Financial Aid</h4>
 			</div>
-			<div class="card-body px-3">
-				<h6 class=" card-title d-flex justify-content-between ">
+			<div class="px-3 card-body">
+				<h6 class=" card-title d-flex justify-content-between">
 					<span>
 						<i class=" tim-icons icon-coins text-danger-states"> </i>
 						Government loan
@@ -293,7 +293,7 @@
 					</span>
 
 				</h6>
-				<h6 class=" card-title d-flex justify-content-between ">
+				<h6 class=" card-title d-flex justify-content-between">
 					<span>
 						<i class=" tim-icons icon-coins text-danger-states"> </i>
 						CBZ Bank loan
@@ -311,24 +311,24 @@
 			</div>
 		</div>
 	</div>
-	<div class=" col-lg-4 mb-4">
-		<div class=" card card-chart ">
+	<div class="mb-4  col-lg-4">
+		<div class=" card card-chart">
 			<div class=" card-header bg-primary">
 				<h4 class="">Campus Life</h4>
 			</div>
-			<div class="card-body px-3 ">
+			<div class="px-3 card-body ">
 				<h6 class=" card-title d-flex justify-content-between">
 					<span>
 
 						<i class=" tim-icons icon-istanbul text-success"> </i> Campus Accomodation :
 					</span>
 
-					<span class="badge  badge-success small font-weight-light"> <a class="text-white"
+					<span class="badge badge-success small font-weight-light"> <a class="text-white"
 							href="https://www.cut.ac.zw/hostel"> apply now</a></span>
 				</h6>
 
 
-				<h6 class=" card-title d-flex justify-content-between ">
+				<h6 class=" card-title d-flex justify-content-between">
 					<span>
 						<i class=" tim-icons icon-globe-2 text-info"> </i> Off Campus Accomodation:
 					</span>
@@ -336,7 +336,7 @@
 						<a href="http://" target="_blank" rel="noopener noreferrer">Download Database</a>
 					</span>
 				</h6>
-				<h6 class=" card-title d-flex justify-content-between " *ngIf="student.vle">
+				<h6 class=" card-title d-flex justify-content-between" *ngIf="student.vle">
 					<span>
 						<i class=" tim-icons icon-user-run text-info"> </i> Student Employment:
 					</span>
@@ -347,13 +347,13 @@
 			</div>
 		</div>
 	</div>
-	<div class=" col-lg-4 mb-4">
+	<div class="mb-4  col-lg-4">
 		<div class=" card card-chart">
 			<div class=" card-header bg-primary">
-				<h4 class=" ">Student Downloads </h4>
+				<h4 class="">Student Downloads </h4>
 			</div>
-			<div class=" card-body px-3">
-				<h6 class=" card-title  d-flex justify-content-between">
+			<div class="px-3  card-body">
+				<h6 class=" card-title d-flex justify-content-between">
 					<span>
 						<i class=" tim-icons icon-calendar-60 text-success"> </i> Student Handbook :
 					</span>
@@ -364,7 +364,7 @@
 						</a>
 					</span>
 				</h6>
-				<h6 class=" card-title  d-flex justify-content-between">
+				<h6 class=" card-title d-flex justify-content-between">
 					<span>
 						<i class=" tim-icons icon-calendar-60 text-success"> </i> ICT Policy :
 					</span>
@@ -375,7 +375,7 @@
 						</a>
 					</span>
 				</h6>
-				<h6 class=" card-title  d-flex justify-content-between">
+				<h6 class=" card-title d-flex justify-content-between">
 					<span>
 						<i class=" tim-icons icon-calendar-60 text-success"> </i> VLE Manual :
 					</span>
@@ -395,7 +395,7 @@
 
 <ng-template #alert let-modal>
 
-	<a class="btn btn-link float-left text-danger mr-0" (click)="modal.dismiss('Cross click')">
+	<a class="float-left mr-0 btn btn-link text-danger" (click)="modal.dismiss('Cross click')">
 		x
 	</a>
 	<div class="modal-body">

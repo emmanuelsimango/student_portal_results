@@ -94,6 +94,8 @@ export class PaymentsComponent implements OnInit {
 		});
 	}
 
+	
+
 }
 
 interface Payment {
