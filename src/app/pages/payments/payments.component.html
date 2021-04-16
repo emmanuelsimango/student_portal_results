@@ -1,46 +1,20 @@
 <div class="row">
-	<div class="col-lg-8 col-md-8 col-sm-12 mx-auto">
+	<div class="mx-auto col-lg-8 col-md-8 col-sm-12">
 		<div class="card card-chart rounded-0">
 			<div class="card-header bg-primary rounded-0">
 				<h4 class="font-weight-bold">Make a payment</h4>
 			</div>
-			<div class="card-body px-3">
+			<div class="px-3 card-body">
 				<form
-					#resetForm="ngForm"
+					#paymentForm="ngForm"
 					[ngClass]="amount.touched ? 'was-validated' : ''"
 					autocomplete="off"
+					(submit)="onSubmit(paymentForm,alert)"
 				>
-					<div class="form-group">
-						<label for="amount">Amount(ZWL$)</label>
-						<input
-							type="number"
-							class="form-control"
-							name="amount"
-							id="amount"
-							placeholder="Amount"
-							autofocus
-							pattern="[0-9]*"
-							[ngClass]="{
-								'is-invalid': amount.touched && amount.errors
-							}"
-							placeholder="0.0"
-							required
-							minlength="3"
-							maxlength="10"
-							ngModel="amount"
-							#amount="ngModel"
-						/>
-						<div
-							[hidden]="!amount.errors?.required"
-							class="invalid-feedback small"
-						>
-							Amount is required
-						</div>
-						<!-- <small id="helpId" class="form-text text-muted">Help text</small> -->
-					</div>
 					<div class="form-group">
 						<label for="email">Email</label>
 						<input
+						autofocus
 							type="email"
 							class="form-control"
 							name="email"
@@ -59,10 +33,68 @@
 						>
 							Email is required
 						</small>
+						<div class="invalid-feedback small" [hidden]="!email.errors?.email">
+							Pin should be a minimum of four digits
+						</div>
 						<!-- <small id="emailHelpId" class="form-text text-muted">Help text</small> -->
 					</div>
+					<div class="form-group">
+						<label for="amount">Amount(ZWL$)</label>
+						<input
+							type="number"
+							class="form-control"
+							name="amount"
+							id="amount"
+							placeholder="Amount"
+
+							pattern="[0-9]*"
+							[ngClass]="{
+								'is-invalid': amount.touched && amount.errors
+							}"
+							placeholder="0.0"
+							minlength="3"
+							maxlength="10"
+							ngModel="amount"
+							#amount="ngModel"
+							required
+						/>
+						<div
+							[hidden]="!amount.errors?.required"
+							class="invalid-feedback small"
+						>
+							Amount is required
+						</div>
+						<!-- <small id="helpId" class="form-text text-muted">Help text</small> -->
+					</div>
+					<div class="form-group">
+						<label for="amount">Payment Description</label>
+						<select
+						name="description"
+						id="description"
+							class="form-control"
+							[ngClass]="{
+								'is-invalid': amount.touched && amount.errors
+							}"
+							ngModel="description"
+							#description="ngModel"
+							required
+						>
+							<option *ngFor="let item of payment_codes" [value]="item.payment_code" selected >
+								{{ item.description }}
+							</option>
+						</select>
+						<div
+							[hidden]="!amount.errors?.required"
+							class="invalid-feedback small"
+						>
+							Description
+						</div>
+						<!-- <small id="helpId" class="form-text text-muted">Help text</small> -->
+					</div>
+
 					<div class="row">
-						<button type="submit" class="btn btn-link mx-auto">
+						<button  [disabled]="!paymentForm.valid "
+						 type="submit" class="mx-auto btn btn-link">
 							<img
 								src="assets\img\button_make-payment_large.svg"
 								alt=""
@@ -92,10 +124,10 @@
 	</div>
 	<div class="col-lg-4 col-md-4 col-sm-12">
 		<div class="card card-chart">
-			<div class="card-header px-4">
-				<div class="form-group">
+			<div class="px-4 card-header">
+				<!-- <div class="form-group">
 					<label for="">Search Transaction</label>
-					<div class="input-group mb-3">
+					<div class="mb-3 input-group">
 						<input
 							type="text"
 							class="form-control"
@@ -106,21 +138,60 @@
 						<div class="input-group-append">
 							<button
 								type=""
-								class="btn btn-outline-light btn-link py-1"
+								class="py-1 btn btn-outline-light btn-link"
 							>
 								Search
 							</button>
 						</div>
 					</div>
-					<!-- <input type="search"
-					class="form-control" name="" id="" aria-describedby="helpId" placeholder="Transaction Reference Number"> -->
-				</div>
+				</div> -->
 			</div>
-			<div class="card-body px-3">
-				<table>
+			<div class="px-3 card-body">
+				<table class="table">
 					<tr>
+						<th>Date</th>
+						<th>Description</th>
+						<th>Action</th>
+					</tr>
+					<tr class="small" *ngFor="let payment of payments">
 						<td>
-							
+							{{ payment.created_at | date }}
+						</td>
+						<td>
+							{{ payment.payment_description }}
+							<span
+								class="float-right badge badge-pill small"
+								[ngClass]="{
+									'badge-success': payment.confirmed,
+									'badge-warning': !payment.confirmed
+								}"
+							>
+								{{ payment.confirmed ? "success" : "pending" }}
+							</span>
+						</td>
+						<td>
+							<button
+								class="btn btn-link"
+								*ngIf="payment.confirmed"
+								type="button"
+							>
+								<i
+									class="tim-icons icon-check-2 text-success-states"
+								>
+								</i>
+							</button>
+
+							<button
+								class="badge badge-light badge-pill small"
+								*ngIf="!payment.confirmed"
+								type="button"
+							>
+								check
+								<i
+									class="tim-icons icon-alert-circle-exc text-danger-states"
+								>
+								</i>
+							</button>
 						</td>
 					</tr>
 				</table>
@@ -130,9 +201,9 @@
 </div>
 
 <ng-template #alert let-modal>
-	<div class="modal-header bg-danger">
-		<h4 class="text-center" id="" style="color: white!important;">
-			Error <i class="fas fa-exclamation"></i>
+	<div class="modal-header bg-info">
+		<h4 class="text-center" id="" style="color: white !important">
+			Information <i class="fas fa-exclamation"></i>
 		</h4>
 		<button
 			type="button"
@@ -144,7 +215,7 @@
 		</button>
 	</div>
 	<div class="modal-body">
-		{{ error_msg }}
+		{{ msg }}
 	</div>
 	<div class="modal-footer justify-content-end">
 		<button
@@ -152,7 +223,7 @@
 			class="btn btn-primary"
 			(click)="modal.close('Save click')"
 		>
-			Close
+			Okay
 		</button>
 	</div>
 </ng-template>

@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { CartItem } from "../models/cart-item";
+import { Payment } from "../models/payment";
 import { PaynowRequest } from "../models/paynow-request";
 import { PaynowTransaction } from "../models/paynow-transaction";
 import { Student } from "../models/student";
@@ -23,36 +24,40 @@ export class PaynowServiceService {
 	};
 	constructor(private _http: HttpClient, private auth: AuthService) {}
 
-	public makePayment(email, amount) {
+	public makePayment(payment:Payment) {
 		const student: Student = this.auth.is_Authenticated();
 		if (student) {
 			let cartItems: CartItem[] = [
-				{ description: "Fees Payment", amount: amount },
+				{ description: payment.description.description, price: payment.amount },
 			];
 			const data: PaynowRequest = {
 				return_url: `${this.serverDetails.portalURL}/self/#/bursary/`,
 				surname: student.profile.surname,
 				first_name: student.profile.first_name,
 				reg_number: this.auth.getAuth().reg_number,
-				description: `Payment for ${student.profile.first_name} ${
-					student.profile.surname
-				} (${this.auth.getAuth().reg_number})`,
-				payment_code: 100,
-				email: email,
+				description: `${payment.description.description}`,
+				payment_code: payment.description.payment_code,
+				email: payment.email,
 				cart: cartItems,
 			};
 
-			return this._http.post<PaynowTransaction>(`${this.paynowServiceUrl}/paynow`,data,this.httpOptions);
+			return this._http.post<PaynowTransaction>(`${this.paynowServiceUrl}paynow`,data,this.httpOptions);
 		}
 	}
 
 	/**
 	 * getTransactions
 	 */
-	public getTransactions(): Observable<PaynowTransaction>{
+	public getTransactions(): Observable<PaynowTransaction[]>{
 		const data = {
 			reg_number:this.auth.getAuth().reg_number
 		};
-		return this._http.post<PaynowTransaction>(`${this.paynowServiceUrl}/paynow/student`,data,this.httpOptions);
+		return this._http.post<PaynowTransaction[]>(`${this.paynowServiceUrl}paynow/student`,data,this.httpOptions);
+	}
+	public pollTransaction(transaction_id): Observable<PaynowTransaction[]>{
+		const data = {
+			id:transaction_id
+		};
+		return this._http.post<PaynowTransaction[]>(`${this.paynowServiceUrl}paynow/poll`,data,this.httpOptions);
 	}
 }
