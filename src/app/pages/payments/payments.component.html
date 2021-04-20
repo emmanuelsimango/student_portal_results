@@ -69,22 +69,23 @@
 					<div class="form-group">
 						<label for="amount">Payment Description</label>
 						<select
-						name="description"
-						id="description"
+							name="description"
+							id="description"
 							class="form-control"
 							[ngClass]="{
-								'is-invalid': amount.touched && amount.errors
+								'is-invalid': description.touched && description.errors
 							}"
-							ngModel="description"
+							[ngModel]="description"
 							#description="ngModel"
 							required
+
 						>
-							<option *ngFor="let item of payment_codes" [value]="item.payment_code" selected >
+							<option *ngFor="let item of payment_codes;let i=index" [value]="item.payment_code"  >
 								{{ item.description }}
 							</option>
 						</select>
 						<div
-							[hidden]="!amount.errors?.required"
+							[hidden]="!description.errors?.required"
 							class="invalid-feedback small"
 						>
 							Description
@@ -160,7 +161,7 @@
 						<td>
 							{{ payment.payment_description }}
 							<span
-								class="float-right badge badge-pill small"
+								class="float-right badge badge-pill small font-weight-bold text-dark"
 								[ngClass]="{
 									'badge-success': payment.confirmed,
 									'badge-warning': !payment.confirmed
@@ -182,9 +183,10 @@
 							</button>
 
 							<button
-								class="badge badge-light badge-pill small"
+								class="cursor-pointer badge badge-light badge-pill small text-dark font-weight-bold"
 								*ngIf="!payment.confirmed"
 								type="button"
+								(click)="pollTransaction(payment,alert)"
 							>
 								check
 								<i

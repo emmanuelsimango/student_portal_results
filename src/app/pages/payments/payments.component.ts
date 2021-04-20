@@ -15,9 +15,7 @@ import { Payment } from "src/app/models/payment";
 	templateUrl: "./payments.component.html",
 	styleUrls: ["./payments.component.scss"],
 })
-export class PaymentsComponent implements OnInit {
-
-
+export class PaymentsComponent implements OnInit{
 	msg: string;
 	payments: PaynowTransaction[];
 	payment_codes: PaymentCode[] = [
@@ -50,6 +48,16 @@ export class PaymentsComponent implements OnInit {
 
 	}
 
+
+	ngAfterViewInit(): void {
+		//Called after ngAfterContentInit when the component's view has been initialized. Applies to components only.
+		//Add 'implements AfterViewInit' to the class.
+		// document.getElementById('description').options[0];
+		
+
+
+	}
+
 	onSubmit(formData: NgForm, modal) {
 		const data = formData.value;
 		// console.log(formData.value);
@@ -66,42 +74,34 @@ export class PaymentsComponent implements OnInit {
 
 		});
 	}
-	submit(pin, cpin, password) {
-		// alert("hie");
-		console.log(pin);
 
-		if (pin) {
-			if (pin === cpin) {
-				this.loader.is_loading.next(true);
-				this.pinService.resetPin(pin, password).subscribe(
-					(result) => {
-						console.log(result);
 
-						if (!result.error) {
-						}
-						this.loader.is_loading.next(false);
-					},
-					(error) => {
-						this.loader.is_loading.next(false);
-						console.log(error);
-					}
-				);
-			} else {
-				this.toast.error("Pins do not match");
+	pollTransaction(id:PaynowTransaction,modal){
+		this.loader.is_loading.next(true);
+		this.paynowService.pollTransaction(id).subscribe(trans=>{
+			this.paynowService.getTransactions().subscribe((transactions) => {
+				this.payments = transactions;
+
+			});
+			this.loader.is_loading.next(false);
+			if (!trans.confirmed) {
+				this.msg = "This payment is still awaiting delivery, please try again later";
+				this.open(modal)
 			}
-		} else {
-			alert("Pin is required");
-			this.toast.error("Pins do not match");
-		}
+		})
 	}
-	open(content, url) {
+
+	open(content, url=null) {
 		this.modalService
-			.open(content, { keyboard: true, size: "sm" })
+			.open(content, { keyboard: true, size: "md" })
 			.result.then(
 				(result) => {
-
+					if (url) {
+						window.location.href = url
+					}
 				},
 				(reason) => {}
 			);
 	}
+
 }

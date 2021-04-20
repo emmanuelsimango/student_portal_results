@@ -54,10 +54,10 @@ export class PaynowServiceService {
 		};
 		return this._http.post<PaynowTransaction[]>(`${this.paynowServiceUrl}paynow/student`,data,this.httpOptions);
 	}
-	public pollTransaction(transaction_id): Observable<PaynowTransaction[]>{
+	public pollTransaction(transaction_id:PaynowTransaction): Observable<PaynowTransaction>{
 		const data = {
-			id:transaction_id
+			id:transaction_id.id
 		};
-		return this._http.post<PaynowTransaction[]>(`${this.paynowServiceUrl}paynow/poll`,data,this.httpOptions);
+		return this._http.post<PaynowTransaction>(`${this.paynowServiceUrl}paynow/poll`,data,this.httpOptions);
 	}
 }
